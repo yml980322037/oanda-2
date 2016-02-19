@@ -6,7 +6,8 @@ import sys
 import time
 import random
 
-trade_word = [u"Kr\u00F3tka po rynkowej", u"D\u0142uga po rynkowej"]
+trade_word = [u"Kr\u00F3tka po rynkowej", u"D\u0142uga po rynkowej",
+              u"Kr\u00F3tka po cenie rynkowej", u"D\u0142uga po cenie rynkowej"]
 url = "http://tradebeat.pl/"
 useragent = "Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:44.0) Gecko/20100101 Firefox/44.0"
 
@@ -29,20 +30,21 @@ class get_idea_trade():
             for art in self.soup.find_all(option):
                 self.do_article(art)
         else:
-            for art in self.soup.find_all(option):
-                print art.text
+            self.art = self.soup.find_all('article', option)
+            for item in self.art:
+                print item.contents[3].text
 
     def do_article(self, art):
         for trade in trade_word:
             try:
                 assert trade in art.text
-                print "Found something!"
+                print "\nFound something!"
                 if self.check_mem(art.contents[5].find_all("a")[0].get("href")):
                     print art.contents[5].find_all("a")[0].get("href")
                     self.login(art.contents[5].find_all("a")[0].get("href"))
                     self.try_num += 1
                 else:
-                    print('Nothing new!')
+                    print('\nNothing new!')
                     self.try_num += 1
             except AssertionError:
                 pass
@@ -65,7 +67,7 @@ class get_idea_trade():
                                "Action[login]":1, "T[_B]":''}
             l.post(url+"user", data=self.login_data, headers={"Referer": url+"user"})
             page = l.get(url+link[1:])
-            self.do_soup(page, "p")
+            self.do_soup(page, {'class': 'news urgent'})
 
     def save_to_file(self, data):
         self.time = time.ctime().split(' ')
