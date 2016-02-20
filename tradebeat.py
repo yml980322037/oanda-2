@@ -5,9 +5,11 @@ from bs4 import BeautifulSoup
 import sys
 import time
 import random
+import json
 
-trade_word = [u"Kr\u00F3tka po rynkowej", u"D\u0142uga po rynkowej",
-              u"Kr\u00F3tka po cenie rynkowej", u"D\u0142uga po cenie rynkowej"]
+trade_word = [u"kr\u00F3tka po rynkowej", u"d\u0142uga po rynkowej",
+              u"kr\u00F3tka po cenie rynkowej", u"d\u0142uga po cenie rynkowej",	      u"take profit", u"stop loss", u"zamkni\u0119ta", u"st:", u"tp:"]
+
 url = "http://tradebeat.pl/"
 useragent = "Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:44.0) Gecko/20100101 Firefox/44.0"
 
@@ -18,6 +20,9 @@ class get_idea_trade():
         self.base_url = "%simportant" %(url)
         self.try_num = 0
         self.found_list = {}
+	self.value = str()
+	self.art_list = {}
+	self.art_data = {}
 
     def check_page(self):
         with requests.Session() as c:
@@ -31,16 +36,22 @@ class get_idea_trade():
                 self.do_article(art)
         else:
             self.art = self.soup.find_all('article', option)
+	    self.art_data["title"]= self.art[0].find("h1").text.lower()
+	    self.art_data["time"]= self.art[0].find("time").get("datetime")
             for item in self.art:
-                print item.contents[3].text
-
+	#	self.art_obj[str(self.art[0].get("id"))] = {"title": self.art[0].find("h1").text.lower()}
+		self.art_data['description'] = item.contents[3].text.lower() # description from page (save to database)
+	#	print self.text.get(self.art_id, "error")
+	    self.art_list[self.art[0].get("id")] = self.art_data
+	    print self.art_list
+    
     def do_article(self, art):
         for trade in trade_word:
             try:
-                assert trade in art.text
-                print "\nFound something!"
+                assert trade in art.text.lower()
                 if self.check_mem(art.contents[5].find_all("a")[0].get("href")):
-                    print art.contents[5].find_all("a")[0].get("href")
+                    print "\nFound something!"
+		    print art.contents[5].find_all("a")[0].get("href")
                     self.login(art.contents[5].find_all("a")[0].get("href"))
                     self.try_num += 1
                 else:
@@ -73,7 +84,9 @@ class get_idea_trade():
         self.time = time.ctime().split(' ')
         self.file_name = "trade-ideas."+self.time[2]+"."+self.time[1]
         with open(self.file_name, "ab") as f:
-            f.write(data+"\n")
+            json.dump(data, f)
+
+
 
 
 try:
@@ -82,8 +95,9 @@ try:
         p1.check_page()
         time.sleep(random.randint(300,400))
 except KeyboardInterrupt:
-    for e in p1.found_list.keys():
-        p1.save_to_file(str(e))
-        p1.save_to_file(str(p1.found_list[e]))
+#    for e in p1.found_list.keys():
+#        p1.save_to_file(str(e))
+#        p1.save_to_file(str(p1.found_list[e]))
+    p1.save_to_file(p1.art_list)
     sys.exit(1)
 
