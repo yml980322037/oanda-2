@@ -7,6 +7,7 @@ import time
 import random
 import json
 import ipdb
+import os
 
 
 trade_word = [u"kr\u00F3tka po rynkowej", u"kr\u00F3tka po cenie rynkowej",
@@ -65,7 +66,6 @@ class get_idea_trade():
 	    self._art_list[self.art[0].get("id")] = self._art_data
 	    self._art_list[self.art[0].get("id")].update(self.art_data)
 	    self.art_list.update(self._art_list)
-	    print self.art_list
 	    self.save_to_file(self.art[0].get("id"), self._art_list)
 
     def do_article(self, art): # check articles from /important page and find keywords from trade_word
@@ -112,12 +112,18 @@ class get_idea_trade():
 
     def save_to_file(self, fname, data):
         self.time = time.ctime().split(' ')
-        self.file_name = fname+"."+self.time[2]+"."+self.time[1]
-        with open(self.file_name, "ab") as f:
-            json.dump(data, f)
+	self.dir_name = "./%s-%s/" % (self.time[2], self.time[1])
+        self.file_name = self.dir_name + fname
+	try:
+            with open(self.file_name, "ab") as f:
+            	json.dump(data, f)
+	except IOError:
+	    os.makedirs(self.dir_name)
+	    with open(self.file_name, "ab") as f:
+		json.dump(data, f)
 
 
-# Find take profit and stop loss from description section:
+# Find take profit and stop loss values from description section:
     def inner(self, z):
         if z.isdigit():
                 return True
