@@ -45,28 +45,28 @@ class get_idea_trade():
                 self.do_article(art)
         else:
             self.art = self.soup.find_all('article', option)
-        print "Let's start with ", self.art[0].find("h1").text.lower()
-        self._art_data["title"]= self.art[0].find("h1").text.lower()
-        self._art_data["time"]= self.art[0].find("time").get("datetime")
-        self._art_data['page'] = page.url
-        for item in self.art[0].find_all("li"): # this one is to find tags and take instrument symbol from it
-            self._temp.append(item.text)
-        self._art_data["instrument"] = self._temp[1]
-        print "Instrument: ", self._temp[1]
-        for item in self.art: # take description
-            self._art_data['description'] = item.contents[3].text.lower() # description from page (save to database)
-        for action in trade_action.keys(): # find action keywords from trade_action list words
-            for t in trade_action.get(action):
-                try:
-                    self._art_data[action] = self.outer(self._art_data.get('description', '').index((t)))
-                    print "%s, value: %s" % (t, self._value)
-                except ValueError:
-                    pass
-        print "action: ", self.art_data["action"]
-        self._art_list[self.art[0].get("id")] = self._art_data
-        self._art_list[self.art[0].get("id")].update(self.art_data)
-        self.art_list.update(self._art_list)
-        self.save_to_file(self.art[0].get("id"), self._art_list)
+            print "Let's start with ", self.art[0].find("h1").text.lower()
+            self._art_data["title"]= self.art[0].find("h1").text.lower()
+            self._art_data["time"]= self.art[0].find("time").get("datetime")
+            self._art_data['page'] = page.url
+            for item in self.art[0].find_all("li"): # this one is to find tags and take instrument symbol from it
+                self._temp.append(item.text)
+            self._art_data["instrument"] = self._temp[1]
+            print "Instrument: ", self._temp[1]
+            for item in self.art: # take description
+                self._art_data['description'] = item.contents[3].text.lower() # description from page (save to database)
+            for action in trade_action.keys(): # find action keywords from trade_action list words
+                for t in trade_action.get(action):
+                    try:
+                        self._art_data[action] = self.outer(self._art_data.get('description', '').index((t)))
+                        print "%s, value: %s" % (t, self._value)
+                    except ValueError:
+                        pass
+            print "action: ", self.art_data["action"]
+            self._art_list[self.art[0].get("id")] = self._art_data
+            self._art_list[self.art[0].get("id")].update(self.art_data)
+            self.art_list.update(self._art_list)
+            self.save_to_file(self.art[0].get("id"), self._art_list)
 
     def do_article(self, art): # check articles from /important page and find keywords from trade_word
         for trade in trade_word:
