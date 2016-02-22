@@ -11,8 +11,8 @@ import os
 
 
 trade_word = [u"kr\u00F3tka po rynkowej", u"kr\u00F3tka po cenie rynkowej",
-              u"d\u0142uga po rynkowej", u"d\u0142uga po cenie rynkowej",
-              u"zamkni\u0119ta"]
+	      u"d\u0142uga po rynkowej", u"d\u0142uga po cenie rynkowej",
+	      u"zamkni\u0119ta"]
 
 trade_action = {"TP" : ["take profit", "tp:"],
 		"SL" : ["stop loss", "sl:"]}
@@ -37,7 +37,7 @@ class get_idea_trade():
 
     def do_soup(self, page, option):
 	self._temp = [] #internal temporary veriable, used to find intrument's symbol
-	self._art_data = {} #internal variable to hold article data
+	self._art_data = {} #internal variable to hold article data 
 	self._art_list = {}
         self.soup = BeautifulSoup(page.content, "lxml")
         if option == "article":
@@ -45,28 +45,28 @@ class get_idea_trade():
                 self.do_article(art)
         else:
             self.art = self.soup.find_all('article', option)
-        print "Let's start with ", self.art[0].find("h1").text.lower()
-        self._art_data["title"]= self.art[0].find("h1").text.lower()
-        self._art_data["time"]= self.art[0].find("time").get("datetime")
-        self._art_data['page'] = page.url
+	    print "Let's start with ", self.art[0].find("h1").text.lower()
+	    self._art_data["title"]= self.art[0].find("h1").text.lower()
+	    self._art_data["time"]= self.art[0].find("time").get("datetime")
+	    self._art_data['page'] = page.url
             for item in self.art[0].find_all("li"): # this one is to find tags and take instrument symbol from it
 		self._temp.append(item.text)
-        self._art_data["instrument"] = self._temp[1]
-        print "Instrument: ", self._temp[1]
-        for item in self.art: # take description
+	    self._art_data["instrument"] = self._temp[1]
+	    print "Instrument: ", self._temp[1]
+	    for item in self.art: # take description
 		self._art_data['description'] = item.contents[3].text.lower() # description from page (save to database)
-        for action in trade_action.keys(): # find action keywords from trade_action list words
-            for t in trade_action.get(action):
-            try:
+	    for action in trade_action.keys(): # find action keywords from trade_action list words
+	        for t in trade_action.get(action): 
+		    try:
 			self._art_data[action] = self.outer(self._art_data.get('description', '').index((t)))
 			print "%s, value: %s" % (t, self._value)
-                except ValueError:
+	    	    except ValueError:
 			pass
-        print "action: ", self.art_data["action"]
-        self._art_list[self.art[0].get("id")] = self._art_data
-        self._art_list[self.art[0].get("id")].update(self.art_data)
-        self.art_list.update(self._art_list)
-        self.save_to_file(self.art[0].get("id"), self._art_list)
+	    print "action: ", self.art_data["action"]
+	    self._art_list[self.art[0].get("id")] = self._art_data
+	    self._art_list[self.art[0].get("id")].update(self.art_data)
+	    self.art_list.update(self._art_list)
+	    self.save_to_file(self.art[0].get("id"), self._art_list)
 
     def do_article(self, art): # check articles from /important page and find keywords from trade_word
         for trade in trade_word:
@@ -74,7 +74,7 @@ class get_idea_trade():
                 assert trade in art.text.lower()
                 if self.check_mem(art.contents[5].find_all("a")[0].get("href")):
                     print "\nFound something!"
-            self.art_data["action"] = self.get_action(trade)
+		    self.art_data["action"] = self.get_action(trade)
                     self.login(art.contents[5].find_all("a")[0].get("href"))
                     self.try_num += 1
                 else:
@@ -84,11 +84,11 @@ class get_idea_trade():
                 pass
     def get_action(self, action):
 	if action in trade_word[:2]:
-        return "sell"
+	    return "sell"
 	elif action in trade_word[2:4]:
-        return "buy"
+	    return "buy"
 	else:
-        return "error"
+	    return "error"
 
     def check_mem(self, data): # section to check if trade idea has been found before (need change to use art_id)
         if data not in self.found_list.values():
@@ -116,10 +116,10 @@ class get_idea_trade():
         self.file_name = self.dir_name + fname
 	try:
             with open(self.file_name, "ab") as f:
-                json.dump(data, f)
+            	json.dump(data, f)
 	except IOError:
-        os.makedirs(self.dir_name)
-        with open(self.file_name, "ab") as f:
+	    os.makedirs(self.dir_name)
+	    with open(self.file_name, "ab") as f:
 		json.dump(data, f)
 
 
