@@ -45,10 +45,9 @@ class get_idea_trade():
                 self.do_article(art)
         else:
             self.art = self.soup.find_all('article', option)
-            print self.art
-            #print "Let's start with ", self.art[0].find("h1").text.lower()
+            print "Let's start with ", self.art[0].find("h1").text.lower()
             self._art_data["title"]= self.art[0].find("h1").text.lower()
-            self._art_data["time"] = self.art[0].find("time").get("datetime")
+            self._art_data["time"]= self.art[0].find("time").get("datetime")
             self._art_data['page'] = page.url
             for item in self.art[0].find_all("li"): # this one is to find tags and take instrument symbol from it
                 self._temp.append(item.text)
@@ -83,7 +82,6 @@ class get_idea_trade():
                     self.try_num += 1
             except AssertionError:
                 pass
-
     def get_action(self, action):
         if action in trade_word[:2]:
             return "sell"
@@ -128,15 +126,15 @@ class get_idea_trade():
 # Find take profit and stop loss values from description section:
     def inner(self, z):
         if z.isdigit():
-            return True
+                return True
         else:
-            return False
+                return False
 
     def inner2(self, z):
         if z.isdigit() or z == "." or z == ",":
-            return True
+                return True
         else:
-            return False
+                return False
 
     def outer(self, u):
         self._value = str()
@@ -144,7 +142,7 @@ class get_idea_trade():
             while self.inner2(self.ble(u)):
                 self._value += self._value.join(self.ble(u))
                 u +=1
-            return self._value
+                return self._value
         else:
             return self.outer(u+1)
 
