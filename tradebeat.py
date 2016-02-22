@@ -6,6 +6,7 @@ import sys
 import time
 import random
 import json
+import ipdb
 import os
 
 
@@ -14,7 +15,7 @@ trade_word = [u"kr\u00F3tka po rynkowej", u"kr\u00F3tka po cenie rynkowej",
               u"zamkni\u0119ta"]
 
 trade_action = {"TP" : ["take profit", "tp:"],
-                "SL" : ["stop loss", "sl:"]}
+		"SL" : ["stop loss", "sl:"]}
 
 url = "http://tradebeat.pl/"
 useragent = "Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:44.0) Gecko/20100101 Firefox/44.0"
@@ -27,8 +28,8 @@ class get_idea_trade():
         self.base_url = "%simportant" %(url)
         self.try_num = 0
         self.found_list = {}
-        self.art_list = {}
-        self.art_data = {}
+	iself.art_list = {}
+	self.art_data = {}
 
     def check_page(self):
         with requests.Session() as c:
@@ -36,9 +37,9 @@ class get_idea_trade():
             self.do_soup(self.main_page, "article")
 
     def do_soup(self, page, option):
-        self._temp = [] #internal temporary veriable, used to find intrument's symbol
-        self._art_data = {} #internal variable to hold article data
-        self._art_list = {}
+	self._temp = [] #internal temporary veriable, used to find intrument's symbol
+	self._art_data = {} #internal variable to hold article data
+	self._art_list = {}
         self.soup = BeautifulSoup(page.content, "lxml")
         if option == "article":
             for art in self.soup.find_all(option):
@@ -54,14 +55,14 @@ class get_idea_trade():
         self._art_data["instrument"] = self._temp[1]
         print "Instrument: ", self._temp[1]
         for item in self.art: # take description
-            self._art_data['description'] = item.contents[3].text.lower() # description from page (save to database)
+		self._art_data['description'] = item.contents[3].text.lower() # description from page (save to database)
         for action in trade_action.keys(): # find action keywords from trade_action list words
             for t in trade_action.get(action):
-                try:
-                    self._art_data[action] = self.outer(self._art_data.get('description', '').index((t)))
-                    print "%s, value: %s" % (t, self._value)
+            try:
+			self._art_data[action] = self.outer(self._art_data.get('description', '').index((t)))
+			print "%s, value: %s" % (t, self._value)
                 except ValueError:
-                    pass
+			pass
         print "action: ", self.art_data["action"]
         self._art_list[self.art[0].get("id")] = self._art_data
         self._art_list[self.art[0].get("id")].update(self.art_data)
@@ -74,7 +75,7 @@ class get_idea_trade():
                 assert trade in art.text.lower()
                 if self.check_mem(art.contents[5].find_all("a")[0].get("href")):
                     print "\nFound something!"
-                    self.art_data["action"] = self.get_action(trade)
+            self.art_data["action"] = self.get_action(trade)
                     self.login(art.contents[5].find_all("a")[0].get("href"))
                     self.try_num += 1
                 else:
@@ -83,12 +84,12 @@ class get_idea_trade():
             except AssertionError:
                 pass
     def get_action(self, action):
-        if action in trade_word[:2]:
-            return "sell"
-        elif action in trade_word[2:4]:
-            return "buy"
-        else:
-            return "error"
+	if action in trade_word[:2]:
+        return "sell"
+	elif action in trade_word[2:4]:
+        return "buy"
+	else:
+        return "error"
 
     def check_mem(self, data): # section to check if trade idea has been found before (need change to use art_id)
         if data not in self.found_list.values():
@@ -112,15 +113,15 @@ class get_idea_trade():
 
     def save_to_file(self, fname, data):
         self.time = time.ctime().split(' ')
-        self.dir_name = "./%s-%s/" % (self.time[2], self.time[1])
+	self.dir_name = "./%s-%s/" % (self.time[2], self.time[1])
         self.file_name = self.dir_name + fname
-        try:
+	try:
             with open(self.file_name, "ab") as f:
                 json.dump(data, f)
-        except IOError:
-            os.makedirs(self.dir_name)
-            with open(self.file_name, "ab") as f:
-                json.dump(data, f)
+	except IOError:
+        os.makedirs(self.dir_name)
+        with open(self.file_name, "ab") as f:
+		json.dump(data, f)
 
 
 # Find take profit and stop loss values from description section:
@@ -137,17 +138,17 @@ class get_idea_trade():
                 return False
 
     def outer(self, u):
-        self._value = str()
+	self._value = str()
         if self.inner(self.ble(u)):
-            while self.inner2(self.ble(u)):
-                self._value += self._value.join(self.ble(u))
-                u +=1
+                while self.inner2(self.ble(u)):
+                        self._value += self._value.join(self.ble(u))
+                        u +=1
                 return self._value
         else:
-            return self.outer(u+1)
+                return self.outer(u+1)
 
     def ble(self, x):
-        self.txt = self._art_data.get('description', '')
+	self.txt = self._art_data.get('description', '')
         return self.txt[x:(x+1)]
 # end of section
 
@@ -165,3 +166,4 @@ try:
 except KeyboardInterrupt:
     p1.save_to_file("trade-ideas", p1.art_list) # save all info to one file
     sys.exit(1)
+
