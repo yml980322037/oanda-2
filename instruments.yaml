@@ -1,0 +1,484 @@
+AUDCAD:
+ - instrument: AUD_CAD
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+AUDCHF:
+ - instrument: AUD_CHF
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+AUDHKD:
+ - instrument: AUD_HKD
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+AUDJPY:
+ - instrument: AUD_JPY
+ - maxTradeUnits: 10000000
+ - pip: 0.01
+AUDNZD:
+ - instrument: AUD_NZD
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+AUDSGD:
+ - instrument: AUD_SGD
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+AUDUSD:
+ - instrument: AUD_USD
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+BrentCrudeOil:
+ - instrument: BCO_USD
+ - maxTradeUnits: 10000
+ - pip: 0.01
+CADCHF:
+ - instrument: CAD_CHF
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+CADHKD:
+ - instrument: CAD_HKD
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+CADJPY:
+ - instrument: CAD_JPY
+ - maxTradeUnits: 10000000
+ - pip: 0.01
+CADSGD:
+ - instrument: CAD_SGD
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+Swiss20:
+ - instrument: CH20_CHF
+ - maxTradeUnits: 100
+ - pip: 1.0
+CHFHKD:
+ - instrument: CHF_HKD
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+CHFJPY:
+ - instrument: CHF_JPY
+ - maxTradeUnits: 10000000
+ - pip: 0.01
+CHFZAR:
+ - instrument: CHF_ZAR
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+Corn:
+ - instrument: CORN_USD
+ - maxTradeUnits: 150000
+ - pip: 0.01
+Bund:
+ - instrument: DE10YB_EUR
+ - maxTradeUnits: 6000
+ - pip: 0.01
+DAX:
+ - instrument: DE30_EUR
+ - maxTradeUnits: 250
+ - pip: 1.0
+Europe50:
+ - instrument: EU50_EUR
+ - maxTradeUnits: 300
+ - pip: 1.0
+EURAUD:
+ - instrument: EUR_AUD
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+EURCAD:
+ - instrument: EUR_CAD
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+EURCHF:
+ - instrument: EUR_CHF
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+EURCZK:
+ - instrument: EUR_CZK
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+EURDKK:
+ - instrument: EUR_DKK
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+EURGBP:
+ - instrument: EUR_GBP
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+EURHKD:
+ - instrument: EUR_HKD
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+EURHUF:
+ - instrument: EUR_HUF
+ - maxTradeUnits: 10000000
+ - pip: 0.01
+EURJPY:
+ - instrument: EUR_JPY
+ - maxTradeUnits: 10000000
+ - pip: 0.01
+EURNOK:
+ - instrument: EUR_NOK
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+EURNZD:
+ - instrument: EUR_NZD
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+EURPLN:
+ - instrument: EUR_PLN
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+EURSEK:
+ - instrument: EUR_SEK
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+EURSGD:
+ - instrument: EUR_SGD
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+EURTRY:
+ - instrument: EUR_TRY
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+EURUSD:
+ - instrument: EUR_USD
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+EURZAR:
+ - instrument: EUR_ZAR
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+France40:
+ - instrument: FR40_EUR
+ - maxTradeUnits: 200
+ - pip: 1.0
+GBPAUD:
+ - instrument: GBP_AUD
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+GBPCAD:
+ - instrument: GBP_CAD
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+GBPCHF:
+ - instrument: GBP_CHF
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+GBPHKD:
+ - instrument: GBP_HKD
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+GBPJPY:
+ - instrument: GBP_JPY
+ - maxTradeUnits: 10000000
+ - pip: 0.01
+GBPNZD:
+ - instrument: GBP_NZD
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+GBPPLN:
+ - instrument: GBP_PLN
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+GBPSGD:
+ - instrument: GBP_SGD
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+GBPUSD:
+ - instrument: GBP_USD
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+GBPZAR:
+ - instrument: GBP_ZAR
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+HongKong33:
+ - instrument: HK33_HKD
+ - maxTradeUnits: 400
+ - pip: 1.0
+HKDJPY:
+ - instrument: HKD_JPY
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+Japan225:
+ - instrument: JP225_USD
+ - maxTradeUnits: 100
+ - pip: 1.0
+USNas100:
+ - instrument: NAS100_USD
+ - maxTradeUnits: 400
+ - pip: 1.0
+NaturalGas:
+ - instrument: NATGAS_USD
+ - maxTradeUnits: 250000
+ - pip: 0.01
+Netherlands25:
+ - instrument: NL25_EUR
+ - maxTradeUnits: 2000
+ - pip: 0.01
+NZDCAD:
+ - instrument: NZD_CAD
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+NZDCHF:
+ - instrument: NZD_CHF
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+NZDHKD:
+ - instrument: NZD_HKD
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+NZDJPY:
+ - instrument: NZD_JPY
+ - maxTradeUnits: 10000000
+ - pip: 0.01
+NZDSGD:
+ - instrument: NZD_SGD
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+NZDUSD:
+ - instrument: NZD_USD
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+Singapore30:
+ - instrument: SG30_SGD
+ - maxTradeUnits: 300
+ - pip: 0.1
+SGDCHF:
+ - instrument: SGD_CHF
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+SGDHKD:
+ - instrument: SGD_HKD
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+SGDJPY:
+ - instrument: SGD_JPY
+ - maxTradeUnits: 10000000
+ - pip: 0.01
+Soybeans:
+ - instrument: SOYBN_USD
+ - maxTradeUnits: 60000
+ - pip: 0.01
+SP500:
+ - instrument: SPX500_USD
+ - maxTradeUnits: 800
+ - pip: 1.0
+Sugar:
+ - instrument: SUGAR_USD
+ - maxTradeUnits: 4000000
+ - pip: 0.0001
+TRYJPY:
+ - instrument: TRY_JPY
+ - maxTradeUnits: 10000000
+ - pip: 0.01
+UK100:
+ - instrument: UK100_GBP
+ - maxTradeUnits: 100
+ - pip: 1.0
+UK10YGilt:
+ - instrument: UK10YB_GBP
+ - maxTradeUnits: 6000
+ - pip: 0.01
+USRuss2000:
+ - instrument: US2000_USD
+ - maxTradeUnits: 1000
+ - pip: 0.01
+USWallSt30:
+ - instrument: US30_USD
+ - maxTradeUnits: 100
+ - pip: 1.0
+US2YT-Note:
+ - instrument: USB02Y_USD
+ - maxTradeUnits: 6000
+ - pip: 0.01
+US5YT-Note:
+ - instrument: USB05Y_USD
+ - maxTradeUnits: 6000
+ - pip: 0.01
+US10YT-Note:
+ - instrument: USB10Y_USD
+ - maxTradeUnits: 6000
+ - pip: 0.01
+UST-Bond:
+ - instrument: USB30Y_USD
+ - maxTradeUnits: 6000
+ - pip: 0.01
+USDCAD:
+ - instrument: USD_CAD
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+USDCHF:
+ - instrument: USD_CHF
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+USDCNH:
+ - instrument: USD_CNH
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+USDCZK:
+ - instrument: USD_CZK
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+USDDKK:
+ - instrument: USD_DKK
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+USDHKD:
+ - instrument: USD_HKD
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+USDHUF:
+ - instrument: USD_HUF
+ - maxTradeUnits: 10000000
+ - pip: 0.01
+USDINR:
+ - instrument: USD_INR
+ - maxTradeUnits: 10000000
+ - pip: 0.01
+USDJPY:
+ - instrument: USD_JPY
+ - maxTradeUnits: 10000000
+ - pip: 0.01
+USDMXN:
+ - instrument: USD_MXN
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+USDNOK:
+ - instrument: USD_NOK
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+USDPLN:
+ - instrument: USD_PLN
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+USDSAR:
+ - instrument: USD_SAR
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+USDSEK:
+ - instrument: USD_SEK
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+USDSGD:
+ - instrument: USD_SGD
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+USDTHB:
+ - instrument: USD_THB
+ - maxTradeUnits: 10000000
+ - pip: 0.01
+USDTRY:
+ - instrument: USD_TRY
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+USDZAR:
+ - instrument: USD_ZAR
+ - maxTradeUnits: 10000000
+ - pip: 0.0001
+Wheat:
+ - instrument: WHEAT_USD
+ - maxTradeUnits: 150000
+ - pip: 0.01
+WestTexasOil:
+ - instrument: WTICO_USD
+ - maxTradeUnits: 10000
+ - pip: 0.01
+SilverAUD:
+ - instrument: XAG_AUD
+ - maxTradeUnits: 100000
+ - pip: 0.0001
+SilverCAD:
+ - instrument: XAG_CAD
+ - maxTradeUnits: 100000
+ - pip: 0.0001
+SilverCHF:
+ - instrument: XAG_CHF
+ - maxTradeUnits: 100000
+ - pip: 0.0001
+SilverEUR:
+ - instrument: XAG_EUR
+ - maxTradeUnits: 100000
+ - pip: 0.0001
+SilverGBP:
+ - instrument: XAG_GBP
+ - maxTradeUnits: 100000
+ - pip: 0.0001
+SilverHKD:
+ - instrument: XAG_HKD
+ - maxTradeUnits: 100000
+ - pip: 0.0001
+SilverJPY:
+ - instrument: XAG_JPY
+ - maxTradeUnits: 100000
+ - pip: 1.0
+SilverNZD:
+ - instrument: XAG_NZD
+ - maxTradeUnits: 100000
+ - pip: 0.0001
+SilverSGD:
+ - instrument: XAG_SGD
+ - maxTradeUnits: 100000
+ - pip: 0.0001
+Silver:
+ - instrument: XAG_USD
+ - maxTradeUnits: 100000
+ - pip: 0.0001
+GoldAUD:
+ - instrument: XAU_AUD
+ - maxTradeUnits: 5000
+ - pip: 0.01
+GoldCAD:
+ - instrument: XAU_CAD
+ - maxTradeUnits: 5000
+ - pip: 0.01
+GoldCHF:
+ - instrument: XAU_CHF
+ - maxTradeUnits: 5000
+ - pip: 0.01
+GoldEUR:
+ - instrument: XAU_EUR
+ - maxTradeUnits: 5000
+ - pip: 0.01
+GoldGBP:
+ - instrument: XAU_GBP
+ - maxTradeUnits: 5000
+ - pip: 0.01
+GoldHKD:
+ - instrument: XAU_HKD
+ - maxTradeUnits: 5000
+ - pip: 0.01
+GoldJPY:
+ - instrument: XAU_JPY
+ - maxTradeUnits: 5000
+ - pip: 10
+GoldNZD:
+ - instrument: XAU_NZD
+ - maxTradeUnits: 5000
+ - pip: 0.01
+GoldSGD:
+ - instrument: XAU_SGD
+ - maxTradeUnits: 5000
+ - pip: 0.01
+Gold:
+ - instrument: XAU_USD
+ - maxTradeUnits: 5000
+ - pip: 0.01
+GoldSilver:
+ - instrument: XAU_XAG
+ - maxTradeUnits: 5000
+ - pip: 0.01
+Copper:
+ - instrument: XCU_USD
+ - maxTradeUnits: 250000
+ - pip: 0.0001
+Palladium:
+ - instrument: XPD_USD
+ - maxTradeUnits: 500
+ - pip: 0.01
+Platinum:
+ - instrument: XPT_USD
+ - maxTradeUnits: 500
+ - pip: 0.01
+ZARJPY:
+ - instrument: ZAR_JPY
+ - maxTradeUnits: 10000000
+ - pip: 0.01
