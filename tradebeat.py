@@ -50,8 +50,8 @@ class get_idea_trade():
         self._art_data["title"]= self.art[0].find("h1").text.lower()
         self._art_data["time"]= self.art[0].find("time").get("datetime")
         self._art_data['page'] = page.url
-            for item in self.art[0].find_all("li"): # this one is to find tags and take instrument symbol from it
-		self._temp.append(item.text)
+        for item in self.art[0].find_all("li"): # this one is to find tags and take instrument symbol from it
+            self._temp.append(item.text)
         self._art_data["instrument"] = self._temp[1]
         print "Instrument: ", self._temp[1]
         for item in self.art: # take description
