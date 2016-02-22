@@ -24,10 +24,11 @@ class get_idea_trade():
     def __init__(self):
         self.user = sys.argv[1]
         self.password = sys.argv[2]
+        self.timeframe = sys.argv[3]
         self.base_url = "%simportant" %(url)
         self.try_num = 0
         self.found_list = {}
-	self.art_list = {}
+	iself.art_list = {}
 	self.art_data = {}
 
     def check_page(self):
@@ -151,11 +152,17 @@ class get_idea_trade():
         return self.txt[x:(x+1)]
 # end of section
 
+    def check_time(self):
+        self._mytime = time.ctime().split(' ')[3][:5]
+        return self.timeframe in self._mytime
+
+
 try:
     p1 = get_idea_trade()
-    while True:
+    while not p1.check_time():
         p1.check_page()
         time.sleep(random.randint(300,400))
+    p1.save_to_file("trade-ideas", p1.art_list) # save all info to one file
 except KeyboardInterrupt:
     p1.save_to_file("trade-ideas", p1.art_list) # save all info to one file
     sys.exit(1)
