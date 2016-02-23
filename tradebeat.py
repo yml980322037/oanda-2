@@ -6,7 +6,7 @@ import sys
 import time
 import random
 import json
-#import ipdb
+import yaml
 import os
 
 
@@ -14,31 +14,63 @@ import os
 #              u"d\u0142uga po rynkowej", u"d\u0142uga po cenie rynkowej",
 #              u"zamkni\u0119ta"]
 
-trade_word = [u"long at market",
-              u"short at market"]
+trade_word = {"buy": [u"long at market", u"long on market"],
+              "sell": [u"short at market", u"short on market"]}
 
 trade_action = {"TP" : ["take profit", "tp:"],
                 "SL" : ["stop loss", "sl:"]}
 
 url = "http://tradebeat.com/"
 useragent = "Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:44.0) Gecko/20100101 Firefox/44.0"
+instruments = './instruments.yaml'
+
 
 class get_idea_trade():
 
     def __init__(self):
         self.user = sys.argv[1]
         self.password = sys.argv[2]
-       # self.timeframe = sys.argv[3]
+        self.timeframe = sys.argv[3]
         self.base_url = "%simportant" %(url)
         self.try_num = 0
         self.found_list = {}
         self.art_list = {}
         self.art_data = {}
+	self.instruments_dict = {}
 
     def check_page(self):
         with requests.Session() as c:
             self.main_page = c.get(self.base_url, headers={"User-Agent": useragent})
             self.do_soup(self.main_page, "article")
+
+    def import_instruments(self):
+	try:
+	    with open(instruments, 'r') as f:
+		self.instruments_dict = yaml.load(f)
+	    print('Instruments imported!')
+	except:
+	    print('Instruments import failed')
+
+    def check_instrument(self, title):
+	print('checking instruments...')
+	for i in self.instruments_dict.keys():
+	    if i.lower() in title:
+		return i.lower()
+
+    def find_tp_sl(self, info):
+	print('finding TP and SL...')
+	for action in trade_action.keys():
+	    for t in trade_action.get(action):
+		try:
+		    self._art_data[action] = self.outer(info.index(t))
+		except ValueError:
+		    pass
+	#	try:
+		   # self._art_data[action] =
+	       #self.outer(info.index(t))
+	#	    return
+	#	except ValueError:
+		  #  pass
 
     def do_soup(self, page, option):
         self._temp = [] #internal temporary veriable, used to find intrument's symbol
@@ -54,46 +86,47 @@ class get_idea_trade():
             self._art_data["title"]= self.art[0].find("h1").text.lower()
             self._art_data["time"]= self.art[0].find("time").get("datetime")
             self._art_data['page'] = page.url
-            for item in self.art[0].find_all("li"): # this one is to find tags and take instrument symbol from it
-                self._temp.append(item.text)
-            self._art_data["instrument"] = self._temp[1]
-            print "Instrument: ", self._temp[1]
+            #for item in self.art[0].find_all("li"): # this one is to find tags and take instrument symbol from it
+            #    self._temp.append(item.text)
+            #self._art_data["instrument"] = self._temp[1]
+	    self._art_data["instrument"] = self.check_instrument(self._art_data.get("title"))
+            print "Instrument: ", self._art_data.get("instrument", 'error with get instrument')
             for item in self.art: # take description
                 self._art_data['description'] = item.contents[3].text.lower() # description from page (save to database)
-            for action in trade_action.keys(): # find action keywords from trade_action list words
-                for t in trade_action.get(action):
-                    try:
-                        self._art_data[action] = self.outer(self._art_data.get('description', '').index((t)))
-                        print "%s, value: %s" % (t, self._value)
-                    except ValueError:
-                        pass
-            print "action: ", self.art_data["action"]
+           # for action in trade_action.keys(): # find action keywords from trade_action list words
+            #    for t in trade_action.get(action):
+             #       try:
+                       # self._art_data[action] = self.outer(self._art_data.get('description', '').index((t)))
+            self.find_tp_sl(self._art_data.get('description'))
+	    #print "%s, value: %s" % (t, self._value)
+              #      except ValueError:
+               #         pass
+            print "action: ", self.art_data.get("action")
             self._art_list[self.art[0].get("id")] = self._art_data
             self._art_list[self.art[0].get("id")].update(self.art_data)
             self.art_list.update(self._art_list)
             self.save_to_file(self.art[0].get("id"), self._art_list)
 
     def do_article(self, art): # check articles from /important page and find keywords from trade_word
-        for trade in trade_word:
-            try:
-                assert trade in art.text.lower()
-                if self.check_mem(art.contents[5].find_all("a")[0].get("href")):
-                    print "\nFound something!"
-                    self.art_data["action"] = self.get_action(trade)
-                    self.login(art.contents[5].find_all("a")[0].get("href"))
-                    self.try_num += 1
-                else:
-                    print('\nNothing new!')
-                    self.try_num += 1
-            except AssertionError:
-                pass
+        for trade_list in trade_word.values():
+	    for trade in trade_list:
+                try:
+                    assert trade in art.text.lower()
+                    if self.check_mem(art.contents[5].find_all("a")[0].get("href")):
+                        print "\nFound something!"
+                        self.art_data["action"] = self.get_action(trade)
+                        self.login(art.contents[5].find_all("a")[0].get("href"))
+                        self.try_num += 1
+                    else:
+                        print('\nNothing new!')
+                        self.try_num += 1
+                except AssertionError:
+                    pass
+
     def get_action(self, action):
-        if action in trade_word[:2]:
-            return "sell"
-        elif action in trade_word[2:4]:
-            return "buy"
-        else:
-            return "error"
+	for t in trade_word.keys():
+	    if action in trade_word.get(t):
+		return t
 
     def check_mem(self, data): # section to check if trade idea has been found before (need change to use art_id)
         if data not in self.found_list.values():
@@ -156,13 +189,14 @@ class get_idea_trade():
         return self.txt[x:(x+1)]
 # end of section
 
-   # def check_time(self):
-      #  self._mytime = time.ctime().split(' ')[3][:5]
-      #  return self.timeframe in self._mytime
+    def check_time(self):
+        self._mytime = time.ctime().split(' ')[3][:5]
+        return self.timeframe >= self._mytime
 
 try:
     p1 = get_idea_trade()
-    while True:
+    p1.import_instruments()
+    while  p1.check_time():
         p1.check_page()
         time.sleep(random.randint(300,400))
     p1.save_to_file("trade-ideas", p1.art_list) # save all info to one file
