@@ -8,7 +8,7 @@ import random
 import json
 import yaml
 import os
-
+import order
 
 #trade_word = [u"kr\u00F3tka po rynkowej", u"kr\u00F3tka po cenie rynkowej",
 #              u"d\u0142uga po rynkowej", u"d\u0142uga po cenie rynkowej",
@@ -96,6 +96,7 @@ class get_idea_trade():
             self.save_to_file(self.art[0].get("id"), self._art_list)
 	    for dt in self._art_data.keys():
 		print "%s : %s" % ( dt, self._art_data.get(dt))
+	    self.place_order(self._art_data)
 
     def do_article(self, art): # check articles from /important page and find keywords from trade_word
         for trade_list in trade_word.values():
@@ -150,7 +151,21 @@ class get_idea_trade():
             with open(self.file_name, "ab") as f:
                 json.dump(data, f)
 
-
+    def place_order(self, data):
+	print('Placing order...')
+        self._instr = self.instruments_dict.get(data.get('instrument').upper())[0].get('instrument')
+	self._unit = self.instruments_dict.get(data.get('instrument').upper())[3].get('tradeUnit')
+	self._action = data.get('action')
+	self._tp = data.get("TP")
+	self._sl = data.get("SL")
+	print self._instr, self._unit, self._action, self._tp, self._sl
+	self.ordr = order.MyOanda(self._instr, self._unit, self._action, self._sl, self._tp)
+	try:
+	    self._response = self.ordr.create_order()
+	    print self._response
+	except:
+	    print('Place order failed')
+	    pass
 # Find take profit and stop loss values from description section:
     def inner(self, z):
         if z.isdigit():
