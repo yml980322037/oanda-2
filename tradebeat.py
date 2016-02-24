@@ -2,6 +2,7 @@
 
 import requests
 from bs4 import BeautifulSoup
+from trade import *
 import sys
 import time
 import random
@@ -14,8 +15,10 @@ import order
 #              u"d\u0142uga po rynkowej", u"d\u0142uga po cenie rynkowej",
 #              u"zamkni\u0119ta"]
 
-trade_word = {"buy": [u"long at market", u"long on market"],
-              "sell": [u"short at market", u"short on market"]}
+trade_word = {"buy": [u"long at market", u"long on market", 
+		      u"buy at market", u"buy on market"],
+              "sell": [u"short at market", u"short on market",
+		       u"sell at market", u"sell on marker"]}
 
 trade_action = {"TP" : ["take profit", "tp:"],
                 "SL" : ["stop loss", "sl:"]}
@@ -37,7 +40,8 @@ class get_idea_trade():
         self.art_list = {}
         self.art_data = {}
 	self.instruments_dict = {}
-
+	self.trades = {}
+	
     def check_page(self):
         with requests.Session() as c:
             self.main_page = c.get(self.base_url, headers={"User-Agent": useragent})
@@ -59,44 +63,38 @@ class get_idea_trade():
 
     def find_tp_sl(self, info):
 	print('finding TP and SL...')
+	#print info
 	for action in trade_action.keys():
 	    for t in trade_action.get(action):
 		try:
-		    self._art_data[action] = self.outer(info.index(t))
+		    self._art_data.add_takestop(action, self.outer(info.lower().index(t)))
 		except ValueError:
 		    pass
-	#	try:
-		   # self._art_data[action] =
-	       #self.outer(info.index(t))
-	#	    return
-	#	except ValueError:
-		  #  pass
 
     def do_soup(self, page, option):
-        self._temp = [] #internal temporary veriable, used to find intrument's symbol
         self._art_data = {} #internal variable to hold article data
-        self._art_list = {}
         self.soup = BeautifulSoup(page.content, "lxml")
         if option == "article":
             for art in self.soup.find_all(option):
                 self.do_article(art)
         else:
-            self.art = self.soup.find_all('article', option)
-            print "Let's start with ", self.art[0].find("h1").text.lower()
-            self._art_data["title"]= self.art[0].find("h1").text.lower()
-            self._art_data["time"]= self.art[0].find("time").get("datetime")
-            self._art_data['page'] = page.url
-	    self._art_data["instrument"] = self.check_instrument(self._art_data.get("title"))
-            for item in self.art: # take description
-                self._art_data['description'] = item.contents[3].text.lower() # description from page (save to database)
-            self.find_tp_sl(self._art_data.get('description')) # find take profit and sl values
-	    self._art_list[self.art[0].get("id")] = self._art_data
-            self._art_list[self.art[0].get("id")].update(self.art_data)
-            self.art_list.update(self._art_list)
-            self.save_to_file(self.art[0].get("id"), self._art_list)
-	    for dt in self._art_data.keys():
-		print "%s : %s" % ( dt, self._art_data.get(dt))
-	    self.place_order(self._art_data)
+            self.art = self.soup.find('article', option)
+            print "Let's start with ", self.art.find("h1").text.lower()
+	    self._art_data = tradeClass()
+	    self._art_data.title = self.art.find("h1").text.lower().encode('ascii', 'ignore')
+	    self._art_data.add_time(self.art.find("time").get("datetime"))
+	    self._art_data.page_adr = page.url.encode('ascii', 'ignore')
+	    self._art_data.ID = self.art.get("id")
+	    self._art_data.instrument = self.check_instrument(self._art_data.title)
+	    self._art_data.description = self.art.find('div').text.encode('ascii', 'ignore')
+            self.find_tp_sl(self._art_data.description) # find take profit and sl values
+	    self._art_data.add_trade(self._art_data.takestop)
+	    self._art_data.author = self.art.find('section', {'class' : 'autor'}).text.encode('ascii', 'ignore')
+	    self._art_data.do_all_data()
+	    self.trades.update({self._art_data.ID : self._art_data.all_data})
+	    self.save_to_yaml(self._art_data.ID, self._art_data.all_data)
+	    self.save_to_file(self._art_data.ID, self.trades)
+	   # self.place_order(self._art_data.all_data)
 
     def do_article(self, art): # check articles from /important page and find keywords from trade_word
         for trade_list in trade_word.values():
@@ -104,12 +102,12 @@ class get_idea_trade():
                 try:
                     assert trade in art.text.lower()
                     if self.check_mem(art.contents[5].find_all("a")[0].get("href")):
-                        print "\nFound something!"
+                        print "\nFound something!\n"
+	#		print art
                         self.art_data["action"] = self.get_action(trade)
                         self.login(art.contents[5].find_all("a")[0].get("href"))
                         self.try_num += 1
                     else:
-                        print('\nNothing new!')
                         self.try_num += 1
                 except AssertionError:
                     pass
@@ -140,16 +138,29 @@ class get_idea_trade():
             self.do_soup(page, {"class": "news urgent"})
 
     def save_to_file(self, fname, data):
-        self.time = time.ctime().split(' ')
-        self.dir_name = "./%s-%s/" % (self.time[2], self.time[1])
-        self.file_name = self.dir_name + fname
+        self._time = time.ctime().split(' ')
+        self._dir_name = "./%s-%s/" % (self._time[2], self._time[1])
+        self._file_name = self._dir_name + fname
         try:
-            with open(self.file_name, "ab") as f:
+            with open(self._file_name, "ab") as f:
                 json.dump(data, f)
         except IOError:
-            os.makedirs(self.dir_name)
-            with open(self.file_name, "ab") as f:
+            os.makedirs(self._dir_name)
+            with open(self._file_name, "ab") as f:
                 json.dump(data, f)
+
+    def save_to_yaml(self, fname,data):
+        self._time = time.ctime().split(' ')
+        self._dir_name = "./%s-%s/" % (self._time[2], self._time[1])
+        self._file_name = self._dir_name + fname + '.yaml'
+        try:
+            with open(self._file_name, "ab") as f:
+                yaml.dump(data, f)
+        except IOError:
+            os.makedirs(self._dir_name)
+            with open(self._file_name, "ab") as f:
+                yaml.dump(data, f)
+
 
     def place_order(self, data):
 	print('Placing order...')
@@ -174,7 +185,7 @@ class get_idea_trade():
             return False
 
     def inner2(self, z):
-        if z.isdigit() or z == "." or z == ",":
+        if z.isdigit() or z == ".": # or z == ",":
             return True
         else:
             return False
@@ -185,12 +196,12 @@ class get_idea_trade():
             while self.inner2(self.ble(u)):
                 self._value += self._value.join(self.ble(u))
                 u +=1
-            return self._value
+            return (self._value).encode('ascii', 'ignore')
         else:
             return self.outer(u+1)
 
     def ble(self, x):
-        self.txt = self._art_data.get('description', '')
+        self.txt = self._art_data.description
         return self.txt[x:(x+1)]
 # end of section
 
@@ -204,7 +215,8 @@ try:
     while  p1.check_time():
         p1.check_page()
         time.sleep(random.randint(300,400))
-    p1.save_to_file("trade-ideas", p1.art_list) # save all info to one file
+    p1.save_to_yaml("trade-ideas", p1.trades) # save all info to one file
 except KeyboardInterrupt:
+    p1.save_to_yaml("trade-ideas", p1.trades) # save all info to one file
     sys.exit(1)
 
