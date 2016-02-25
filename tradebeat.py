@@ -146,11 +146,27 @@ class get_idea_trade():
 	self.soup = BeautifulSoup(page.content, "lxml")
 	self.art = self.soup.find('article', option)
 	if self.all_trade_ideas.has_key(self.art.get("id")):
-	    print('Found something with has articleID in database already...')
+	    print('Found something with has same articleID in database already...')
+	    self.check_timestamp(self.art.get("id"), self.art)
 	    return
 	else:
 	    print('Found something new!')
 	    self.do_soup(page, option)
+
+    def check_timestamp(self, artID, content):
+	print('I am going to compare timestamps')
+	self._old_time = self.all_trade_ideas.get(artID).get('time')[len(self.all_trade_ideas.get(artID).get('time'))]
+	self._new_time = content.find("time").get("datetime")
+	if self._old_time == self._new_time:
+	    print('No updates')
+	    return
+	else:
+	    print('Update of article has been detected!')
+	    return self.do_update()
+
+    def do_update(self):
+	print("Let's check what has been updated")
+	return
 
     def save_to_yaml_all(self, data):
         self._time = time.ctime().split(' ')
