@@ -98,20 +98,21 @@ class get_idea_trade():
 	    self.trades.update({self._art_data.ID : self._art_data.all_data})
 	    self.save_to_yaml(self._art_data.ID, self._art_data.all_data)
 	    self.save_to_yaml_all(self.trades)
+	    self.import_all_trade_ideas() # Refresh self.all_trade_ideas
 
     def do_article(self, art): # check articles from /important page and find keywords from trade_word
         for trade_list in trade_word.values():
 	    for trade in trade_list:
                 try:
                     assert trade in art.text.lower()
-                    if self.check_mem(art.contents[5].find_all("a")[0].get("href")):
-                        print "\nFound something!\n"
+#                    if self.check_mem(art.contents[5].find_all("a")[0].get("href")):
+#                    print "\nFound something!\n"
 	#		print art
-                        self.art_data["action"] = self.get_action(trade)
-                        self.login(art.contents[5].find_all("a")[0].get("href"))
-                        self.try_num += 1
-                    else:
-                        self.try_num += 1
+                    self.art_data["action"] = self.get_action(trade)
+                    self.login(art.contents[5].find_all("a")[0].get("href"))
+                  #      self.try_num += 1
+                  #  else:
+                   #     self.try_num += 1
                 except AssertionError:
                     pass
 
@@ -138,7 +139,18 @@ class get_idea_trade():
                                "Action[login]":1, "T[_B]":''}
             l.post(url+"user", data=self.login_data, headers={"Referer": url+"user"})
             page = l.get(url+link[1:])
-            self.do_soup(page, {"class": "news urgent"})
+	    self.check_artid(page, {"class": "news urgent"})
+          #  self.do_soup(page, {"class": "news urgent"})
+
+    def check_artid(self, page, option):
+	self.soup = BeautifulSoup(page.content, "lxml")
+	self.art = self.soup.find('article', option)
+	if self.all_trade_ideas.has_key(self.art.get("id")):
+	    print('Found something with has articleID in database already...')
+	    return
+	else:
+	    print('Found something new!')
+	    self.do_soup(page, option)
 
     def save_to_yaml_all(self, data):
         self._time = time.ctime().split(' ')
