@@ -14,8 +14,8 @@ class tradeClass():
 	self.takestop = {}
 
 
-    def add_trade(self, data):
-	self.trade.update({len(self.trade)+1 : data})
+    def add_trade(self, action, data):
+	self.trade.update({action :{len(self.trade)+1 : data}})
 
     def add_time(self, new_time):
 	self.time.update({len(self.time)+1 : new_time})
@@ -31,7 +31,8 @@ class tradeClass():
                          'time' : self.time,
                          'title' : self.title,
                          'desctiption': self.description,
-                         'author' : self.author }
+                         'author' : self.author,
+			 'oanda' : self.oanda_respond }
 
 
     def show_all(self):

@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+from oandapy import OandaError
 import requests
 from bs4 import BeautifulSoup
 from trade import *
@@ -41,6 +42,7 @@ class get_idea_trade():
         self.art_data = {}
 	self.instruments_dict = {}
 	self.trades = {}
+	self.all_trade_ideas = {}
 	
     def check_page(self):
         with requests.Session() as c:
@@ -88,13 +90,14 @@ class get_idea_trade():
 	    self._art_data.instrument = self.check_instrument(self._art_data.title)
 	    self._art_data.description = self.art.find('div').text.encode('ascii', 'ignore')
             self.find_tp_sl(self._art_data.description) # find take profit and sl values
-	    self._art_data.add_trade(self._art_data.takestop)
+	    self._art_data.add_trade(self.art_data['action'], self._art_data.takestop)
 	    self._art_data.author = self.art.find('section', {'class' : 'autor'}).text.encode('ascii', 'ignore')
+	    self._art_data.do_all_data()
+	    self._art_data.oanda_respond = self.place_order(self._art_data.all_data, 1)
 	    self._art_data.do_all_data()
 	    self.trades.update({self._art_data.ID : self._art_data.all_data})
 	    self.save_to_yaml(self._art_data.ID, self._art_data.all_data)
-	    self.save_to_file(self._art_data.ID, self.trades)
-	   # self.place_order(self._art_data.all_data)
+	    self.save_to_yaml_all(self.trades)
 
     def do_article(self, art): # check articles from /important page and find keywords from trade_word
         for trade_list in trade_word.values():
@@ -137,17 +140,16 @@ class get_idea_trade():
             page = l.get(url+link[1:])
             self.do_soup(page, {"class": "news urgent"})
 
-    def save_to_file(self, fname, data):
+    def save_to_yaml_all(self, data):
         self._time = time.ctime().split(' ')
         self._dir_name = "./%s-%s/" % (self._time[2], self._time[1])
-        self._file_name = self._dir_name + fname
+        self._file_name = 'all_trade_ideas.yaml'
         try:
             with open(self._file_name, "ab") as f:
-                json.dump(data, f)
+                yaml.dump(data, f)
+		print('All data has been saved to: ', self._file_name)
         except IOError:
-            os.makedirs(self._dir_name)
-            with open(self._file_name, "ab") as f:
-                json.dump(data, f)
+	    print('Error during saving: ', self._file_name)
 
     def save_to_yaml(self, fname,data):
         self._time = time.ctime().split(' ')
@@ -161,22 +163,30 @@ class get_idea_trade():
             with open(self._file_name, "ab") as f:
                 yaml.dump(data, f)
 
+    def import_all_trade_ideas(self):
+	try:
+	    with open('all_trade_ideas.yaml', "r") as f:
+                self.all_trade_ideas = yaml.load(f)
+	    print('Historical data has been imported')
+	except:
+	    print('Error with importing historical data')
 
-    def place_order(self, data):
+    def place_order(self, data, i):
 	print('Placing order...')
         self._instr = self.instruments_dict.get(data.get('instrument').upper())[0].get('instrument')
 	self._unit = self.instruments_dict.get(data.get('instrument').upper())[3].get('tradeUnit')
-	self._action = data.get('action')
-	self._tp = data.get("TP")
-	self._sl = data.get("SL")
+	for x in data.get('trade').keys():
+	    self._action = x
+    	    self._tp = data.get('trade')[x][i]['TP'] 
+    	    self._sl = data.get('trade')[x][i]['SL']
 	print self._instr, self._unit, self._action, self._tp, self._sl
 	self.ordr = order.MyOanda(self._instr, self._unit, self._action, self._sl, self._tp)
 	try:
-	    self._response = self.ordr.create_order()
-	    print self._response
-	except:
+	    return self.ordr.create_order()
+	except OandaError:
 	    print('Place order failed')
-	    pass
+	    return 0
+
 # Find take profit and stop loss values from description section:
     def inner(self, z):
         if z.isdigit():
@@ -212,11 +222,10 @@ class get_idea_trade():
 try:
     p1 = get_idea_trade()
     p1.import_instruments()
+    p1.import_all_trade_ideas()
     while  p1.check_time():
         p1.check_page()
         time.sleep(random.randint(300,400))
-    p1.save_to_yaml("trade-ideas", p1.trades) # save all info to one file
 except KeyboardInterrupt:
-    p1.save_to_yaml("trade-ideas", p1.trades) # save all info to one file
     sys.exit(1)
 
