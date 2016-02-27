@@ -30,7 +30,7 @@ class tradeClass():
                          'page_adr' : self.page_adr,
                          'time' : self.time,
                          'title' : self.title,
-                         'desctiption': self.description,
+                         'description': self.description,
                          'author' : self.author,
 			 'oanda' : self.oanda_respond }
 

@@ -1,17 +1,13 @@
-a105564:
-  artID: a105564
-  author: "\n12:35  \n\n\nAdam Puchalski\n\n\nAccess for level market\n\n"
-  desctiption: 'Short at market (5983) - three separate positions
+a105668:
+  artID: a105668
+  author: "\n12:22  \n\n\nAdam Puchalski\n\n\nAccess for level market\n\n"
+  desctiption: 'Short at market(0.7893)Stop loss: 0.7934Take profit: 0.78
 
-    Stop loss: 6090Take profit:5820, 5700, 5450
-
-    Justification:As weve pointed out previously, a bearish trend on FTSE is still
-    intact and we may be currently observing a dormation of another lower high within
-    the sequence. What is more on smaller frames the SHS pattern seems likely.
-
-    On M30 we observe a pinbar slightly below the resistance, candlestick should be
-    confirmed. Current levels allow us to short FTSE with a decent RR.
-
+    Justification: Price dropped, opening a path for a further decline (as we are
+    on extremely elevated levels and within the crucial support support around 0.79-0.80.
+    We see a confirmed doji, the nearest resistance is defended and the SHS pattern
+    has formed on the smallest intervals. Position has an intraday character therefore
+    we recommend a smaller risk.
 
 
 
@@ -24,55 +20,37 @@ a105564:
     financial situation and needs of any specific person who may receive it.
 
     '
-  instrument: uk100
+  instrument: eurgbp
   oanda:
-    !!python/unicode 'instrument': !!python/unicode 'UK100_GBP'
-    !!python/unicode 'price': 5990.5
-    !!python/unicode 'time': !!python/unicode '2016-02-25T15:59:36.000000Z'
-    !!python/unicode 'tradeOpened': {!!python/unicode 'id': 10131452517, !!python/unicode 'side': !!python/unicode 'sell',
-      !!python/unicode 'stopLoss': 6090, !!python/unicode 'takeProfit': 5820, !!python/unicode 'trailingStop': 0,
-      !!python/unicode 'units': 1}
+    !!python/unicode 'instrument': !!python/unicode 'EUR_GBP'
+    !!python/unicode 'price': 0.78885
+    !!python/unicode 'time': !!python/unicode '2016-02-26T12:49:12.000000Z'
+    !!python/unicode 'tradeOpened': {!!python/unicode 'id': 10134305144, !!python/unicode 'side': !!python/unicode 'sell',
+      !!python/unicode 'stopLoss': 0.7934, !!python/unicode 'takeProfit': 0.78, !!python/unicode 'trailingStop': 0,
+      !!python/unicode 'units': 1000}
     !!python/unicode 'tradeReduced': {}
     !!python/unicode 'tradesClosed': []
-  page_adr: http://tradebeat.com/uk100-trade-idea-25-02/
-  time: {1: '2016-02-25 12:35:29'}
-  title: uk100 - trade idea 25/02
+  page_adr: http://tradebeat.com/eurgbp-trade-idea-26-02/
+  time: {1: '2016-02-26 12:22:40'}
+  title: eurgbp - trade idea 26/02
   trade:
     sell:
-      1: {SL: '6090', TP: '5820'}
-a104634:
-  artID: a104634
-  author: "\n09:59  \n\n\nArkadiusz Trzcioek, CFA\n\n\nAccess for level market\n\n"
-  desctiption: 'EURSEK - short on market (open price 9,6019 as of 11/02/2016)/ 70%
-    CLOSED (24/02 - 9.35)
-
-    Take profit: 9,25
-
-    Stop loss: 9,80/ moved at 9.60 (BE)
-
-    PARTIALLY CLOSED: We decided to close 70% of a position. The recent rally spurring
-    risk appetite might be coming to an end and a general risk-off attitude which
-    we have seen since the very beginning of the year is a major risk factor for our
-    trade. We still see a potential for a continuation of a drop from a fundamental
-    perspective, but we also think it is smart to partially take profit and eventually
-    enter shorts once again on higher levels. There are also technical signs pointing
-    to a reversal with numerous dojis on H4 interval.
+      1: {SL: '0.7934', TP: '0.78'}
+a105633:
+  artID: a105633
+  author: "\n08:51  \n\n\nAdam Puchalski\n\n\nAccess for level market\n\n"
+  desctiption: 'Long at market - three separate positions (1.9389)Stop loss: 1.92Take
+    profit: 1.962, 2.02, noTPJustification:The upper bound of the short-term bearish
+    channel has been broken above. GBP is extremely oversold especially against Antipodean
+    currencies which still have a bearish fundamental outlook. Move, at least towards
+    the nearest resistance is likely. We are within the crucial support area, taken
+    from a weeklyinterval. There is a forming piercing pattern on a daily interval
+    and a possible engulfing (both pointing to a reversal). On a weekly interval we
+    have seen a marubozu, breaking belowthe lower bound of the channel, and flag pattern
+    but a week is not over yet and we may observe a leg higher, even a pinbar.
 
 
 
-    UPDATE:Our scenario has been materialized. Depreciation of SEK after Riksbanks
-    decision was temporary so we decided to movee SL to BE at 9.60.
-
-
-    Justification (11/02/2016): As we mentioned in our latest currency report, we
-    decided to open a short EURSEK position following the Riksbank decision to cut
-    interest rates. As Swedish monetary authorities decided to cut rates by 15 basis
-    points, the pair grew increased above 9,60. Rates differentials as well as the
-    level of trade weighted index suggests that Swedish krona is oversold versus euro.
-    Especially taking the ECB easing stance into consideration. We believe that Riksbank
-    is going to switch to wait-and-see mode and is not going to introduce FX interventions
-    anytime soon. Current levels provide a good opportunity for EURSEK to correct
-    lower in the mid-term
 
 
 
@@ -82,14 +60,22 @@ a104634:
     financial situation and needs of any specific person who may receive it.
 
     '
-  instrument: eursek
-  oanda: 0
-  page_adr: http://tradebeat.com/eursek-trade-idea-partially-closed/
-  time: {1: '2016-02-24 09:59:56'}
-  title: eursek - trade idea (partially closed)
+  instrument: gbpaud
+  oanda:
+    !!python/unicode 'instrument': !!python/unicode 'GBP_AUD'
+    !!python/unicode 'price': 1.94163
+    !!python/unicode 'time': !!python/unicode '2016-02-26T12:49:21.000000Z'
+    !!python/unicode 'tradeOpened': {!!python/unicode 'id': 10134305449, !!python/unicode 'side': !!python/unicode 'buy',
+      !!python/unicode 'stopLoss': 1.92, !!python/unicode 'takeProfit': 1.962, !!python/unicode 'trailingStop': 0,
+      !!python/unicode 'units': 1000}
+    !!python/unicode 'tradeReduced': {}
+    !!python/unicode 'tradesClosed': []
+  page_adr: http://tradebeat.com/gbpaud-trade-idea-26-02/
+  time: {1: '2016-02-26 08:51:51'}
+  title: gbpaud - trade idea 26/02
   trade:
-    sell:
-      1: {SL: '9', TP: '9'}
+    buy:
+      1: {SL: '1.92', TP: '1.962'}
 a105564:
   artID: a105564
   author: "\n12:35  \n\n\nAdam Puchalski\n\n\nAccess for level market\n\n"
@@ -119,9 +105,9 @@ a105564:
   instrument: uk100
   oanda:
     !!python/unicode 'instrument': !!python/unicode 'UK100_GBP'
-    !!python/unicode 'price': 5990.5
-    !!python/unicode 'time': !!python/unicode '2016-02-25T15:59:36.000000Z'
-    !!python/unicode 'tradeOpened': {!!python/unicode 'id': 10131452517, !!python/unicode 'side': !!python/unicode 'sell',
+    !!python/unicode 'price': 6056.7
+    !!python/unicode 'time': !!python/unicode '2016-02-26T12:49:25.000000Z'
+    !!python/unicode 'tradeOpened': {!!python/unicode 'id': 10134305604, !!python/unicode 'side': !!python/unicode 'sell',
       !!python/unicode 'stopLoss': 6090, !!python/unicode 'takeProfit': 5820, !!python/unicode 'trailingStop': 0,
       !!python/unicode 'units': 1}
     !!python/unicode 'tradeReduced': {}
@@ -207,105 +193,21 @@ a105424:
 
     '
   instrument: gbpusd
-  oanda: 0
+  oanda:
+    !!python/unicode 'instrument': !!python/unicode 'GBP_USD'
+    !!python/unicode 'price': 1.39823
+    !!python/unicode 'time': !!python/unicode '2016-02-26T12:52:23.000000Z'
+    !!python/unicode 'tradeOpened': {!!python/unicode 'id': 10134312026, !!python/unicode 'side': !!python/unicode 'buy',
+      !!python/unicode 'stopLoss': 1.395, !!python/unicode 'takeProfit': 1.41, !!python/unicode 'trailingStop': 0,
+      !!python/unicode 'units': 1000}
+    !!python/unicode 'tradeReduced': {}
+    !!python/unicode 'tradesClosed': []
   page_adr: http://tradebeat.com/gbpusd-trade-idea-24-02/
   time: {1: '2016-02-24 07:08:30'}
   title: gbpusd - trade idea 24/02
   trade:
     buy:
       1: {SL: '1.3950', TP: '1.41'}
-a105564:
-  artID: a105564
-  author: "\n12:35  \n\n\nAdam Puchalski\n\n\nAccess for level market\n\n"
-  desctiption: 'Short at market (5983) - three separate positions
-
-    Stop loss: 6090Take profit:5820, 5700, 5450
-
-    Justification:As weve pointed out previously, a bearish trend on FTSE is still
-    intact and we may be currently observing a dormation of another lower high within
-    the sequence. What is more on smaller frames the SHS pattern seems likely.
-
-    On M30 we observe a pinbar slightly below the resistance, candlestick should be
-    confirmed. Current levels allow us to short FTSE with a decent RR.
-
-
-
-
-
-
-
-
-    Any person acting on this information does so entirely at their own risk. Any
-    research provided does not have regard to the specific investment objectives,
-    financial situation and needs of any specific person who may receive it.
-
-    '
-  instrument: uk100
-  oanda:
-    !!python/unicode 'instrument': !!python/unicode 'UK100_GBP'
-    !!python/unicode 'price': 5990.5
-    !!python/unicode 'time': !!python/unicode '2016-02-25T15:59:36.000000Z'
-    !!python/unicode 'tradeOpened': {!!python/unicode 'id': 10131452517, !!python/unicode 'side': !!python/unicode 'sell',
-      !!python/unicode 'stopLoss': 6090, !!python/unicode 'takeProfit': 5820, !!python/unicode 'trailingStop': 0,
-      !!python/unicode 'units': 1}
-    !!python/unicode 'tradeReduced': {}
-    !!python/unicode 'tradesClosed': []
-  page_adr: http://tradebeat.com/uk100-trade-idea-25-02/
-  time: {1: '2016-02-25 12:35:29'}
-  title: uk100 - trade idea 25/02
-  trade:
-    sell:
-      1: {SL: '6090', TP: '5820'}
-a104634:
-  artID: a104634
-  author: "\n09:59  \n\n\nArkadiusz Trzcioek, CFA\n\n\nAccess for level market\n\n"
-  desctiption: 'EURSEK - short on market (open price 9,6019 as of 11/02/2016)/ 70%
-    CLOSED (24/02 - 9.35)
-
-    Take profit: 9,25
-
-    Stop loss: 9,80/ moved at 9.60 (BE)
-
-    PARTIALLY CLOSED: We decided to close 70% of a position. The recent rally spurring
-    risk appetite might be coming to an end and a general risk-off attitude which
-    we have seen since the very beginning of the year is a major risk factor for our
-    trade. We still see a potential for a continuation of a drop from a fundamental
-    perspective, but we also think it is smart to partially take profit and eventually
-    enter shorts once again on higher levels. There are also technical signs pointing
-    to a reversal with numerous dojis on H4 interval.
-
-
-
-    UPDATE:Our scenario has been materialized. Depreciation of SEK after Riksbanks
-    decision was temporary so we decided to movee SL to BE at 9.60.
-
-
-    Justification (11/02/2016): As we mentioned in our latest currency report, we
-    decided to open a short EURSEK position following the Riksbank decision to cut
-    interest rates. As Swedish monetary authorities decided to cut rates by 15 basis
-    points, the pair grew increased above 9,60. Rates differentials as well as the
-    level of trade weighted index suggests that Swedish krona is oversold versus euro.
-    Especially taking the ECB easing stance into consideration. We believe that Riksbank
-    is going to switch to wait-and-see mode and is not going to introduce FX interventions
-    anytime soon. Current levels provide a good opportunity for EURSEK to correct
-    lower in the mid-term
-
-
-
-
-    Any person acting on this information does so entirely at their own risk. Any
-    research provided does not have regard to the specific investment objectives,
-    financial situation and needs of any specific person who may receive it.
-
-    '
-  instrument: eursek
-  oanda: 0
-  page_adr: http://tradebeat.com/eursek-trade-idea-partially-closed/
-  time: {1: '2016-02-24 09:59:56'}
-  title: eursek - trade idea (partially closed)
-  trade:
-    sell:
-      1: {SL: '9', TP: '9'}
 a105383:
   artID: a105383
   author: "\n17:20  \n\n\nAdam Puchalski\n\n\nAccess for level market\n\n"
@@ -335,9 +237,9 @@ a105383:
   instrument: eurusd
   oanda:
     !!python/unicode 'instrument': !!python/unicode 'EUR_USD'
-    !!python/unicode 'price': 1.10347
-    !!python/unicode 'time': !!python/unicode '2016-02-25T15:59:43.000000Z'
-    !!python/unicode 'tradeOpened': {!!python/unicode 'id': 10131452890, !!python/unicode 'side': !!python/unicode 'buy',
+    !!python/unicode 'price': 1.10243
+    !!python/unicode 'time': !!python/unicode '2016-02-26T12:52:27.000000Z'
+    !!python/unicode 'tradeOpened': {!!python/unicode 'id': 10134312150, !!python/unicode 'side': !!python/unicode 'buy',
       !!python/unicode 'stopLoss': 1.0985, !!python/unicode 'takeProfit': 1.1065,
       !!python/unicode 'trailingStop': 0, !!python/unicode 'units': 1000}
     !!python/unicode 'tradeReduced': {}
@@ -348,77 +250,3 @@ a105383:
   trade:
     buy:
       1: {SL: '1.0985', TP: '1.1065'}
-a105424:
-  artID: a105424
-  author: "\n07:08  \n\n\nAdam Puchalski\n\n\nAccess for level market\n\n"
-  desctiption: 'Buy at market (1.3999), three separate positionsStop loss 1.3950Take
-    profit: 1.41, 1.422, 1.452
-
-    Justification:The psychological level - 1.40 has been touched but not broken below
-    with a massive momentum it is currently beingrespected, a lot of TP has probably
-    been hit and with profit taking we may see a move higher especially after the
-    double bottom on M5. We see formed reversal pattern on higher intervals, starting
-    with a bullish harami on H4 and a pair of pinbars, tweezzer bottom, on H1. Pound
-    is extremely oversold therefeor a leg higherat least towards the recently broken
-    support around 1.41 is expected.
-
-
-
-
-
-
-    Any person acting on this information does so entirely at their own risk. Any
-    research provided does not have regard to the specific investment objectives,
-    financial situation and needs of any specific person who may receive it.
-
-    '
-  instrument: gbpusd
-  oanda: 0
-  page_adr: http://tradebeat.com/gbpusd-trade-idea-24-02/
-  time: {1: '2016-02-24 07:08:30'}
-  title: gbpusd - trade idea 24/02
-  trade:
-    buy:
-      1: {SL: '1.3950', TP: '1.41'}
-a105564:
-  artID: a105564
-  author: "\n12:35  \n\n\nAdam Puchalski\n\n\nAccess for level market\n\n"
-  desctiption: 'Short at market (5983) - three separate positions
-
-    Stop loss: 6090Take profit:5820, 5700, 5450
-
-    Justification:As weve pointed out previously, a bearish trend on FTSE is still
-    intact and we may be currently observing a dormation of another lower high within
-    the sequence. What is more on smaller frames the SHS pattern seems likely.
-
-    On M30 we observe a pinbar slightly below the resistance, candlestick should be
-    confirmed. Current levels allow us to short FTSE with a decent RR.
-
-
-
-
-
-
-
-
-    Any person acting on this information does so entirely at their own risk. Any
-    research provided does not have regard to the specific investment objectives,
-    financial situation and needs of any specific person who may receive it.
-
-    '
-  instrument: uk100
-  oanda:
-    !!python/unicode 'instrument': !!python/unicode 'UK100_GBP'
-    !!python/unicode 'price': 5990.5
-    !!python/unicode 'time': !!python/unicode '2016-02-25T15:59:36.000000Z'
-    !!python/unicode 'tradeOpened': {!!python/unicode 'id': 10131452517, !!python/unicode 'side': !!python/unicode 'sell',
-      !!python/unicode 'stopLoss': 6090, !!python/unicode 'takeProfit': 5820, !!python/unicode 'trailingStop': 0,
-      !!python/unicode 'units': 1}
-    !!python/unicode 'tradeReduced': {}
-    !!python/unicode 'tradesClosed': []
-  page_adr: http://tradebeat.com/uk100-trade-idea-25-02/
-  time: {1: '2016-02-25 12:35:29'}
-  title: uk100 - trade idea 25/02
-  trade:
-    sell:
-      1: {SL: '6090', TP: '5820'}
