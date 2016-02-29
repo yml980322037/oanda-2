@@ -10,7 +10,7 @@ class tradeClass():
         self.author = None
         self.page_adr = None
         self.instrument = None
-        self.oanda_respond = None
+        self.oanda_respond = {}
 	self.takestop = {}
 
 
@@ -22,6 +22,9 @@ class tradeClass():
 
     def add_takestop(self, action, data):
 	self.takestop.update({action : data})
+
+    def add_oanda(self, data):
+	self.oanda_respond.update({data})
 
     def do_all_data(self):
         self.all_data = {'artID' : self.ID,

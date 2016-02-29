@@ -11,6 +11,7 @@ import json
 import yaml
 import os
 import order
+from database import MySQL
 
 #trade_word = [u"kr\u00F3tka po rynkowej", u"kr\u00F3tka po cenie rynkowej",
 #              u"d\u0142uga po rynkowej", u"d\u0142uga po cenie rynkowej",
@@ -40,6 +41,7 @@ class get_idea_trade():
 	self.instruments_dict = {}
 	self.trades = {}
 	self.all_trade_ideas = {}
+	self.db = MySQL()
 
     def import_instruments(self):
 	'''
@@ -99,7 +101,29 @@ class get_idea_trade():
                                "Action[login]":1, "T[_B]":''}
             l.post(url+"user", data=self.login_data, headers={"Referer": url+"user"}) # send post request to login page
             page = l.get(url+link[1:]) # send get request to article page
-	    self.check_artid(page, {"class": "news urgent"}) # pass page content for checking process
+	    #self.check_artid(page, {"class": "news urgent"}) # pass page content for checking process
+	    self.check_artid2(page, {"class": "news urgent"})
+
+    def ask_database(self, what, artID):
+	self._result = self.db.select(what, artID)
+	if self._result:
+	    for data in self._result:
+		self._result_dict = yaml.load(data)
+	    return self._result_dict
+	else:
+	    print('Nothing found!')
+	    return 0
+
+    def check_artid2(self, page, option):
+	self.soup = BeautifulSoup(page.content, "lxml")
+	self.art = self.soup.find('article', option)
+	if self.ask_database('time', self.art.get("id")):
+	    print('Found something with has same articleID in database already...')
+	    self.check_timestamp(self.art.get("id"), self.art) #  checking if article is an update, or old one
+	    return
+	else:
+	    print('Found something new!')
+	    self.do_soup(page, option)
 
     def check_artid(self, page, option):
 	'''
@@ -120,7 +144,11 @@ class get_idea_trade():
 	compare timestamp of last entry in time key
 	'''
 	print('I am going to compare timestamps')
-	self._old_time = self.all_trade_ideas.get(artID).get('time')[len(self.all_trade_ideas.get(artID).get('time'))]
+	#self._old_time = self.all_trade_ideas.get(artID).get('time')[len(self.all_trade_ideas.get(artID).get('time'))]
+	self._old_time = self.ask_database('time', artID)
+	print self._old_time
+	print len(self._old_time)
+	self._old_time = self._old_time.values()[-1]
 	self._new_time = content.find("time").get("datetime")
 	if self._old_time == self._new_time:
 	    print('No updates')
@@ -137,8 +165,6 @@ class get_idea_trade():
         else:
             self.art = self.soup.find('article', option)
 	    self.do_collect_info(self.art, page.url.encode('ascii', 'ignore'))
-	   # self.save_to_yaml_all(self.trades)
-	 #   self.import_all_trade_ideas() # Refresh self.all_trade_ideas
 
     def do_collect_info(self, art, pageurl):
         self._art_data = {} #internal variable to hold article data	
@@ -151,14 +177,17 @@ class get_idea_trade():
 	self._art_data.instrument = self.check_instrument(self._art_data.title)
 	self._art_data.description = art.find('div').text.encode('ascii', 'ignore')
         self.find_tp_sl(self._art_data.description) # find take profit and sl values
-	self._art_data.add_trade(self.art_data['action'], self._art_data.takestop)
 	self._art_data.author = art.find('section', {'class' : 'autor'}).text.encode('ascii', 'ignore')
+	#self._art_data.add_trade(self.art_data['action'], self._art_data.takestop)
 	self._art_data.do_all_data()
-	self._art_data.oanda_respond = self.place_order(self._art_data.all_data, 1)
+	for i in range(1, len(self._art_data.trade)):
+	    self._art_data.add_oanda = self.place_order(self._art_data.all_data, i)
 	self._art_data.do_all_data()
+	print self._art_data.oanda_respond
 	self.trades.update({self._art_data.ID : self._art_data.all_data})
 	self.save_to_yaml(self._art_data.ID, self._art_data.all_data)
 	self.save_to_yaml_all(self.trades)
+	self.db.insert(self._art_data.all_data) #insert all data to database
 	self.trades = {}
 	return
 
@@ -174,7 +203,11 @@ class get_idea_trade():
 	for action in trade_action.keys():
 	    for t in trade_action.get(action):
 		try:
-		    self._art_data.add_takestop(action, self.outer(info.lower().index(t)))
+		    self._tmp = self.outer(info.lower().index(t))
+		    for i in self._tmp.split(','):
+		        self._art_data.add_takestop(action, i)
+			print self._art_data.takestop
+			self._art_data.add_trade(self.art_data['action'], self._art_data.takestop)
 		except ValueError:
 		    pass
 
@@ -221,6 +254,7 @@ class get_idea_trade():
 	Funtion to place an order with ST and TP parameters
 	'''
 	print('Placing an order...')
+	print i
         self._instr = self.instruments_dict.get(data.get('instrument').upper())[0].get('instrument')
 	self._unit = self.instruments_dict.get(data.get('instrument').upper())[3].get('tradeUnit')
 	for x in data.get('trade').keys():
@@ -230,39 +264,29 @@ class get_idea_trade():
 	print self._instr, self._unit, self._action, self._tp, self._sl
 	self.ordr = order.MyOanda(self._instr, self._unit, self._action, self._sl, self._tp)
 	try:
-	    return self.ordr.create_order()
+	    return #self.ordr.create_order()
 	except OandaError:
 	    print('Placing a order failed')
 	    return 0
 
 # Find take profit and stop loss values from description section:
-
-    def outer(self, u):
-        self._value = str()
-
-        def inner(z):
-            if z.isdigit():
-            	return True
-            else:
-                return False
-
-    	def inner2(z):
-            if z.isdigit() or z == ".": # or z == ",":
-            	return True
-            else:
-            	return False
-        
-	if inner(self.ble(u)):
-            while inner2(self.ble(u)):
-                self._value += self._value.join(self.ble(u))
-                u +=1
-            return (self._value).encode('ascii', 'ignore')
+    def outer(self, u, value = str()):
+	if self.find_digit(u).isdigit():
+	    while (self.find_digit(u).isdigit() or self.find_digit(u) == '.' or self.find_digit(u) == ','):
+                value += value.join(self.find_digit(u))
+	        if self.find_digit(u) == ',':
+		    if self.find_digit(u+1).isdigit():
+			return self.outer(u+1, value.replace(',','.'))
+		    else:
+			return self.outer(u+2, value)
+		u +=1
+            return value.encode('ascii', 'ignore')
         else:
             return self.outer(u+1)
 
-    def ble(self, x):
-        self.txt = self._art_data.description
-        return self.txt[x:(x+1)]
+    def find_digit(self, x):
+        self._txt = self._art_data.description
+        return self._txt[x:(x+1)]
 # end of section
 
     def check_time(self):
