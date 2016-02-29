@@ -1484,3 +1484,338 @@ a104634:
   trade:
     sell:
       2: {SL: '9.80', TP: '9.25'}
+a105564:
+  artID: a105564
+  author: "\n12:35  \n\n\nAdam Puchalski\n\n\nAccess for level market\n\n"
+  description: 'Short at market (5983) - three separate positions
+
+    Stop loss: 6090Take profit:5820, 5700, 5450
+
+    Justification:As weve pointed out previously, a bearish trend on FTSE is still
+    intact and we may be currently observing a dormation of another lower high within
+    the sequence. What is more on smaller frames the SHS pattern seems likely.
+
+    On M30 we observe a pinbar slightly below the resistance, candlestick should be
+    confirmed. Current levels allow us to short FTSE with a decent RR.
+
+
+
+
+
+
+
+
+    Any person acting on this information does so entirely at their own risk. Any
+    research provided does not have regard to the specific investment objectives,
+    financial situation and needs of any specific person who may receive it.
+
+    '
+  instrument: uk100
+  oanda: {}
+  page_adr: http://tradebeat.com/uk100-trade-idea-25-02/
+  time: {1: '2016-02-25 12:35:29'}
+  title: uk100 - trade idea 25/02
+  trade: {}
+a104634:
+  artID: a104634
+  author: "\n09:59  \n\n\nArkadiusz Trzcioek, CFA\n\n\nAccess for level market\n\n"
+  description: 'EURSEK - short on market (open price 9,6019 as of 11/02/2016)/ 70%
+    CLOSED (24/02 - 9.35)
+
+    Take profit: 9,25
+
+    Stop loss: 9,80/ moved at 9.60 (BE)
+
+    PARTIALLY CLOSED: We decided to close 70% of a position. The recent rally spurring
+    risk appetite might be coming to an end and a general risk-off attitude which
+    we have seen since the very beginning of the year is a major risk factor for our
+    trade. We still see a potential for a continuation of a drop from a fundamental
+    perspective, but we also think it is smart to partially take profit and eventually
+    enter shorts once again on higher levels. There are also technical signs pointing
+    to a reversal with numerous dojis on H4 interval.
+
+
+
+    UPDATE:Our scenario has been materialized. Depreciation of SEK after Riksbanks
+    decision was temporary so we decided to movee SL to BE at 9.60.
+
+
+    Justification (11/02/2016): As we mentioned in our latest currency report, we
+    decided to open a short EURSEK position following the Riksbank decision to cut
+    interest rates. As Swedish monetary authorities decided to cut rates by 15 basis
+    points, the pair grew increased above 9,60. Rates differentials as well as the
+    level of trade weighted index suggests that Swedish krona is oversold versus euro.
+    Especially taking the ECB easing stance into consideration. We believe that Riksbank
+    is going to switch to wait-and-see mode and is not going to introduce FX interventions
+    anytime soon. Current levels provide a good opportunity for EURSEK to correct
+    lower in the mid-term
+
+
+
+
+    Any person acting on this information does so entirely at their own risk. Any
+    research provided does not have regard to the specific investment objectives,
+    financial situation and needs of any specific person who may receive it.
+
+    '
+  instrument: eursek
+  oanda: {}
+  page_adr: http://tradebeat.com/eursek-trade-idea-partially-closed/
+  time: {1: '2016-02-24 09:59:56'}
+  title: eursek - trade idea (partially closed)
+  trade: {}
+a105564:
+  artID: a105564
+  author: "\n12:35  \n\n\nAdam Puchalski\n\n\nAccess for level market\n\n"
+  description: 'Short at market (5983) - three separate positions
+
+    Stop loss: 6090Take profit:5820, 5700, 5450
+
+    Justification:As weve pointed out previously, a bearish trend on FTSE is still
+    intact and we may be currently observing a dormation of another lower high within
+    the sequence. What is more on smaller frames the SHS pattern seems likely.
+
+    On M30 we observe a pinbar slightly below the resistance, candlestick should be
+    confirmed. Current levels allow us to short FTSE with a decent RR.
+
+
+
+
+
+
+
+
+    Any person acting on this information does so entirely at their own risk. Any
+    research provided does not have regard to the specific investment objectives,
+    financial situation and needs of any specific person who may receive it.
+
+    '
+  instrument: uk100
+  oanda: {}
+  page_adr: http://tradebeat.com/uk100-trade-idea-25-02/
+  time: {1: '2016-02-25 12:35:29'}
+  title: uk100 - trade idea 25/02
+  trade: {}
+a105564:
+  artID: a105564
+  author: "\n12:35  \n\n\nAdam Puchalski\n\n\nAccess for level market\n\n"
+  description: 'Short at market (5983) - three separate positions
+
+    Stop loss: 6090Take profit:5820, 5700, 5450
+
+    Justification:As weve pointed out previously, a bearish trend on FTSE is still
+    intact and we may be currently observing a dormation of another lower high within
+    the sequence. What is more on smaller frames the SHS pattern seems likely.
+
+    On M30 we observe a pinbar slightly below the resistance, candlestick should be
+    confirmed. Current levels allow us to short FTSE with a decent RR.
+
+
+
+
+
+
+
+
+    Any person acting on this information does so entirely at their own risk. Any
+    research provided does not have regard to the specific investment objectives,
+    financial situation and needs of any specific person who may receive it.
+
+    '
+  instrument: uk100
+  oanda: {}
+  page_adr: http://tradebeat.com/uk100-trade-idea-25-02/
+  time: {1: '2016-02-25 12:35:29'}
+  title: uk100 - trade idea 25/02
+  trade: {}
+a104634:
+  artID: a104634
+  author: "\n09:59  \n\n\nArkadiusz Trzcioek, CFA\n\n\nAccess for level market\n\n"
+  description: 'EURSEK - short on market (open price 9,6019 as of 11/02/2016)/ 70%
+    CLOSED (24/02 - 9.35)
+
+    Take profit: 9,25
+
+    Stop loss: 9,80/ moved at 9.60 (BE)
+
+    PARTIALLY CLOSED: We decided to close 70% of a position. The recent rally spurring
+    risk appetite might be coming to an end and a general risk-off attitude which
+    we have seen since the very beginning of the year is a major risk factor for our
+    trade. We still see a potential for a continuation of a drop from a fundamental
+    perspective, but we also think it is smart to partially take profit and eventually
+    enter shorts once again on higher levels. There are also technical signs pointing
+    to a reversal with numerous dojis on H4 interval.
+
+
+
+    UPDATE:Our scenario has been materialized. Depreciation of SEK after Riksbanks
+    decision was temporary so we decided to movee SL to BE at 9.60.
+
+
+    Justification (11/02/2016): As we mentioned in our latest currency report, we
+    decided to open a short EURSEK position following the Riksbank decision to cut
+    interest rates. As Swedish monetary authorities decided to cut rates by 15 basis
+    points, the pair grew increased above 9,60. Rates differentials as well as the
+    level of trade weighted index suggests that Swedish krona is oversold versus euro.
+    Especially taking the ECB easing stance into consideration. We believe that Riksbank
+    is going to switch to wait-and-see mode and is not going to introduce FX interventions
+    anytime soon. Current levels provide a good opportunity for EURSEK to correct
+    lower in the mid-term
+
+
+
+
+    Any person acting on this information does so entirely at their own risk. Any
+    research provided does not have regard to the specific investment objectives,
+    financial situation and needs of any specific person who may receive it.
+
+    '
+  instrument: eursek
+  oanda: {}
+  page_adr: http://tradebeat.com/eursek-trade-idea-partially-closed/
+  time: {1: '2016-02-24 09:59:56'}
+  title: eursek - trade idea (partially closed)
+  trade: {}
+a105564:
+  artID: a105564
+  author: "\n12:35  \n\n\nAdam Puchalski\n\n\nAccess for level market\n\n"
+  description: 'Short at market (5983) - three separate positions
+
+    Stop loss: 6090Take profit:5820, 5700, 5450
+
+    Justification:As weve pointed out previously, a bearish trend on FTSE is still
+    intact and we may be currently observing a dormation of another lower high within
+    the sequence. What is more on smaller frames the SHS pattern seems likely.
+
+    On M30 we observe a pinbar slightly below the resistance, candlestick should be
+    confirmed. Current levels allow us to short FTSE with a decent RR.
+
+
+
+
+
+
+
+
+    Any person acting on this information does so entirely at their own risk. Any
+    research provided does not have regard to the specific investment objectives,
+    financial situation and needs of any specific person who may receive it.
+
+    '
+  instrument: uk100
+  oanda: {}
+  page_adr: http://tradebeat.com/uk100-trade-idea-25-02/
+  time: {1: '2016-02-25 12:35:29'}
+  title: uk100 - trade idea 25/02
+  trade: {}
+a105271:
+  artID: a105271
+  author: "\n09:35  \n\n\nAdam Puchalski\n\n\nAccess for level market\n\n"
+  description: 'Long at market (159.91), two separate positionsStop loss: 159.47Take
+    profit: 163, 174
+
+    Justification: Market could have overreacted the Johnsons statement to vote Leave.
+    We think that despite bad perspective for the GBP, the currency is oversold and
+    current levels create decent RR to long it against specific currencies. For example
+    JPY. We see an impressive rebound on equities and general risk appetite - negative
+    signals for JPY. With a risk of BoJs intervention and a potential easing in March
+    it may be worth a risk. There is also a major divergence between JPY and US500
+    (stocks in general).
+
+
+
+
+
+    Any person acting on this information does so entirely at their own risk. Any
+    research provided does not have regard to the specific investment objectives,
+    financial situation and needs of any specific person who may receive it.
+
+    '
+  instrument: gbpjpy
+  oanda: {}
+  page_adr: http://tradebeat.com/gbpjpy-trade-idea-22-02/
+  time: {1: '2016-02-22 09:35:07'}
+  title: gbpjpy - trade idea 22/02
+  trade: {}
+a105190:
+  artID: a105190
+  author: "\n08:23  \n\n\nJakub Stasik\n\n\nAccess for level market\n\n"
+  description: 'Short at market ( 1912.5), CLOSED at market
+
+    SL: 1960
+
+    TP: 1810
+
+    Update: We decided to close the position as risk-on continues. The market ignored
+    "Brexit" news and rebounds quite sharply. It seems that a break above an important
+    resistance is a matter of time. Fundamentals didnt change and we will look to
+    go short from higher levels.
+
+    Justification: Risk factors are still on and we dont think that recent rebound
+    has changed the outlook for global markets. Both banking and energy sectors struggle
+    as lower interest rates and low oil prices hurt their profits. Whats more, it
+    seems that recent rebound of oil has stopped as freezing the output wont help
+    the market to rebalance quickly. In addition, majority of companies cut their
+    forecasts for the upcoming year, including Wal-Mart, which is one of the biggest
+    companies listed on Wall Street. We also notice a correlation between high-yield
+    bonds and SP500 that shows a scope for the index to fall further.
+
+
+    From the technical perspective it seems that bulls struggle to break above 1930
+    and recent rally should be seen as a pullback within the bearish trend. If so,
+    now is a good spot to take a shot and we decide to go short with a target located
+    near recent lows.
+
+
+
+
+
+    Any person acting on this information does so entirely at their own risk. Any
+    research provided does not have regard to the specific investment objectives,
+    financial situation and needs of any specific person who may receive it.
+
+    '
+  instrument: sp500
+  oanda: {}
+  page_adr: http://tradebeat.com/trade-idea-sp500-update/
+  time: {1: '2016-02-22 08:23:09'}
+  title: trade idea - sp500 (update)
+  trade:
+    sell:
+      1:
+        SL: ['1960']
+        TP: ['1810']
+a105564:
+  artID: a105564
+  author: "\n12:35  \n\n\nAdam Puchalski\n\n\nAccess for level market\n\n"
+  description: 'Short at market (5983) - three separate positions
+
+    Stop loss: 6090Take profit:5820, 5700, 5450
+
+    Justification:As weve pointed out previously, a bearish trend on FTSE is still
+    intact and we may be currently observing a dormation of another lower high within
+    the sequence. What is more on smaller frames the SHS pattern seems likely.
+
+    On M30 we observe a pinbar slightly below the resistance, candlestick should be
+    confirmed. Current levels allow us to short FTSE with a decent RR.
+
+
+
+
+
+
+
+
+    Any person acting on this information does so entirely at their own risk. Any
+    research provided does not have regard to the specific investment objectives,
+    financial situation and needs of any specific person who may receive it.
+
+    '
+  instrument: uk100
+  oanda: {}
+  page_adr: http://tradebeat.com/uk100-trade-idea-25-02/
+  time: {1: '2016-02-25 12:35:29'}
+  title: uk100 - trade idea 25/02
+  trade:
+    sell:
+      2: {SL: '6090', TP: '5450'}

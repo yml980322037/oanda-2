@@ -180,9 +180,11 @@ class get_idea_trade():
 	self._art_data.author = art.find('section', {'class' : 'autor'}).text.encode('ascii', 'ignore')
 	#self._art_data.add_trade(self.art_data['action'], self._art_data.takestop)
 	self._art_data.do_all_data()
+	self.do_trade(self._art_data.takestop)
+	self._art_data.do_all_data()
 	for i in range(1, len(self._art_data.trade)):
 	    self._art_data.add_oanda = self.place_order(self._art_data.all_data, i)
-	self._art_data.do_all_data()
+	print 'trade: ', self._art_data.trade
 	print self._art_data.oanda_respond
 	self.trades.update({self._art_data.ID : self._art_data.all_data})
 	self.save_to_yaml(self._art_data.ID, self._art_data.all_data)
@@ -190,6 +192,25 @@ class get_idea_trade():
 	self.db.insert(self._art_data.all_data) #insert all data to database
 	self.trades = {}
 	return
+
+    def do_trade(self, value):
+        self._temp = {}
+	print 'value: ', value
+    	for i in range(0,max(len(value.get('SL')), len(value.get('TP')))):
+	    print i
+    	    try:
+            	self._temp.update({'SL' : value.get('SL')[0], 'TP': value.get('TP')[i]})
+            	print 'temp1: ', self._temp
+		self._art_data.add_trade(self.art_data['action'], self._temp)
+    	    except IndexError:
+		try:
+		    print 'temp2: ', self._temp
+        	    self._temp.update({'SL' : value.get('SL')[0], 'TP': value.get('TP')[i]})
+		    self._art_data.add_trade(self.art_data['action'], self._temp)
+		except IndexError:
+		    print 'temp3: ', self._temp
+        	    self._temp.update({'SL' : value.get('SL')[i], 'TP': value.get('TP')[0]})
+		    self._art_data.add_trade(self.art_data['action'], self._temp)
 
     def check_instrument(self, title):
 	print('checking instruments...')
@@ -204,12 +225,10 @@ class get_idea_trade():
 	    for t in trade_action.get(action):
 		try:
 		    self._tmp = self.outer(info.lower().index(t))
-		    for i in self._tmp.split(','):
-		        self._art_data.add_takestop(action, i)
-			print self._art_data.takestop
-			self._art_data.add_trade(self.art_data['action'], self._art_data.takestop)
+		    self._art_data.add_takestop(action, self._tmp.split(','))
 		except ValueError:
 		    pass
+	print 'takestop: ', self._art_data.takestop
 
     def do_update(self):
 	'''
@@ -259,8 +278,8 @@ class get_idea_trade():
 	self._unit = self.instruments_dict.get(data.get('instrument').upper())[3].get('tradeUnit')
 	for x in data.get('trade').keys():
 	    self._action = x
-    	    self._tp = data.get('trade')[x][i]['TP'] 
-    	    self._sl = data.get('trade')[x][i]['SL']
+    	    self._tp = data.get('trade')[i][x]['TP'] 
+    	    self._sl = data.get('trade')[i][x]['SL']
 	print self._instr, self._unit, self._action, self._tp, self._sl
 	self.ordr = order.MyOanda(self._instr, self._unit, self._action, self._sl, self._tp)
 	try:
