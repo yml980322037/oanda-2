@@ -182,10 +182,9 @@ class get_idea_trade():
 	self._art_data.do_all_data()
 	self.do_trade(self._art_data.takestop)
 	self._art_data.do_all_data()
-	for i in range(1, len(self._art_data.trade)):
-	    self._art_data.add_oanda = self.place_order(self._art_data.all_data, i)
 	print 'trade: ', self._art_data.trade
-	print self._art_data.oanda_respond
+	print 'len: ', len(self._art_data.trade)
+	self.place_order(self._art_data.all_data, len(self._art_data.trade))
 	self.trades.update({self._art_data.ID : self._art_data.all_data})
 	self.save_to_yaml(self._art_data.ID, self._art_data.all_data)
 	self.save_to_yaml_all(self.trades)
@@ -203,14 +202,9 @@ class get_idea_trade():
             	print 'temp1: ', self._temp
 		self._art_data.add_trade(self.art_data['action'], self._temp)
     	    except IndexError:
-		try:
-		    print 'temp2: ', self._temp
-        	    self._temp.update({'SL' : value.get('SL')[0], 'TP': value.get('TP')[i]})
-		    self._art_data.add_trade(self.art_data['action'], self._temp)
-		except IndexError:
-		    print 'temp3: ', self._temp
-        	    self._temp.update({'SL' : value.get('SL')[i], 'TP': value.get('TP')[0]})
-		    self._art_data.add_trade(self.art_data['action'], self._temp)
+		print 'temp2: ', self._temp
+        	self._temp.update({'SL' : value.get('SL')[i], 'TP': value.get('TP')[0]})
+		self._art_data.add_trade(self.art_data['action'], self._temp)
 
     def check_instrument(self, title):
 	print('checking instruments...')
@@ -276,14 +270,14 @@ class get_idea_trade():
 	print i
         self._instr = self.instruments_dict.get(data.get('instrument').upper())[0].get('instrument')
 	self._unit = self.instruments_dict.get(data.get('instrument').upper())[3].get('tradeUnit')
-	for x in data.get('trade').keys():
-	    self._action = x
-    	    self._tp = data.get('trade')[i][x]['TP'] 
-    	    self._sl = data.get('trade')[i][x]['SL']
-	print self._instr, self._unit, self._action, self._tp, self._sl
-	self.ordr = order.MyOanda(self._instr, self._unit, self._action, self._sl, self._tp)
+	for x in range(1,(i+1)):
+	    self._action = data.get('trade')[x].keys()[0]
+    	    self._tp = data.get('trade')[x][self._action]['TP'] 
+    	    self._sl = data.get('trade')[x][self._action]['SL']
+	    print self._instr, self._unit, self._action, self._tp, self._sl
+	    self.ordr = order.MyOanda(self._instr, self._unit, self._action, self._sl, self._tp)
 	try:
-	    return #self.ordr.create_order()
+	    return self.ordr.create_order()
 	except OandaError:
 	    print('Placing a order failed')
 	    return 0

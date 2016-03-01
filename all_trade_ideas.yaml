@@ -1819,3 +1819,117 @@ a105564:
   trade:
     sell:
       2: {SL: '6090', TP: '5450'}
+a105564:
+  artID: a105564
+  author: "\n12:35  \n\n\nAdam Puchalski\n\n\nAccess for level market\n\n"
+  description: 'Short at market (5983) - three separate positions
+
+    Stop loss: 6090Take profit:5820, 5700, 5450
+
+    Justification:As weve pointed out previously, a bearish trend on FTSE is still
+    intact and we may be currently observing a dormation of another lower high within
+    the sequence. What is more on smaller frames the SHS pattern seems likely.
+
+    On M30 we observe a pinbar slightly below the resistance, candlestick should be
+    confirmed. Current levels allow us to short FTSE with a decent RR.
+
+
+
+
+
+
+
+
+    Any person acting on this information does so entirely at their own risk. Any
+    research provided does not have regard to the specific investment objectives,
+    financial situation and needs of any specific person who may receive it.
+
+    '
+  instrument: uk100
+  oanda: {}
+  page_adr: http://tradebeat.com/uk100-trade-idea-25-02/
+  time: {1: '2016-02-25 12:35:29'}
+  title: uk100 - trade idea 25/02
+  trade:
+    1:
+      sell: &id001 {SL: '6090', TP: '5450'}
+    2:
+      sell: *id001
+    3:
+      sell: *id001
+a105564:
+  artID: a105564
+  author: "\n12:35  \n\n\nAdam Puchalski\n\n\nAccess for level market\n\n"
+  description: 'Short at market (5983) - three separate positions
+
+    Stop loss: 6090Take profit:5820, 5700, 5450
+
+    Justification:As weve pointed out previously, a bearish trend on FTSE is still
+    intact and we may be currently observing a dormation of another lower high within
+    the sequence. What is more on smaller frames the SHS pattern seems likely.
+
+    On M30 we observe a pinbar slightly below the resistance, candlestick should be
+    confirmed. Current levels allow us to short FTSE with a decent RR.
+
+
+
+
+
+
+
+
+    Any person acting on this information does so entirely at their own risk. Any
+    research provided does not have regard to the specific investment objectives,
+    financial situation and needs of any specific person who may receive it.
+
+    '
+  instrument: uk100
+  oanda: {}
+  page_adr: http://tradebeat.com/uk100-trade-idea-25-02/
+  time: {1: '2016-02-25 12:35:29'}
+  title: uk100 - trade idea 25/02
+  trade:
+    1:
+      sell: &id001 {SL: '6090', TP: '5450'}
+    2:
+      sell: *id001
+    3:
+      sell: *id001
+a105564:
+  artID: a105564
+  author: "\n12:35  \n\n\nAdam Puchalski\n\n\nAccess for level market\n\n"
+  description: 'Short at market (5983) - three separate positions
+
+    Stop loss: 6090Take profit:5820, 5700, 5450
+
+    Justification:As weve pointed out previously, a bearish trend on FTSE is still
+    intact and we may be currently observing a dormation of another lower high within
+    the sequence. What is more on smaller frames the SHS pattern seems likely.
+
+    On M30 we observe a pinbar slightly below the resistance, candlestick should be
+    confirmed. Current levels allow us to short FTSE with a decent RR.
+
+
+
+
+
+
+
+
+    Any person acting on this information does so entirely at their own risk. Any
+    research provided does not have regard to the specific investment objectives,
+    financial situation and needs of any specific person who may receive it.
+
+    '
+  instrument: uk100
+  oanda: {}
+  page_adr: http://tradebeat.com/uk100-trade-idea-25-02/
+  time: {1: '2016-02-25 12:35:29'}
+  title: uk100 - trade idea 25/02
+  trade:
+    1:
+      sell: &id001 {SL: '6090', TP: '5450'}
+    2:
+      sell: *id001
+    3:
+      sell: *id001
