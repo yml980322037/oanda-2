@@ -54,16 +54,16 @@ class get_idea_trade():
 	except:
 	    print('Instruments import failed')
 
-    def import_all_trade_ideas(self):
-	'''
-	importing data of all trade ideas from file all_trade_ideas.yaml
-	'''
-	try:
-	    with open('all_trade_ideas.yaml', "r") as f:
-                self.all_trade_ideas = yaml.load(f)
-	    print('Historical data has been imported')
-	except:
-	    print('Error with importing historical data')
+#    def import_all_trade_ideas(self):
+#	'''
+#	importing data of all trade ideas from file all_trade_ideas.yaml
+#	'''
+#	try:
+#	    with open('all_trade_ideas.yaml', "r") as f:
+#               self.all_trade_ideas = yaml.load(f)
+#	    print('Historical data has been imported')
+#	except:
+#	    print('Error with importing historical data')
 	
     def check_page(self):
 	'''
@@ -146,6 +146,7 @@ class get_idea_trade():
 	print('I am going to compare timestamps')
 	#self._old_time = self.all_trade_ideas.get(artID).get('time')[len(self.all_trade_ideas.get(artID).get('time'))]
 	self._old_time = self.ask_database('time', artID)
+	print artID
 	print self._old_time
 	print len(self._old_time)
 	self._old_time = self._old_time.values()[-1]
@@ -159,6 +160,7 @@ class get_idea_trade():
 
     def do_soup(self, page, option):
         self.soup = BeautifulSoup(page.content, "lxml")
+	#self.save_to_yaml('mainpage', self.soup.prettify())
         if option == "article":
             for art in self.soup.find_all(option):
                 self.do_article(art)
@@ -167,6 +169,7 @@ class get_idea_trade():
 	    self.do_collect_info(self.art, page.url.encode('ascii', 'ignore'))
 
     def do_collect_info(self, art, pageurl):
+	self.save_to_yaml('page', str(art))
         self._art_data = {} #internal variable to hold article data	
 	print "Let's start with ", art.find("h1").text.lower()
 	self._art_data = tradeClass()
@@ -175,10 +178,11 @@ class get_idea_trade():
 	self._art_data.ID = art.get("id")
 	self._art_data.page_adr = pageurl
 	self._art_data.instrument = self.check_instrument(self._art_data.title)
-	self._art_data.description = art.find('div').text.encode('ascii', 'ignore')
+	self._art_data.description = art.find('div').find('p').text.encode('ascii', 'ignore')
         self.find_tp_sl(self._art_data.description) # find take profit and sl values
-	self._art_data.author = art.find('section', {'class' : 'autor'}).text.encode('ascii', 'ignore')
+	self._art_data.author = art.find('section', {'class' : 'autor'}).find('div', {'class' : 'about'}).find('h1').text.encode('ascii', 'ignore')
 	#self._art_data.add_trade(self.art_data['action'], self._art_data.takestop)
+	#print art.find('div').find('p').text.encode('ascii', 'ignore')
 	self._art_data.do_all_data()
 	self.do_trade(self._art_data.takestop)
 	self._art_data.do_all_data()
@@ -218,7 +222,9 @@ class get_idea_trade():
 	for action in trade_action.keys():
 	    for t in trade_action.get(action):
 		try:
+		    print 'index %s of %s' % (info.lower().index(t), t)
 		    self._tmp = self.outer(info.lower().index(t))
+		    
 		    self._art_data.add_takestop(action, self._tmp.split(','))
 		except ValueError:
 		    pass
@@ -241,6 +247,7 @@ class get_idea_trade():
 
     def save_to_yaml_all(self, data):
         self._time = time.ctime().split(' ')
+	self._time.remove('')
         self._dir_name = "./%s-%s/" % (self._time[2], self._time[1])
         self._file_name = 'all_trade_ideas.yaml'
         try:
@@ -252,6 +259,7 @@ class get_idea_trade():
 
     def save_to_yaml(self, fname,data):
         self._time = time.ctime().split(' ')
+	self._time.remove('')
         self._dir_name = "./%s-%s/" % (self._time[2], self._time[1])
         self._file_name = self._dir_name + fname + '.yaml'
         try:
@@ -284,14 +292,21 @@ class get_idea_trade():
 
 # Find take profit and stop loss values from description section:
     def outer(self, u, value = str()):
+	print '!!wchodze z u: ', u
 	if self.find_digit(u).isdigit():
 	    while (self.find_digit(u).isdigit() or self.find_digit(u) == '.' or self.find_digit(u) == ','):
                 value += value.join(self.find_digit(u))
+		print "na poczatku while: ", self.find_digit(u)
 	        if self.find_digit(u) == ',':
+		    print "if self.find_digit(u) == ',' ", self.find_digit(u)
 		    if self.find_digit(u+1).isdigit():
+			value += value.join(self.find_digit(u))
+			print "if self.find_digit(u+1).isdigit() ", value
 			return self.outer(u+1, value.replace(',','.'))
 		    else:
-			return self.outer(u+2, value)
+			return self.outer(u+1, value)
+		#value += value.join(self.find_digit(u))
+		print "na koncu while ", value
 		u +=1
             return value.encode('ascii', 'ignore')
         else:
@@ -303,7 +318,9 @@ class get_idea_trade():
 # end of section
 
     def check_time(self):
-        self._mytime = time.ctime().split(' ')[3][:5]
+        self._mytime = time.ctime().split(' ')
+	self._mytime.remove('')
+	self._mytime = self._mytime[3][:5]
         return self.timeframe >= self._mytime
 
 try:
@@ -311,8 +328,8 @@ try:
     p1.import_instruments()
     #p1.import_all_trade_ideas()
     while  p1.check_time():
-	p1.trades = {}
-	p1.import_all_trade_ideas()
+#	p1.trades = {}
+#	p1.import_all_trade_ideas()
         p1.check_page()
         time.sleep(random.randint(300,400))
    # p1.save_to_yaml_all(p1.trades)

@@ -16,7 +16,6 @@ class tradeClass():
 
     def add_trade(self, action, data):
 	self.trade.update({len(self.trade)+1 : {action : data}})
-	print self.trade
 
     def add_time(self, new_time):
 	self.time.update({len(self.time)+1 : new_time})
