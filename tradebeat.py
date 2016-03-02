@@ -186,8 +186,8 @@ class get_idea_trade():
 	self._art_data.do_all_data()
 	self.do_trade(self._art_data.takestop)
 	self._art_data.do_all_data()
-	print 'trade: ', self._art_data.trade
-	print 'len: ', len(self._art_data.trade)
+	#print 'trade: ', self._art_data.trade
+	#print 'len: ', len(self._art_data.trade)
 	self.place_order(self._art_data.all_data, len(self._art_data.trade))
 	self.trades.update({self._art_data.ID : self._art_data.all_data})
 	self.save_to_yaml(self._art_data.ID, self._art_data.all_data)
@@ -197,15 +197,16 @@ class get_idea_trade():
 	return
 
     def do_trade(self, value):
-        self._temp = {}
 	print 'value: ', value
     	for i in range(0,max(len(value.get('SL')), len(value.get('TP')))):
 	    print i
     	    try:
+		self._temp = {}
             	self._temp.update({'SL' : value.get('SL')[0], 'TP': value.get('TP')[i]})
             	print 'temp1: ', self._temp
 		self._art_data.add_trade(self.art_data['action'], self._temp)
     	    except IndexError:
+		self._temp = {}
 		print 'temp2: ', self._temp
         	self._temp.update({'SL' : value.get('SL')[i], 'TP': value.get('TP')[0]})
 		self._art_data.add_trade(self.art_data['action'], self._temp)
@@ -224,7 +225,6 @@ class get_idea_trade():
 		try:
 		    print 'index %s of %s' % (info.lower().index(t), t)
 		    self._tmp = self.outer(info.lower().index(t))
-		    
 		    self._art_data.add_takestop(action, self._tmp.split(','))
 		except ValueError:
 		    pass
@@ -292,21 +292,24 @@ class get_idea_trade():
 
 # Find take profit and stop loss values from description section:
     def outer(self, u, value = str()):
-	print '!!wchodze z u: ', u
+	#print '!!wchodze z u: ', u
 	if self.find_digit(u).isdigit():
 	    while (self.find_digit(u).isdigit() or self.find_digit(u) == '.' or self.find_digit(u) == ','):
                 value += value.join(self.find_digit(u))
-		print "na poczatku while: ", self.find_digit(u)
+		#print "na poczatku while: ", self.find_digit(u)
 	        if self.find_digit(u) == ',':
-		    print "if self.find_digit(u) == ',' ", self.find_digit(u)
-		    if self.find_digit(u+1).isdigit():
-			value += value.join(self.find_digit(u))
-			print "if self.find_digit(u+1).isdigit() ", value
-			return self.outer(u+1, value.replace(',','.'))
+		   # print "if self.find_digit(u) == ',' ", self.find_digit(u)
+		    if (self.find_digit(u+1).isdigit() or self.find_digit(u+2).isdigit()):
+			#value += value.join(self.find_digit(u))
+			#print "if self.find_digit(u+1).isdigit() ", value
+			u += 1
+			#return self.outer(u+1, value.replace(',','.'))
 		    else:
-			return self.outer(u+1, value)
+			return value[:-1].encode('ascii', 'ignore')
+			#return self.outer(u+1, value.replace(',','.'))
+			#return self.outer(u+1, value)
 		#value += value.join(self.find_digit(u))
-		print "na koncu while ", value
+		#print "na koncu while ", value
 		u +=1
             return value.encode('ascii', 'ignore')
         else:
