@@ -12,28 +12,12 @@ import yaml
 import os
 import order
 from database import MySQL
-import logging
+import logger as log
 
-# log file name with date generator
-log_file = './logs/tradebeat-' + time.strftime("%Y%m%d-%H%M%S") + '.log'
+#log.print_error
+#log.print_green
+#log.print_warning
 
-
-# logging config
-logger = logging.getLogger('TB')
-logger.setLevel(logging.DEBUG)
-
-# create console handler and set level to debug
-ch = logging.FileHandler(log_file)
-ch.setLevel(logging.DEBUG)
-
-# create formatter
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-
-# add formatter to ch
-ch.setFormatter(formatter)
-
-# add ch to logger
-logger.addHandler(ch)
 
 #trade_word = [u"kr\u00F3tka po rynkowej", u"kr\u00F3tka po cenie rynkowej",
 #              u"d\u0142uga po rynkowej", u"d\u0142uga po cenie rynkowej",
@@ -74,19 +58,8 @@ class get_idea_trade():
 		self.instruments_dict = yaml.load(f)
 	    print('Instruments imported!')
 	except:
-	    print('Instruments import failed')
+	    log.print_error('Instruments import failed')
 
-#    def import_all_trade_ideas(self):
-#	'''
-#	importing data of all trade ideas from file all_trade_ideas.yaml
-#	'''
-#	try:
-#	    with open('all_trade_ideas.yaml', "r") as f:
-#               self.all_trade_ideas = yaml.load(f)
-#	    print('Historical data has been imported')
-#	except:
-#	    print('Error with importing historical data')
-	
     def check_page(self):
 	'''
 	Main function which is called every time.
@@ -123,8 +96,7 @@ class get_idea_trade():
                                "Action[login]":1, "T[_B]":''}
             l.post(url+"user", data=self.login_data, headers={"Referer": url+"user"}) # send post request to login page
             page = l.get(url+link[1:]) # send get request to article page
-	    #self.check_artid(page, {"class": "news urgent"}) # pass page content for checking process
-	    self.check_artid2(page, {"class": "news urgent"})
+	    self.check_artid(page, {"class": "news urgent"}) # pass page content for checking process
 
     def ask_database(self, what, artID):
 	self._result = self.db.select(what, artID)
@@ -133,32 +105,18 @@ class get_idea_trade():
 		self._result_dict = yaml.load(data)
 	    return self._result_dict
 	else:
-	    print('Nothing found!')
+	    log.print_warning('Nothing found!')
 	    return 0
 
-    def check_artid2(self, page, option):
+    def check_artid(self, page, option):
 	self.soup = BeautifulSoup(page.content, "lxml")
 	self.art = self.soup.find('article', option)
 	if self.ask_database('time', self.art.get("id")):
-	    print('Found something with has same articleID in database already...')
+	    log.print_green('Found something with has same articleID in database already...')
 	    self.check_timestamp(self.art.get("id"), self.art) #  checking if article is an update, or old one
 	    return
 	else:
-	    print('Found something new!')
-	    self.do_soup(page, option)
-
-    def check_artid(self, page, option):
-	'''
-	Function to check if new article appeared on page is already in database (for now in all_trade_ideas.yaml file)
-	'''
-	self.soup = BeautifulSoup(page.content, "lxml")
-	self.art = self.soup.find('article', option)
-	if self.all_trade_ideas.has_key(self.art.get("id")):
-	    print('Found something with has same articleID in database already...')
-	    self.check_timestamp(self.art.get("id"), self.art) #  checking if article is an update, or old one
-	    return
-	else: #for now is carrying on with do_soup, but I want to 
-	    print('Found something new!')
+	    log.print_warning('Found something new!')
 	    self.do_soup(page, option)
 
     def check_timestamp(self, artID, content):
@@ -193,7 +151,7 @@ class get_idea_trade():
     def do_collect_info(self, art, pageurl):
 	self.save_to_yaml('page', str(art))
         self._art_data = {} #internal variable to hold article data	
-	print "Let's start with ", art.find("h1").text.lower()
+	log.print_green("Let's start with ", art.find("h1").text.lower())
 	self._art_data = tradeClass()
 	self._art_data.title = art.find("h1").text.lower().encode('ascii', 'ignore')
 	self._art_data.add_time(art.find("time").get("datetime"))
@@ -202,15 +160,15 @@ class get_idea_trade():
 	self._art_data.instrument = self.check_instrument(self._art_data.title)
 	for p in art.find('div').find_all('p'): #.text.encode('ascii', 'ignore')
 	    self._art_data.description += p.text.encode('ascii', 'ignore')
-	print '######opis##### ', self._art_data.description
+	log.print_warning('######opis##### ', self._art_data.description)
         self.find_tp_sl(self._art_data.description) # find take profit and sl values
 	self._art_data.author = art.find('section', {'class' : 'autor'}).find('div', {'class' : 'about'}).find('h1').text.encode('ascii', 'ignore')
 	#self._art_data.add_trade(self.art_data['action'], self._art_data.takestop)
-	#print art.find('div').find('p').text.encode('ascii', 'ignore')
+	#log.print_warning(art.find('div').find('p').text.encode('ascii', 'ignore'))
 	self._art_data.do_all_data()
 	self.do_trade(self._art_data.takestop)
-	#print 'trade: ', self._art_data.trade
-	#print 'len: ', len(self._art_data.trade)
+	#log.print_warning('trade: ', self._art_data.trade)
+	#log.print_warning('len: ', len(self._art_data.trade))
 	self.place_order(self._art_data.all_data, len(self._art_data.trade))
 	self._art_data.do_all_data()
 	self.trades.update({self._art_data.ID : self._art_data.all_data})
@@ -227,11 +185,11 @@ class get_idea_trade():
     	    try:
 		self._temp = {}
             	self._temp.update({'SL' : value.get('SL')[0], 'TP': value.get('TP')[i]})
-            	print 'temp1: ', self._temp
+            	log.print_green('temp1: ', self._temp)
 		self._art_data.add_trade(self.art_data['action'], self._temp)
     	    except IndexError:
 		self._temp = {}
-		print 'temp2: ', self._temp
+		log.print_green('temp2: ', self._temp)
         	self._temp.update({'SL' : value.get('SL')[i], 'TP': value.get('TP')[0]})
 		self._art_data.add_trade(self.art_data['action'], self._temp)
 
@@ -247,12 +205,12 @@ class get_idea_trade():
 	for action in trade_action.keys():
 	    for t in trade_action.get(action):
 		try:
-		    print 'index %s of %s' % (info.lower().index(t), t)
+		    log.print_green('index %s of %s' % (info.lower().index(t), t))
 		    self._tmp = self.outer(info.lower().index(t))
 		    self._art_data.add_takestop(action, self._tmp.split(','))
 		except ValueError:
 		    pass
-	print 'takestop: ', self._art_data.takestop
+	log.print_green('takestop: ', self._art_data.takestop)
 
     def do_update(self,new_time):
 	'''
@@ -278,9 +236,9 @@ class get_idea_trade():
         try:
             with open(self._file_name, "ab") as f:
                 yaml.dump(data, f)
-		print('All data has been saved to: ', self._file_name)
+		log.print_green('All data has been saved to: ', self._file_name)
         except IOError:
-	    print('Error during saving: ', self._file_name)
+	    log.print_error('Error during saving: ', self._file_name)
 
     def save_to_yaml(self, fname,data):
         self._time = time.ctime().split(' ')
@@ -299,20 +257,19 @@ class get_idea_trade():
 	'''
 	Funtion to place an order with ST and TP parameters
 	'''
-	print('Placing an order...')
-	print i
+	log.print_green('Placing an order...')
         self._instr = self.instruments_dict.get(data.get('instrument').upper())[0].get('instrument')
 	self._unit = self.instruments_dict.get(data.get('instrument').upper())[3].get('tradeUnit')
 	for x in range(1,(i+1)):
 	    self._action = data.get('trade')[x].keys()[0]
     	    self._tp = data.get('trade')[x][self._action]['TP'] 
     	    self._sl = data.get('trade')[x][self._action]['SL']
-	    print self._instr, self._unit, self._action, self._tp, self._sl
+	    log.print_warning(self._instr, self._unit, self._action, self._tp, self._sl)
 	    self.ordr = order.MyOanda(self._instr, self._unit, self._action, self._sl, self._tp)
 	    try:
 	    	self._art_data.add_oanda(self.ordr.create_order())
 	    except OandaError:
-	    	print('Placing a order failed')
+	    	log.print_error('Placing a order failed')
 	    	return 0
 	return
 # Find take profit and stop loss values from description section:
@@ -354,14 +311,9 @@ class get_idea_trade():
 try:
     p1 = get_idea_trade()
     p1.import_instruments()
-    #p1.import_all_trade_ideas()
     while  p1.check_time():
-#	p1.trades = {}
-#	p1.import_all_trade_ideas()
         p1.check_page()
-        time.sleep(random.randint(300,400))
-   # p1.save_to_yaml_all(p1.trades)
+        time.sleep(random.randint(300,600))
 except KeyboardInterrupt:
-   # p1.save_to_yaml_all(p1.trades)
     sys.exit(1)
 
