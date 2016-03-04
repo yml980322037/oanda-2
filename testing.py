@@ -31,7 +31,7 @@ class FindInTesxTest(unittest.TestCase):
 
     def setUp(self):
         self._art_takestop = {}
-	self.description = description.format('(open price 0,67580)','Take profit: 0,6200', 'Stop Loss:0,7050')
+	
    
 
     def find_tp_sl(self, info):
@@ -72,6 +72,7 @@ class FindInTesxTest(unittest.TestCase):
         return self._txt[x:(x+1)]
 
     def test_00(self):
+	self.description = description.format('(open price 0,67580)','Take profit: 0,6200', 'Stop Loss:0,7050')
 	print self.description
 	self.find_tp_sl(self.description)
 	
