@@ -280,7 +280,7 @@ class get_idea_trade():
                 value += value.join(self.find_digit(u))
 		log.print_warning("na poczatku while: ", self.find_digit(u))
 	        if self.find_digit(u) == ',':
-		   log.print_warning("if self.find_digit(u) == ',' ", self.find_digit(u))
+		    log.print_warning("if self.find_digit(u) == ',' ", self.find_digit(u))
 		    if (self.find_digit(u+1).isdigit() or self.find_digit(u+2).isdigit()):
 			#value += value.join(self.find_digit(u))
 			log.print_warning("if self.find_digit(u+1).isdigit() ", value)
