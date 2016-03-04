@@ -151,7 +151,7 @@ class get_idea_trade():
     def do_collect_info(self, art, pageurl):
 	self.save_to_yaml('page', str(art))
         self._art_data = {} #internal variable to hold article data	
-	log.print_green("Let's start with ", art.find("h1").text.lower())
+	log.print_green("Let's start with " + art.find("h1").text.lower())
 	self._art_data = tradeClass()
 	self._art_data.title = art.find("h1").text.lower().encode('ascii', 'ignore')
 	self._art_data.add_time(art.find("time").get("datetime"))
@@ -160,7 +160,7 @@ class get_idea_trade():
 	self._art_data.instrument = self.check_instrument(self._art_data.title)
 	for p in art.find('div').find_all('p'): #.text.encode('ascii', 'ignore')
 	    self._art_data.description += p.text.encode('ascii', 'ignore')
-	log.print_warning('######opis##### ', self._art_data.description)
+	log.print_warning('######opis##### ' + self._art_data.description)
         self.find_tp_sl(self._art_data.description) # find take profit and sl values
 	self._art_data.author = art.find('section', {'class' : 'autor'}).find('div', {'class' : 'about'}).find('h1').text.encode('ascii', 'ignore')
 	#self._art_data.add_trade(self.art_data['action'], self._art_data.takestop)
@@ -185,11 +185,11 @@ class get_idea_trade():
     	    try:
 		self._temp = {}
             	self._temp.update({'SL' : value.get('SL')[0], 'TP': value.get('TP')[i]})
-            	log.print_green('temp1: ', self._temp)
+            	log.print_green('temp1: ' + self._temp)
 		self._art_data.add_trade(self.art_data['action'], self._temp)
     	    except IndexError:
 		self._temp = {}
-		log.print_green('temp2: ', self._temp)
+		log.print_green('temp2: ' + self._temp)
         	self._temp.update({'SL' : value.get('SL')[i], 'TP': value.get('TP')[0]})
 		self._art_data.add_trade(self.art_data['action'], self._temp)
 
@@ -210,7 +210,7 @@ class get_idea_trade():
 		    self._art_data.add_takestop(action, self._tmp.split(','))
 		except ValueError:
 		    pass
-	log.print_green('takestop: ', self._art_data.takestop)
+	log.print_green('takestop: ' + self._art_data.takestop)
 
     def do_update(self,new_time):
 	'''
@@ -236,9 +236,9 @@ class get_idea_trade():
         try:
             with open(self._file_name, "ab") as f:
                 yaml.dump(data, f)
-		log.print_green('All data has been saved to: ', self._file_name)
+		log.print_green('All data has been saved to: ' + self._file_name)
         except IOError:
-	    log.print_error('Error during saving: ', self._file_name)
+	    log.print_error('Error during saving: ' + self._file_name)
 
     def save_to_yaml(self, fname,data):
         self._time = time.ctime().split(' ')
@@ -264,7 +264,7 @@ class get_idea_trade():
 	    self._action = data.get('trade')[x].keys()[0]
     	    self._tp = data.get('trade')[x][self._action]['TP'] 
     	    self._sl = data.get('trade')[x][self._action]['SL']
-	    log.print_warning(self._instr, self._unit, self._action, self._tp, self._sl)
+	    log.print_warning(print(self._instr, self._unit, self._action, self._tp, self._sl))
 	    self.ordr = order.MyOanda(self._instr, self._unit, self._action, self._sl, self._tp)
 	    try:
 	    	self._art_data.add_oanda(self.ordr.create_order())
