@@ -46,7 +46,6 @@ class FindInTesxTest(unittest.TestCase):
 		except ValueError:
 		    pass
 	log.print_green(self._art_takestop)
-	self.assertEqual(self._art_takestop, {'TP': ['0.6200'], 'SL': ['0.7050']}, "Not equal") 
 
     def outer(self, u, value = str()):
 	log.print_warning('!!wchodze z u: ', u)
@@ -58,10 +57,14 @@ class FindInTesxTest(unittest.TestCase):
 		    log.print_warning("if self.find_digit(u) == ',' ", self.find_digit(u))
 		    if (self.find_digit(u+1).isdigit() or self.find_digit(u+2).isdigit()):
 			log.print_warning("if self.find_digit(u+1).isdigit() ", value)
+			value += value.join(self.find_digit(u+1))
+			#value = value.replace(',','.')
 			u += 1
 		    else:
+			#value = value.replace(',','.')
 			return value[:-1].encode('ascii', 'ignore')
 		log.print_warning("na koncu while ", value)
+		value = value.replace(',','.')
 		u +=1
             return value.encode('ascii', 'ignore')
         else:
@@ -71,11 +74,97 @@ class FindInTesxTest(unittest.TestCase):
         self._txt = self.description
         return self._txt[x:(x+1)]
 
-    def test_00(self):
+    def test_01_value_with_one_comma(self):
 	self.description = description.format('(open price 0,67580)','Take profit: 0,6200', 'Stop Loss:0,7050')
 	print self.description
 	self.find_tp_sl(self.description)
-	
+	self.assertEqual(self._art_takestop, {'TP': ['0.6200'], 'SL': ['0.7050']}, self._art_takestop) 
+
+    def test_02_value_with_two_comma_sl(self):
+	self.description = description.format('(open price 0,67580)','Take profit: 0,6200', 'Stop Loss:0,7050, 0,7150')
+	print self.description
+	self.find_tp_sl(self.description)
+	self.assertEqual(self._art_takestop, {'TP': ['0.6200'], 'SL': ['0.7050, 0.7150']}, self._art_takestop) 
+
+    def test_03_value_with_two_comma(self):
+	self.description = description.format('(open price 0,67580)','Take profit: 0,6200, 0,6500', 'Stop Loss:0,7050')
+	print self.description
+	self.find_tp_sl(self.description)
+	self.assertEqual(self._art_takestop, {'TP': ['0.6200', '0,6500'], 'SL': ['0.7050']}, self._art_takestop)
+
+    def test_04_value_with_three_comma(self):
+	self.description = description.format('(open price 0,67580)','Take profit: 0,6200, 0,6500, 0,6700', 'Stop Loss:0,7050')
+	print self.description
+	self.find_tp_sl(self.description)
+	self.assertEqual(self._art_takestop, {'TP': ['0.6200', '0,6500', '0,6700'], 'SL': ['0.7050']}, self._art_takestop)
+
+    def test_05_value_with_three_comma_sl(self):
+	self.description = description.format('(open price 0,67580)','Take profit: 0,6200', 'Stop Loss:0,7050, 0,7150, 0,7350')
+	print self.description
+	self.find_tp_sl(self.description)
+	self.assertEqual(self._art_takestop, {'TP': ['0.6200'], 'SL': ['0.7050, 0.7150, 0.7350']}, self._art_takestop) 
+
+    def test_06_value_with_one_dot(self):
+	self.description = description.format('(open price 0.67580)','Take profit: 0.6200', 'Stop Loss:0.7050')
+	print self.description
+	self.find_tp_sl(self.description)
+	self.assertEqual(self._art_takestop, {'TP': ['0.6200'], 'SL': ['0.7050']}, self._art_takestop)
+
+    def test_07_value_with_two_dot(self):
+	self.description = description.format('(open price 0.67580)','Take profit: 0.6200, 0.6500', 'Stop Loss:0.7050')
+	print self.description
+	self.find_tp_sl(self.description)
+	self.assertEqual(self._art_takestop, {'TP': ['0.6200', '0.6500'], 'SL': ['0.7050']}, self._art_takestop)
+
+    def test_08_value_with_three_dot(self):
+	self.description = description.format('(open price 0.67580)','Take profit: 0.6200, 0.6500, 0.6700', 'Stop Loss:0.7050')
+	print self.description
+	self.find_tp_sl(self.description)
+	self.assertEqual(self._art_takestop, {'TP': ['0.6200', '0.6500', '0.6700'], 'SL': ['0.7050']}, self._art_takestop)
+
+    def test_09_no_tp_dot(self):
+	self.description = description.format('(open price 0.67580)','Take profit,', 'Stop Loss:0.7050')
+	print self.description
+	self.find_tp_sl(self.description)
+	self.assertEqual(self._art_takestop, {'TP': [], 'SL': ['0.7050']}, self._art_takestop)
+
+    def test_10_no_sl_dot(self):
+	self.description = description.format('(open price 0.67580)','Take profit: 0.6200', 'Stop Loss')
+	print self.description
+	self.find_tp_sl(self.description)
+	self.assertEqual(self._art_takestop, {'TP': ['0.6200'], 'SL': []}, self._art_takestop)
+
+    def test_11_no_sl_and_tp(self):
+	self.description = description.format('(open price 0.67580)','Take profit:', 'Stop Loss:')
+	print self.description
+	self.find_tp_sl(self.description)
+	self.assertEqual(self._art_takestop, {'TP': [], 'SL': []}, self._art_takestop)
+
+    def test_12_value_with_one_comma_short(self):
+	self.description = description.format('(open price 0,67580)','TP: 0,6200', 'SL:0,7050')
+	print self.description
+	self.find_tp_sl(self.description)
+	self.assertEqual(self._art_takestop, {'TP': ['0.6200'], 'SL': ['0.7050']}, self._art_takestop) 
+
+    def test_13_value_with_two_comma_short(self):
+	self.description = description.format('(open price 0,67580)','TP: 0,6200', 'SL:0,7050, 0,7150')
+	print self.description
+	self.find_tp_sl(self.description)
+	self.assertEqual(self._art_takestop, {'TP': ['0.6200'], 'SL': ['0.7050, 0.7150']}, self._art_takestop) 
+
+    def test_14_value_with_one_comma_mixed(self):
+	self.description = description.format('(open price 0,67580)','Take profit: 0,6200', 'sl: 0,7050')
+	print self.description
+	self.find_tp_sl(self.description)
+	self.assertEqual(self._art_takestop, {'TP': ['0.6200'], 'SL': ['0.7050']}, self._art_takestop) 
+
+    def test_15_value_with_two_comma_mixed(self):
+	self.description = description.format('(open price 0,67580)','Take profit: 0,6200', 'SL:0,7050, 0,7150')
+	print self.description
+	self.find_tp_sl(self.description)
+	self.assertEqual(self._art_takestop, {'TP': ['0.6200'], 'SL': ['0.7050, 0.7150']}, self._art_takestop) 
+
 
 if __name__ == "__main__":
-    unittest.main()
+    suite = unittest.TestLoader().loadTestsFromTestCase(FindInTesxTest)
+    unittest.TextTestRunner(verbosity=3).run(suite)
