@@ -38,14 +38,14 @@ logg.addHandler(ch)
 
 def print_error(*argv):
     logg.error(argv)
-    print bcolors.FAIL + argv + bcolors.ENDC
+    print bcolors.FAIL + str(argv) + bcolors.ENDC
 
 
 def print_warning(*argv):
     logg.warning(argv)
-    print bcolors.WARNING + argv + bcolors.ENDC
+    print bcolors.WARNING + str(argv) + bcolors.ENDC
 
 
 def print_green(*argv):
     logg.info(argv)
-    print bcolors.OKGREEN + argv + bcolors.ENDC
+    print bcolors.OKGREEN + str(argv) + bcolors.ENDC
