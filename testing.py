@@ -77,9 +77,5 @@ class FindInTesxTest(unittest.TestCase):
 	self.find_tp_sl(self.description)
 	
 
-def suite():
-    tests = ['test_00']
-    return unittest.TestSuite(map(unittest.TestSuite(), tests))
-
 if __name__ == "__main__":
     unittest.main()
