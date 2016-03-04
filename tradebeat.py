@@ -12,6 +12,28 @@ import yaml
 import os
 import order
 from database import MySQL
+import logging
+
+# log file name with date generator
+log_file = './logs/tradebeat-' + time.strftime("%Y%m%d-%H%M%S") + '.log'
+
+
+# logging config
+logger = logging.getLogger('TB')
+logger.setLevel(logging.DEBUG)
+
+# create console handler and set level to debug
+ch = logging.FileHandler(log_file)
+ch.setLevel(logging.DEBUG)
+
+# create formatter
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+
+# add formatter to ch
+ch.setFormatter(formatter)
+
+# add ch to logger
+logger.addHandler(ch)
 
 #trade_word = [u"kr\u00F3tka po rynkowej", u"kr\u00F3tka po cenie rynkowej",
 #              u"d\u0142uga po rynkowej", u"d\u0142uga po cenie rynkowej",
@@ -156,7 +178,7 @@ class get_idea_trade():
 	    return
 	else:
 	    print('Update of article has been detected!')
-	    return self.do_update()
+	    return self.do_update(self._new_time)
 
     def do_soup(self, page, option):
         self.soup = BeautifulSoup(page.content, "lxml")
@@ -178,17 +200,19 @@ class get_idea_trade():
 	self._art_data.ID = art.get("id")
 	self._art_data.page_adr = pageurl
 	self._art_data.instrument = self.check_instrument(self._art_data.title)
-	self._art_data.description = art.find('div').find('p').text.encode('ascii', 'ignore')
+	for p in art.find('div').find_all('p'): #.text.encode('ascii', 'ignore')
+	    self._art_data.description += p.text.encode('ascii', 'ignore')
+	print '######opis##### ', self._art_data.description
         self.find_tp_sl(self._art_data.description) # find take profit and sl values
 	self._art_data.author = art.find('section', {'class' : 'autor'}).find('div', {'class' : 'about'}).find('h1').text.encode('ascii', 'ignore')
 	#self._art_data.add_trade(self.art_data['action'], self._art_data.takestop)
 	#print art.find('div').find('p').text.encode('ascii', 'ignore')
 	self._art_data.do_all_data()
 	self.do_trade(self._art_data.takestop)
-	self._art_data.do_all_data()
 	#print 'trade: ', self._art_data.trade
 	#print 'len: ', len(self._art_data.trade)
 	self.place_order(self._art_data.all_data, len(self._art_data.trade))
+	self._art_data.do_all_data()
 	self.trades.update({self._art_data.ID : self._art_data.all_data})
 	self.save_to_yaml(self._art_data.ID, self._art_data.all_data)
 	self.save_to_yaml_all(self.trades)
@@ -230,11 +254,12 @@ class get_idea_trade():
 		    pass
 	print 'takestop: ', self._art_data.takestop
 
-    def do_update(self):
+    def do_update(self,new_time):
 	'''
 	do update for article
 	'''
 	print("Let's check what has been updated")
+	self._art_data.add_time(new_time)
 	return
 
     def get_action(self, action):
@@ -284,12 +309,12 @@ class get_idea_trade():
     	    self._sl = data.get('trade')[x][self._action]['SL']
 	    print self._instr, self._unit, self._action, self._tp, self._sl
 	    self.ordr = order.MyOanda(self._instr, self._unit, self._action, self._sl, self._tp)
-	try:
-	    return self.ordr.create_order()
-	except OandaError:
-	    print('Placing a order failed')
-	    return 0
-
+	    try:
+	    	self._art_data.add_oanda(self.ordr.create_order())
+	    except OandaError:
+	    	print('Placing a order failed')
+	    	return 0
+	return
 # Find take profit and stop loss values from description section:
     def outer(self, u, value = str()):
 	#print '!!wchodze z u: ', u

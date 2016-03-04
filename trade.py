@@ -3,7 +3,7 @@
 class tradeClass():
     def __init__(self):
         self.ID = None
-        self.description = None
+        self.description = str()
         self.time = {}
         self.trade = {}
         self.title = None
@@ -24,7 +24,7 @@ class tradeClass():
 	self.takestop.update({action : data})
 
     def add_oanda(self, data):
-	self.oanda_respond.update({data})
+	self.oanda_respond.update({len(self.oanda_respond)+1 : data})
 
     def do_all_data(self):
         self.all_data = {'artID' : self.ID,

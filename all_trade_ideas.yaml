@@ -2613,3 +2613,190 @@ a105633:
       buy: {SL: '1.92', TP: '1.962'}
     2:
       buy: {SL: '1.92', TP: '2.02'}
+a105956:
+  artID: a105956
+  author: Adam Puchalski
+  description: 'Short at market (1.3452)Stop loss: 1.3475Take profit: 1.339, 1.30Justification:A
+    short-term bearish trend prevails and we see an interesting signal on H1 interval.
+    Price hasnt reached the resistance yet a doji is being confirmed with a bearish
+    momentum. A position has strictly intraday character therefore we recommend a
+    smaller risk. If the nearest support is defended we will close the whole position.'
+  instrument: usdcad
+  oanda:
+    2:
+      !!python/unicode 'instrument': !!python/unicode 'USD_CAD'
+      !!python/unicode 'price': 1.34432
+      !!python/unicode 'time': !!python/unicode '2016-03-03T08:03:21.000000Z'
+      !!python/unicode 'tradeOpened': {!!python/unicode 'id': 10148977595, !!python/unicode 'side': !!python/unicode 'sell',
+        !!python/unicode 'stopLoss': 1.3475, !!python/unicode 'takeProfit': 1.3, !!python/unicode 'trailingStop': 0,
+        !!python/unicode 'units': 1000}
+      !!python/unicode 'tradeReduced': {}
+      !!python/unicode 'tradesClosed': []
+  page_adr: http://tradebeat.com/usdcad-trade-idea-02-03/
+  time: {1: '2016-03-02 12:22:20'}
+  title: usdcad - trade idea 02/03
+  trade:
+    1:
+      sell: {SL: '1.3475', TP: '1.339'}
+    2:
+      sell: {SL: '1.3475', TP: '1.30'}
+a105923:
+  artID: a105923
+  author: Adam Puchalski
+  description: 'Long at market (85.03)Stop loss: 84.50Take profit: 87.00Justification:A
+    short-term resistance has been broken-above with a massive momnetum. There are
+    no signals pointing to a change of a direction and there is a large room for a
+    further move higher towards the target laying within the resistance around 0.87.
+    Crude doesnt fall despite API report which is a positive sign for CAD. Stocks
+    dont fall as well. There is a double bottom pattern. We see a continuation pattern
+    on smaller intervals and if the upper bound of the triangle is broken above, move
+    towards 0.87 seems likely.'
+  instrument: cadjpy
+  oanda:
+    2:
+      !!python/unicode 'instrument': !!python/unicode 'CAD_JPY'
+      !!python/unicode 'price': 84.847
+      !!python/unicode 'time': !!python/unicode '2016-03-03T08:03:28.000000Z'
+      !!python/unicode 'tradeOpened': {!!python/unicode 'id': 10148977990, !!python/unicode 'side': !!python/unicode 'buy',
+        !!python/unicode 'stopLoss': 84.5, !!python/unicode 'takeProfit': 87, !!python/unicode 'trailingStop': 0,
+        !!python/unicode 'units': 1000}
+      !!python/unicode 'tradeReduced': {}
+      !!python/unicode 'tradesClosed': []
+  page_adr: http://tradebeat.com/cadjpy-trade-idea-02-03/
+  time: {1: '2016-03-02 09:24:31'}
+  title: cadjpy - trade idea 02/03
+  trade:
+    1:
+      buy: {SL: '84.50', TP: '87.00'}
+a105956:
+  artID: a105956
+  author: Adam Puchalski
+  description: 'Short at market (1.3452)Stop loss: 1.3475Take profit: 1.339, 1.30Justification:A
+    short-term bearish trend prevails and we see an interesting signal on H1 interval.
+    Price hasnt reached the resistance yet a doji is being confirmed with a bearish
+    momentum. A position has strictly intraday character therefore we recommend a
+    smaller risk. If the nearest support is defended we will close the whole position.'
+  instrument: usdcad
+  oanda:
+    2:
+      !!python/unicode 'instrument': !!python/unicode 'USD_CAD'
+      !!python/unicode 'price': 1.34411
+      !!python/unicode 'time': !!python/unicode '2016-03-03T08:10:23.000000Z'
+      !!python/unicode 'tradeOpened': {!!python/unicode 'id': 10148995036, !!python/unicode 'side': !!python/unicode 'sell',
+        !!python/unicode 'stopLoss': 1.3475, !!python/unicode 'takeProfit': 1.3, !!python/unicode 'trailingStop': 0,
+        !!python/unicode 'units': 1000}
+      !!python/unicode 'tradeReduced': {}
+      !!python/unicode 'tradesClosed': []
+  page_adr: http://tradebeat.com/usdcad-trade-idea-02-03/
+  time: {1: '2016-03-02 12:22:20'}
+  title: usdcad - trade idea 02/03
+  trade:
+    1:
+      sell: {SL: '1.3475', TP: '1.339'}
+    2:
+      sell: {SL: '1.3475', TP: '1.30'}
+a105923:
+  artID: a105923
+  author: Adam Puchalski
+  description: 'Long at market (85.03)Stop loss: 84.50Take profit: 87.00Justification:A
+    short-term resistance has been broken-above with a massive momnetum. There are
+    no signals pointing to a change of a direction and there is a large room for a
+    further move higher towards the target laying within the resistance around 0.87.
+    Crude doesnt fall despite API report which is a positive sign for CAD. Stocks
+    dont fall as well. There is a double bottom pattern. We see a continuation pattern
+    on smaller intervals and if the upper bound of the triangle is broken above, move
+    towards 0.87 seems likely.'
+  instrument: cadjpy
+  oanda:
+    1:
+      !!python/unicode 'instrument': !!python/unicode 'CAD_JPY'
+      !!python/unicode 'price': 84.848
+      !!python/unicode 'time': !!python/unicode '2016-03-03T08:12:37.000000Z'
+      !!python/unicode 'tradeOpened': {!!python/unicode 'id': 10149000804, !!python/unicode 'side': !!python/unicode 'buy',
+        !!python/unicode 'stopLoss': 84.5, !!python/unicode 'takeProfit': 87, !!python/unicode 'trailingStop': 0,
+        !!python/unicode 'units': 1000}
+      !!python/unicode 'tradeReduced': {}
+      !!python/unicode 'tradesClosed': []
+  page_adr: http://tradebeat.com/cadjpy-trade-idea-02-03/
+  time: {1: '2016-03-02 09:24:31'}
+  title: cadjpy - trade idea 02/03
+  trade:
+    1:
+      buy: {SL: '84.50', TP: '87.00'}
+a105633:
+  artID: a105633
+  author: Adam Puchalski
+  description: 'Long at market - three separate positions (1.9389)Stop loss: 1.92,
+    moved to BETake profit: 1.962, 2.02, noTPUpdate: As we have expected the pair
+    rebounded somewhat and touch 1,96 overnight. However, the AUD gained some steam
+    after the RBAs decision and made the pair fall again. The RBAs willingness to
+    stay on hold may limit the scope for the AUD to decline further and thats why
+    we decide to move the SL to break-even.Justification:The upper bound of the short-term
+    bearish channel has been broken above. GBP is extremely oversold especially against
+    Antipodean currencies which still have a bearish fundamental outlook. Move, at
+    least towards the nearest resistance is likely. We are within the crucial support
+    area, taken from a weeklyinterval. There is a forming piercing pattern on a daily
+    interval and a possible engulfing (both pointing to a reversal). On a weekly interval
+    we have seen a marubozu, breaking belowthe lower bound of the channel, and flag
+    pattern but a week is not over yet and we may observe a leg higher, even a pinbar.'
+  instrument: gbpaud
+  oanda:
+    1:
+      !!python/unicode 'instrument': !!python/unicode 'GBP_AUD'
+      !!python/unicode 'price': 1.92788
+      !!python/unicode 'time': !!python/unicode '2016-03-03T08:14:38.000000Z'
+      !!python/unicode 'tradeOpened': {!!python/unicode 'id': 10149006089, !!python/unicode 'side': !!python/unicode 'buy',
+        !!python/unicode 'stopLoss': 1.92, !!python/unicode 'takeProfit': 1.962, !!python/unicode 'trailingStop': 0,
+        !!python/unicode 'units': 1000}
+      !!python/unicode 'tradeReduced': {}
+      !!python/unicode 'tradesClosed': []
+    2:
+      !!python/unicode 'instrument': !!python/unicode 'GBP_AUD'
+      !!python/unicode 'price': 1.92789
+      !!python/unicode 'time': !!python/unicode '2016-03-03T08:14:38.000000Z'
+      !!python/unicode 'tradeOpened': {!!python/unicode 'id': 10149006108, !!python/unicode 'side': !!python/unicode 'buy',
+        !!python/unicode 'stopLoss': 1.92, !!python/unicode 'takeProfit': 2.02, !!python/unicode 'trailingStop': 0,
+        !!python/unicode 'units': 1000}
+      !!python/unicode 'tradeReduced': {}
+      !!python/unicode 'tradesClosed': []
+  page_adr: http://tradebeat.com/gbpaud-trade-idea-26-02-update/
+  time: {1: '2016-03-01 07:22:39'}
+  title: gbpaud - trade idea 26/02 [update]
+  trade:
+    1:
+      buy: {SL: '1.92', TP: '1.962'}
+    2:
+      buy: {SL: '1.92', TP: '2.02'}
+a106081:
+  artID: a106081
+  author: Adam Puchalski
+  description: 'Short at market(1.09483)Stop loss: 1.098Take profit: 1.088Justification:We
+    have pointed out previously bullish signals on EURUSD within the crucial support
+    around 1.08. The target of a reversed SHS has been met and price has broken above
+    the upper bound of the channel with a massive momentum. However the nearest resistance
+    with local lows and a high has been respected and we observe a bearish engulfing
+    without a new higher high. Therefore we expect a leg lower.Especially as the possibilty
+    is there. There is a small divergence between the yields spread and EURUSD, pointing
+    to a move lower towards the support above 1.08.What is more a significant divergence
+    between DAX and EURUSD has been formed yesterday. It should be partially closed
+    but rather from EURUSD side as the reaction on the USD might have been exaggerated.Any
+    person acting on this information does so entirely at their own risk. Any research
+    provided does not have regard to the specific investment objectives, financial
+    situation and needs of any specific person who may receive it.'
+  instrument: eurusd
+  oanda:
+    1:
+      !!python/unicode 'instrument': !!python/unicode 'EUR_USD'
+      !!python/unicode 'price': 1.09443
+      !!python/unicode 'time': !!python/unicode '2016-03-04T08:21:23.000000Z'
+      !!python/unicode 'tradeOpened': {!!python/unicode 'id': 10151950715, !!python/unicode 'side': !!python/unicode 'sell',
+        !!python/unicode 'stopLoss': 1.098, !!python/unicode 'takeProfit': 1.088,
+        !!python/unicode 'trailingStop': 0, !!python/unicode 'units': 1000}
+      !!python/unicode 'tradeReduced': {}
+      !!python/unicode 'tradesClosed': []
+  page_adr: http://tradebeat.com/eurusd-trade-idea-04-03/
+  time: {1: '2016-03-04 08:01:31'}
+  title: eurusd - trade idea 04/03
+  trade:
+    1:
+      sell: {SL: '1.098', TP: '1.088'}
