@@ -45,7 +45,8 @@ class FindInTesxTest(unittest.TestCase):
 		    self._art_takestop.update({action : self._tmp.split(',')})
 		except ValueError:
 		    pass
-	log.print_green('takestop: ', self._art_takestop)
+	log.print_green(self._art_takestop)
+	self.assertEqual(self._art_takestop, {'TP': ['0.6200'], 'SL': ['0.7050']}, "Not equal") 
 
     def outer(self, u, value = str()):
 	log.print_warning('!!wchodze z u: ', u)
@@ -73,6 +74,7 @@ class FindInTesxTest(unittest.TestCase):
     def test_00(self):
 	print self.description
 	self.find_tp_sl(self.description)
+	
 
 def suite():
     tests = ['test_00']
