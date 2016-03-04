@@ -274,7 +274,7 @@ class get_idea_trade():
 	return
 # Find take profit and stop loss values from description section:
     def outer(self, u, value = str()):
-	log.print_warning'!!wchodze z u: ', u)
+	log.print_warning('!!wchodze z u: ', u)
 	if self.find_digit(u).isdigit():
 	    while (self.find_digit(u).isdigit() or self.find_digit(u) == '.' or self.find_digit(u) == ','):
                 value += value.join(self.find_digit(u))
