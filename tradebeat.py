@@ -264,7 +264,7 @@ class get_idea_trade():
 	    self._action = data.get('trade')[x].keys()[0]
     	    self._tp = data.get('trade')[x][self._action]['TP'] 
     	    self._sl = data.get('trade')[x][self._action]['SL']
-	    log.print_warning(print(self._instr, self._unit, self._action, self._tp, self._sl))
+	    log.print_warning(self._instr, self._unit, self._action, self._tp, self._sl)
 	    self.ordr = order.MyOanda(self._instr, self._unit, self._action, self._sl, self._tp)
 	    try:
 	    	self._art_data.add_oanda(self.ordr.create_order())
