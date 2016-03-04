@@ -36,16 +36,16 @@ ch.setFormatter(formatter)
 logg.addHandler(ch)
 
 
-def print_error(msg):
-    logg.error(msg)
-    print bcolors.FAIL + msg + bcolors.ENDC
+def print_error(*argv):
+    logg.error(argv)
+    print bcolors.FAIL + argv + bcolors.ENDC
 
 
-def print_warning(msg):
-    logg.warning(msg)
-    print bcolors.WARNING + msg + bcolors.ENDC
+def print_warning(*argv):
+    logg.warning(argv)
+    print bcolors.WARNING + argv + bcolors.ENDC
 
 
-def print_green(msg):
-    logg.info(msg)
-    print bcolors.OKGREEN + msg + bcolors.ENDC
+def print_green(*argv):
+    logg.info(argv)
+    print bcolors.OKGREEN + argv + bcolors.ENDC
