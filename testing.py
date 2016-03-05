@@ -14,6 +14,7 @@ import yaml
 import os
 import order
 from database import MySQL
+import re
 
 
 description ='''NZDUSD - short at market {0}{1}{2}Justification (04/03/2016):We believe that the market is underpricing the
@@ -31,18 +32,39 @@ class FindInTesxTest(unittest.TestCase):
 
     def setUp(self):
         self._art_takestop = {}
+
 	
-   
+    def check_instrument(self, title):
+	log.print_green('checking instruments...')
+	for i in self.instruments_dict.keys():
+	    print title
+	    print 'i.lower() ', i.lower()
+	    if i.lower() in title:
+		print '2: ', title
+		print '2: i.lower() ', i.lower()
+		log.print_green('Found: ', i.lower())
+		return i.lower()
+
+
+    def import_instruments(self):
+	'''
+	Importing list of indtrument from instruments.yaml file
+	'''
+	try:
+	    with open('./instruments.yaml', 'r') as f:
+		self.instruments_dict = yaml.load(f)
+	    log.print_green('Instruments imported!')
+	except:
+	    log.print_error('Instruments import failed')
 
     def find_tp_sl(self, info):
 	print('finding TP and SL...')
 	for action in trade_action.keys():
 	    for t in trade_action.get(action):
 		try:
-		    log.print_green('index %s of %s' % (info.lower().index(t), t))
-		    self._tmp = self.outer(info.lower().index(t))
-		    #self._art_takestop.update({action} : {self._tmp.split(',')})
-		    self._art_takestop.update({action : self._tmp.split(',')})
+		    if t in info.lower():
+			self._tmp = self.find_digits(t, info.lower())
+			self._art_takestop.update({action : self._tmp})
 		except ValueError:
 		    pass
 	log.print_green(self._art_takestop)
@@ -74,6 +96,23 @@ class FindInTesxTest(unittest.TestCase):
         self._txt = self.description
         return self._txt[x:(x+1)]
 
+    def find_digits(self, what, where):
+	self._result = 0
+	self._compile = "{}.[0-9\s.,]+".format(what)
+	try:
+	    self._result = re.findall(self._compile, where)[0]
+	    self._result = self._result.split(':')[1]
+	    self._result = self._result.split(', ')
+	    for i in range(0, len(self._result)):
+		self._result[i] = self._result[i].replace(' ', '')
+		self._result[i] = self._result[i].replace(',', '.')
+	    print 'new result: ', self._result
+	    return self._result
+	except IndexError:
+	    return []
+	
+
+
     def test_01_value_with_one_comma(self):
 	self.description = description.format('(open price 0,67580)','Take profit: 0,6200', 'Stop Loss:0,7050')
 	print self.description
@@ -84,25 +123,25 @@ class FindInTesxTest(unittest.TestCase):
 	self.description = description.format('(open price 0,67580)','Take profit: 0,6200', 'Stop Loss:0,7050, 0,7150')
 	print self.description
 	self.find_tp_sl(self.description)
-	self.assertEqual(self._art_takestop, {'TP': ['0.6200'], 'SL': ['0.7050, 0.7150']}, self._art_takestop) 
+	self.assertEqual(self._art_takestop, {'TP': ['0.6200'], 'SL': ['0.7050', '0.7150']}, self._art_takestop) 
 
     def test_03_value_with_two_comma(self):
 	self.description = description.format('(open price 0,67580)','Take profit: 0,6200, 0,6500', 'Stop Loss:0,7050')
 	print self.description
 	self.find_tp_sl(self.description)
-	self.assertEqual(self._art_takestop, {'TP': ['0.6200', '0,6500'], 'SL': ['0.7050']}, self._art_takestop)
+	self.assertEqual(self._art_takestop, {'TP': ['0.6200', '0.6500'], 'SL': ['0.7050']}, self._art_takestop)
 
     def test_04_value_with_three_comma(self):
 	self.description = description.format('(open price 0,67580)','Take profit: 0,6200, 0,6500, 0,6700', 'Stop Loss:0,7050')
 	print self.description
 	self.find_tp_sl(self.description)
-	self.assertEqual(self._art_takestop, {'TP': ['0.6200', '0,6500', '0,6700'], 'SL': ['0.7050']}, self._art_takestop)
+	self.assertEqual(self._art_takestop, {'TP': ['0.6200', '0.6500', '0.6700'], 'SL': ['0.7050']}, self._art_takestop)
 
     def test_05_value_with_three_comma_sl(self):
 	self.description = description.format('(open price 0,67580)','Take profit: 0,6200', 'Stop Loss:0,7050, 0,7150, 0,7350')
 	print self.description
 	self.find_tp_sl(self.description)
-	self.assertEqual(self._art_takestop, {'TP': ['0.6200'], 'SL': ['0.7050, 0.7150, 0.7350']}, self._art_takestop) 
+	self.assertEqual(self._art_takestop, {'TP': ['0.6200'], 'SL': ['0.7050', '0.7150', '0.7350']}, self._art_takestop) 
 
     def test_06_value_with_one_dot(self):
 	self.description = description.format('(open price 0.67580)','Take profit: 0.6200', 'Stop Loss:0.7050')
@@ -150,7 +189,7 @@ class FindInTesxTest(unittest.TestCase):
 	self.description = description.format('(open price 0,67580)','TP: 0,6200', 'SL:0,7050, 0,7150')
 	print self.description
 	self.find_tp_sl(self.description)
-	self.assertEqual(self._art_takestop, {'TP': ['0.6200'], 'SL': ['0.7050, 0.7150']}, self._art_takestop) 
+	self.assertEqual(self._art_takestop, {'TP': ['0.6200'], 'SL': ['0.7050', '0.7150']}, self._art_takestop) 
 
     def test_14_value_with_one_comma_mixed(self):
 	self.description = description.format('(open price 0,67580)','Take profit: 0,6200', 'sl: 0,7050')
@@ -162,8 +201,14 @@ class FindInTesxTest(unittest.TestCase):
 	self.description = description.format('(open price 0,67580)','Take profit: 0,6200', 'SL:0,7050, 0,7150')
 	print self.description
 	self.find_tp_sl(self.description)
-	self.assertEqual(self._art_takestop, {'TP': ['0.6200'], 'SL': ['0.7050, 0.7150']}, self._art_takestop) 
+	self.assertEqual(self._art_takestop, {'TP': ['0.6200'], 'SL': ['0.7050', '0.7150']}, self._art_takestop) 
 
+    def test_16_title(self):
+	self.instruments_dict = {}
+	self.import_instruments()
+	self._title = 'caduiyjpy - trade idea 02/03'
+	self._instr = self.check_instrument(self._title)
+	self.assertEqual(self._instr, 'cadjpy' , self._instr)
 
 if __name__ == "__main__":
     suite = unittest.TestLoader().loadTestsFromTestCase(FindInTesxTest)

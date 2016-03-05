@@ -2833,3 +2833,232 @@ a106118:
       sell: {SL: '0', TP: '0'}
     2:
       sell: {SL: '0', TP: '200'}
+a106137:
+  artID: a106137
+  author: Micha Stajniak
+  description: 'A divergence between gold and futures on US 10Y bonds (TNOTE)Gold
+    - short at market (1272,52), TNOTE - long at market (129,43)Taking market conditions
+    into account, one position on gold (for example 1 lot) is equivalent of 2,75 position
+    on TNOTE (for example 2,75 lots).Justification: the price of gold has increased
+    significantly in recent weeks which was related with concerns over an economic
+    growth and its influence on interest rate path in the US. The US dollar is much
+    stronger than in October last year, but the gold price is not corresponding to
+    situation and is the highest since the beginning of 2015. In out opinion, yields
+    do not justify such high gold prices and global stabilization should bring a price
+    reverse on gold. As you can see on the chart below, a correlation between gold
+    and TNOTE has been very strong over past months. Current divergence gives us a
+    chance to take positions on these instruments. Position on TNOTE represents a
+    hedge in case of risk return to the market. Obviously, we take into account a
+    possibility of finding a new equilibirium point higher or lower. In such case,
+    we will look to close trades with a minimum profit.Any person acting on this information
+    does so entirely at their own risk. Any research provided does not have regard
+    to the specific investment objectives, financial situation and needs of any specific
+    person who may receive it.'
+  instrument: 0
+  oanda: {}
+  page_adr: http://tradebeat.com/trade-idea-gold-tnote/
+  time: {1: '2016-03-04 15:02:22'}
+  title: trade idea - gold/tnote
+  trade: {}
+a105956:
+  artID: a105956
+  author: Adam Puchalski
+  description: 'Short at market (1.3452)Stop loss: 1.3475Take profit: 1.339, 1.30Justification:A
+    short-term bearish trend prevails and we see an interesting signal on H1 interval.
+    Price hasnt reached the resistance yet a doji is being confirmed with a bearish
+    momentum. A position has strictly intraday character therefore we recommend a
+    smaller risk. If the nearest support is defended we will close the whole position.Any
+    person acting on this information does so entirely at their own risk. Any research
+    provided does not have regard to the specific investment objectives, financial
+    situation and needs of any specific person who may receive it.'
+  instrument: 0
+  oanda: {}
+  page_adr: http://tradebeat.com/usdcad-trade-idea-02-03/
+  time: {1: '2016-03-02 12:22:20'}
+  title: usdcad - trade idea 02/03
+  trade: {}
+a105923:
+  artID: a105923
+  author: Adam Puchalski
+  description: 'Long at market (85.03)Stop loss: 84.50Take profit: 87.00Justification:A
+    short-term resistance has been broken-above with a massive momnetum. There are
+    no signals pointing to a change of a direction and there is a large room for a
+    further move higher towards the target laying within the resistance around 0.87.
+    Crude doesnt fall despite API report which is a positive sign for CAD. Stocks
+    dont fall as well. There is a double bottom pattern. We see a continuation pattern
+    on smaller intervals and if the upper bound of the triangle is broken above, move
+    towards 0.87 seems likely.Any person acting on this information does so entirely
+    at their own risk. Any research provided does not have regard to the specific
+    investment objectives, financial situation and needs of any specific person who
+    may receive it.'
+  instrument: 0
+  oanda: {}
+  page_adr: http://tradebeat.com/cadjpy-trade-idea-02-03/
+  time: {1: '2016-03-02 09:24:31'}
+  title: cadjpy - trade idea 02/03
+  trade:
+    1:
+      buy: {SL: '84.50', TP: '87.00'}
+a106137:
+  artID: a106137
+  author: Micha Stajniak
+  description: 'A divergence between gold and futures on US 10Y bonds (TNOTE)Gold
+    - short at market (1272,52), TNOTE - long at market (129,43)Taking market conditions
+    into account, one position on gold (for example 1 lot) is equivalent of 2,75 position
+    on TNOTE (for example 2,75 lots).Justification: the price of gold has increased
+    significantly in recent weeks which was related with concerns over an economic
+    growth and its influence on interest rate path in the US. The US dollar is much
+    stronger than in October last year, but the gold price is not corresponding to
+    situation and is the highest since the beginning of 2015. In out opinion, yields
+    do not justify such high gold prices and global stabilization should bring a price
+    reverse on gold. As you can see on the chart below, a correlation between gold
+    and TNOTE has been very strong over past months. Current divergence gives us a
+    chance to take positions on these instruments. Position on TNOTE represents a
+    hedge in case of risk return to the market. Obviously, we take into account a
+    possibility of finding a new equilibirium point higher or lower. In such case,
+    we will look to close trades with a minimum profit.Any person acting on this information
+    does so entirely at their own risk. Any research provided does not have regard
+    to the specific investment objectives, financial situation and needs of any specific
+    person who may receive it.'
+  instrument: gold
+  oanda: {}
+  page_adr: http://tradebeat.com/trade-idea-gold-tnote/
+  time: {1: '2016-03-04 15:02:22'}
+  title: trade idea - gold/tnote
+  trade: ''
+a105956:
+  artID: a105956
+  author: Adam Puchalski
+  description: 'Short at market (1.3452)Stop loss: 1.3475Take profit: 1.339, 1.30Justification:A
+    short-term bearish trend prevails and we see an interesting signal on H1 interval.
+    Price hasnt reached the resistance yet a doji is being confirmed with a bearish
+    momentum. A position has strictly intraday character therefore we recommend a
+    smaller risk. If the nearest support is defended we will close the whole position.Any
+    person acting on this information does so entirely at their own risk. Any research
+    provided does not have regard to the specific investment objectives, financial
+    situation and needs of any specific person who may receive it.'
+  instrument: usdcad
+  oanda: {}
+  page_adr: http://tradebeat.com/usdcad-trade-idea-02-03/
+  time: {1: '2016-03-02 12:22:20'}
+  title: usdcad - trade idea 02/03
+  trade:
+    1:
+      sell: {SL: '1.3475', TP: '1.339'}
+    2:
+      sell: {SL: '1.3475', TP: '1.30'}
+a105923:
+  artID: a105923
+  author: Adam Puchalski
+  description: 'Long at market (85.03)Stop loss: 84.50Take profit: 87.00Justification:A
+    short-term resistance has been broken-above with a massive momnetum. There are
+    no signals pointing to a change of a direction and there is a large room for a
+    further move higher towards the target laying within the resistance around 0.87.
+    Crude doesnt fall despite API report which is a positive sign for CAD. Stocks
+    dont fall as well. There is a double bottom pattern. We see a continuation pattern
+    on smaller intervals and if the upper bound of the triangle is broken above, move
+    towards 0.87 seems likely.Any person acting on this information does so entirely
+    at their own risk. Any research provided does not have regard to the specific
+    investment objectives, financial situation and needs of any specific person who
+    may receive it.'
+  instrument: cadjpy
+  oanda: {}
+  page_adr: http://tradebeat.com/cadjpy-trade-idea-02-03/
+  time: {1: '2016-03-02 09:24:31'}
+  title: cadjpy - trade idea 02/03
+  trade:
+    1:
+      buy: {SL: '84.50', TP: '87.00'}
+a105633:
+  artID: a105633
+  author: Adam Puchalski
+  description: 'Long at market - three separate positions (1.9389)Stop loss: 1.92,
+    moved to BETake profit: 1.962, 2.02, noTPUpdate: As we have expected the pair
+    rebounded somewhat and touch 1,96 overnight. However, the AUD gained some steam
+    after the RBAs decision and made the pair fall again. The RBAs willingness to
+    stay on hold may limit the scope for the AUD to decline further and thats why
+    we decide to move the SL to break-even.Justification:The upper bound of the short-term
+    bearish channel has been broken above. GBP is extremely oversold especially against
+    Antipodean currencies which still have a bearish fundamental outlook. Move, at
+    least towards the nearest resistance is likely. We are within the crucial support
+    area, taken from a weeklyinterval. There is a forming piercing pattern on a daily
+    interval and a possible engulfing (both pointing to a reversal). On a weekly interval
+    we have seen a marubozu, breaking belowthe lower bound of the channel, and flag
+    pattern but a week is not over yet and we may observe a leg higher, even a pinbar.Any
+    person acting on this information does so entirely at their own risk. Any research
+    provided does not have regard to the specific investment objectives, financial
+    situation and needs of any specific person who may receive it.'
+  instrument: gbpaud
+  oanda: {}
+  page_adr: http://tradebeat.com/gbpaud-trade-idea-26-02-update/
+  time: {1: '2016-03-01 07:22:39'}
+  title: gbpaud - trade idea 26/02 [update]
+  trade:
+    1:
+      buy: {SL: '1.92', TP: '1.962'}
+    2:
+      buy: {SL: '1.92', TP: '2.02'}
+    3:
+      buy: {SL: '1.92', TP: ''}
+a105633:
+  artID: a105633
+  author: Adam Puchalski
+  description: 'Long at market - three separate positions (1.9389)Stop loss: 1.92,
+    moved to BETake profit: 1.962, 2.02, noTPUpdate: As we have expected the pair
+    rebounded somewhat and touch 1,96 overnight. However, the AUD gained some steam
+    after the RBAs decision and made the pair fall again. The RBAs willingness to
+    stay on hold may limit the scope for the AUD to decline further and thats why
+    we decide to move the SL to break-even.Justification:The upper bound of the short-term
+    bearish channel has been broken above. GBP is extremely oversold especially against
+    Antipodean currencies which still have a bearish fundamental outlook. Move, at
+    least towards the nearest resistance is likely. We are within the crucial support
+    area, taken from a weeklyinterval. There is a forming piercing pattern on a daily
+    interval and a possible engulfing (both pointing to a reversal). On a weekly interval
+    we have seen a marubozu, breaking belowthe lower bound of the channel, and flag
+    pattern but a week is not over yet and we may observe a leg higher, even a pinbar.Any
+    person acting on this information does so entirely at their own risk. Any research
+    provided does not have regard to the specific investment objectives, financial
+    situation and needs of any specific person who may receive it.'
+  instrument: gbpaud
+  oanda: {}
+  page_adr: http://tradebeat.com/gbpaud-trade-idea-26-02-update/
+  time: {1: '2016-03-01 07:22:39'}
+  title: gbpaud - trade idea 26/02 [update]
+  trade:
+    1:
+      buy: {SL: '1.92', TP: '1.962'}
+    2:
+      buy: {SL: '1.92', TP: '2.02'}
+    3:
+      buy: {SL: '1.92', TP: ''}
+a105633:
+  artID: a105633
+  author: Adam Puchalski
+  description: 'Long at market - three separate positions (1.9389)Stop loss: 1.92,
+    moved to BETake profit: 1.962, 2.02, noTPUpdate: As we have expected the pair
+    rebounded somewhat and touch 1,96 overnight. However, the AUD gained some steam
+    after the RBAs decision and made the pair fall again. The RBAs willingness to
+    stay on hold may limit the scope for the AUD to decline further and thats why
+    we decide to move the SL to break-even.Justification:The upper bound of the short-term
+    bearish channel has been broken above. GBP is extremely oversold especially against
+    Antipodean currencies which still have a bearish fundamental outlook. Move, at
+    least towards the nearest resistance is likely. We are within the crucial support
+    area, taken from a weeklyinterval. There is a forming piercing pattern on a daily
+    interval and a possible engulfing (both pointing to a reversal). On a weekly interval
+    we have seen a marubozu, breaking belowthe lower bound of the channel, and flag
+    pattern but a week is not over yet and we may observe a leg higher, even a pinbar.Any
+    person acting on this information does so entirely at their own risk. Any research
+    provided does not have regard to the specific investment objectives, financial
+    situation and needs of any specific person who may receive it.'
+  instrument: gbpaud
+  oanda: {}
+  page_adr: http://tradebeat.com/gbpaud-trade-idea-26-02-update/
+  time: {1: '2016-03-01 07:22:39'}
+  title: gbpaud - trade idea 26/02 [update]
+  trade:
+    1:
+      buy: {SL: '1.92', TP: '1.962'}
+    2:
+      buy: {SL: '1.92', TP: '2.02'}
+    3:
+      buy: {SL: '1.92', TP: ''}

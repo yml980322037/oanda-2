@@ -13,6 +13,7 @@ import os
 import order
 from database import MySQL
 import logger as log
+import re
 
 #log.print_error
 #log.print_green
@@ -56,7 +57,7 @@ class get_idea_trade():
 	try:
 	    with open(instruments, 'r') as f:
 		self.instruments_dict = yaml.load(f)
-	    print('Instruments imported!')
+	    log.print_green('Instruments imported!')
 	except:
 	    log.print_error('Instruments import failed')
 
@@ -160,16 +161,16 @@ class get_idea_trade():
 	self._art_data.instrument = self.check_instrument(self._art_data.title)
 	for p in art.find('div').find_all('p'): #.text.encode('ascii', 'ignore')
 	    self._art_data.description += p.text.encode('ascii', 'ignore')
-	log.print_warning('######opis##### ', self._art_data.description)
+	log.print_warning('###### description ##### ', self._art_data.description)
         self.find_tp_sl(self._art_data.description) # find take profit and sl values
 	self._art_data.author = art.find('section', {'class' : 'autor'}).find('div', {'class' : 'about'}).find('h1').text.encode('ascii', 'ignore')
 	#self._art_data.add_trade(self.art_data['action'], self._art_data.takestop)
 	#log.print_warning(art.find('div').find('p').text.encode('ascii', 'ignore'))
 	self._art_data.do_all_data()
 	self.do_trade(self._art_data.takestop)
+	if self._art_data.trade: self.place_order(self._art_data.all_data, len(self._art_data.trade))
 	#log.print_warning('trade: ', self._art_data.trade)
 	#log.print_warning('len: ', len(self._art_data.trade))
-	self.place_order(self._art_data.all_data, len(self._art_data.trade))
 	self._art_data.do_all_data()
 	self.trades.update({self._art_data.ID : self._art_data.all_data})
 	self.save_to_yaml(self._art_data.ID, self._art_data.all_data)
@@ -179,35 +180,40 @@ class get_idea_trade():
 	return
 
     def do_trade(self, value):
-	print 'value: ', value
-    	for i in range(0,max(len(value.get('SL')), len(value.get('TP')))):
-	    print i
-    	    try:
-		self._temp = {}
-            	self._temp.update({'SL' : value.get('SL')[0], 'TP': value.get('TP')[i]})
-            	log.print_green('temp1: ', self._temp)
-		self._art_data.add_trade(self.art_data['action'], self._temp)
-    	    except IndexError:
-		self._temp = {}
-		log.print_green('temp2: ', self._temp)
-        	self._temp.update({'SL' : value.get('SL')[i], 'TP': value.get('TP')[0]})
-		self._art_data.add_trade(self.art_data['action'], self._temp)
+	log.print_green('Do trade with value: ', value)
+	try:
+    	    for i in range(0,max(len(value.get('SL')), len(value.get('TP')))):
+	        log.print_green(i)
+    	        try:
+		    self._temp = {}
+            	    self._temp.update({'SL' : value.get('SL')[0], 'TP': value.get('TP')[i]})
+            	    log.print_green('temp1: ', self._temp)
+		    self._art_data.add_trade(self.art_data['action'], self._temp)
+    	    	except IndexError:
+		    self._temp = {}
+		    log.print_green('temp2: ', self._temp)
+        	    self._temp.update({'SL' : value.get('SL')[i], 'TP': value.get('TP')[0]})
+		    self._art_data.add_trade(self.art_data['action'], self._temp)
+	except TypeError:
+	    self._art_data.trade = ''
+	    
 
     def check_instrument(self, title):
-	print('checking instruments...')
+	log.print_green('checking instruments...')
 	for i in self.instruments_dict.keys():
 	    if i.lower() in title:
+		log.print_green('Found: ', i.lower())
 		return i.lower()
 
+
     def find_tp_sl(self, info):
-	print('finding TP and SL...')
-	#print info
+	log.print_green('finding TP and SL...')
 	for action in trade_action.keys():
 	    for t in trade_action.get(action):
 		try:
-		    log.print_green('index %s of %s' % (info.lower().index(t), t))
-		    self._tmp = self.outer(info.lower().index(t))
-		    self._art_data.add_takestop(action, self._tmp.split(','))
+		    if t in info.lower():
+			self._tmp = self.find_digits(t, info.lower())
+			self._art_data.add_takestop(action, self._tmp)
 		except ValueError:
 		    pass
 	log.print_green('takestop: ', self._art_data.takestop)
@@ -227,6 +233,21 @@ class get_idea_trade():
 	for t in trade_word.keys():
 	    if action in trade_word.get(t):
 		return t
+
+    def find_digits(self, what, where):
+	self._result = 0
+	self._compile = "{}.[0-9\s.,]+".format(what)
+	try:
+	    self._result = re.findall(self._compile, where)[0]
+	    self._result = self._result.split(':')[1]
+	    self._result = self._result.split(', ')
+	    for i in range(0, len(self._result)):
+		self._result[i] = self._result[i].replace(' ', '')
+		self._result[i] = self._result[i].replace(',', '.')
+	    return self._result
+	except IndexError:
+	    return []
+
 
     def save_to_yaml_all(self, data):
         self._time = time.ctime().split(' ')
@@ -270,7 +291,6 @@ class get_idea_trade():
 	    	self._art_data.add_oanda(self.ordr.create_order())
 	    except OandaError:
 	    	log.print_error('Placing a order failed')
-	    	return 0
 	return
 # Find take profit and stop loss values from description section:
     def outer(self, u, value = str()):
