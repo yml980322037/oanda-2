@@ -24,15 +24,15 @@ class MySQL():
     
     def update(self, what, onwhat, artID):
 	try:
-	    print self.update_query.format(what, onwhat)
-	    self.cursor.execute(self.update_query.format(what, onwhat), artID)
+	    print self.update_query.format(what, onwhat, artID)
+	    self.cursor.execute(self.update_query.format(what, json.dumps(onwhat)), artID)
 	    self.db.commit()
-	    return 0
-	    print('Udate OK!')
+	    print('Update OK!')
+	    return 1
 	except:
 	    print('Update to databse failed')
 	    print(what, onwhat, artID)
-	    return 1
+	    return 0
 	 
 
     def select(self, what, artID):

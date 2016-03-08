@@ -36,6 +36,8 @@ url = "http://tradebeat.com/"
 useragent = "Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:44.0) Gecko/20100101 Firefox/44.0"
 instruments = './instruments.yaml'
 
+test_page = './5-Mar/mainpage.yaml'
+
 
 class get_idea_trade():
 
@@ -44,6 +46,8 @@ class get_idea_trade():
         self.password = sys.argv[2]
         self.timeframe = sys.argv[3]
         self.base_url = "%simportant" %(url)
+	self.test_page = test_page
+	self.test_page_cont = None
         self.art_data = {}
 	self.instruments_dict = {}
 	self.trades = {}
@@ -99,6 +103,13 @@ class get_idea_trade():
             page = l.get(url+link[1:]) # send get request to article page
 	    self.check_artid(page, {"class": "news urgent"}) # pass page content for checking process
 
+    def update_database(self, what, onwhat, artID):
+	self._result = self.db.update(what, onwhat, artID)
+	if self._result:
+	    log.print_green(what, onwhat, artID, ' Update OK!')
+	else:
+	    return
+
     def ask_database(self, what, artID):
 	self._result = self.db.select(what, artID)
 	if self._result:
@@ -113,7 +124,7 @@ class get_idea_trade():
 	self.soup = BeautifulSoup(page.content, "lxml")
 	self.art = self.soup.find('article', option)
 	if self.ask_database('time', self.art.get("id")):
-	    log.print_green('Found something with has same articleID in database already...')
+	    #log.print_green('Found something with has same articleID in database already...')
 	    self.check_timestamp(self.art.get("id"), self.art) #  checking if article is an update, or old one
 	    return
 	else:
@@ -124,24 +135,23 @@ class get_idea_trade():
 	'''
 	compare timestamp of last entry in time key
 	'''
-	print('I am going to compare timestamps')
+	#log.print_green('I am going to compare timestamps')
 	#self._old_time = self.all_trade_ideas.get(artID).get('time')[len(self.all_trade_ideas.get(artID).get('time'))]
 	self._old_time = self.ask_database('time', artID)
-	print artID
-	print self._old_time
-	print len(self._old_time)
+	#print artID
+	#print self._old_time
+	#print len(self._old_time)
 	self._old_time = self._old_time.values()[-1]
 	self._new_time = content.find("time").get("datetime")
 	if self._old_time == self._new_time:
-	    print('No updates')
+	    #print('No updates')
 	    return
 	else:
-	    print('Update of article has been detected!')
-	    return self.do_update(self._new_time)
+	    log.print_green('Update of article has been detected!')
+	    return self.do_update(self._new_time, artID)
 
     def do_soup(self, page, option):
         self.soup = BeautifulSoup(page.content, "lxml")
-	#self.save_to_yaml('mainpage', self.soup.prettify())
         if option == "article":
             for art in self.soup.find_all(option):
                 self.do_article(art)
@@ -218,12 +228,15 @@ class get_idea_trade():
 		    pass
 	log.print_green('takestop: ', self._art_data.takestop)
 
-    def do_update(self,new_time):
+    def do_update(self, new_time, artID):
 	'''
 	do update for article
 	'''
-	print("Let's check what has been updated")
-	self._art_data.add_time(new_time)
+	log.print_green("Let's check what has been updated")
+	self._old_time = self.ask_database('time', artID)
+	self._tmp = self._old_time
+	self._tmp.update({len(self._old_time)+1 : new_time})
+	self.update_database('time', self._tmp, artID)
 	return
 
     def get_action(self, action):
