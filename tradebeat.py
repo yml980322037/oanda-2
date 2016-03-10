@@ -123,6 +123,7 @@ class get_idea_trade():
     def check_artid(self, page, option):
 	self.soup = BeautifulSoup(page.content, "lxml")
 	self.art = self.soup.find('article', option)
+	if not self.art: return
 	if self.ask_database('time', self.art.get("id")):
 	    #log.print_green('Found something with has same articleID in database already...')
 	    self.check_timestamp(self.art.get("id"), self.art) #  checking if article is an update, or old one
@@ -160,7 +161,7 @@ class get_idea_trade():
 	    self.do_collect_info(self.art, page.url.encode('ascii', 'ignore'))
 
     def do_collect_info(self, art, pageurl):
-	self.save_to_yaml('page', str(art))
+	#self.save_to_yaml('page', str(art))
         self._art_data = {} #internal variable to hold article data	
 	log.print_green("Let's start with ", art.find("h1").text.lower())
 	self._art_data = tradeClass()
@@ -183,8 +184,8 @@ class get_idea_trade():
 	#log.print_warning('len: ', len(self._art_data.trade))
 	self._art_data.do_all_data()
 	self.trades.update({self._art_data.ID : self._art_data.all_data})
-	self.save_to_yaml(self._art_data.ID, self._art_data.all_data)
-	self.save_to_yaml_all(self.trades)
+	#self.save_to_yaml(self._art_data.ID, self._art_data.all_data)
+	#self.save_to_yaml_all(self.trades)
 	self.db.insert(self._art_data.all_data) #insert all data to database
 	self.trades = {}
 	return
