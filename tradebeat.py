@@ -338,7 +338,10 @@ class get_idea_trade():
 
     def check_time(self):
         self._mytime = time.ctime().split(' ')
-	self._mytime.remove('')
+	try:
+	    self._mytime.remove('')
+	except ValueError:
+	    pass
 	self._mytime = self._mytime[3][:5]
         return self.timeframe >= self._mytime
 
