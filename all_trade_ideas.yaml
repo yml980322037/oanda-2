@@ -3062,3 +3062,106 @@ a105633:
       buy: {SL: '1.92', TP: '2.02'}
     3:
       buy: {SL: '1.92', TP: ''}
+a106291:
+  artID: a106291
+  author: Adam Puchalski
+  description: 'Short at market(1990)Stop loss: 2015Take profit: 1967, 1922Justification:
+    In a momentAny person acting on this information does so entirely at their own
+    risk. Any research provided does not have regard to the specific investment objectives,
+    financial situation and needs of any specific person who may receive it.'
+  instrument: us500
+  oanda:
+    1:
+      !!python/unicode 'instrument': !!python/unicode 'SPX500_USD'
+      !!python/unicode 'price': 1990.2
+      !!python/unicode 'time': !!python/unicode '2016-03-08T13:24:27.000000Z'
+      !!python/unicode 'tradeOpened': {!!python/unicode 'id': 10159003589, !!python/unicode 'side': !!python/unicode 'sell',
+        !!python/unicode 'stopLoss': 2015, !!python/unicode 'takeProfit': 1967, !!python/unicode 'trailingStop': 0,
+        !!python/unicode 'units': 1}
+      !!python/unicode 'tradeReduced': {}
+      !!python/unicode 'tradesClosed': []
+    2:
+      !!python/unicode 'instrument': !!python/unicode 'SPX500_USD'
+      !!python/unicode 'price': 1989.7
+      !!python/unicode 'time': !!python/unicode '2016-03-08T13:24:32.000000Z'
+      !!python/unicode 'tradeOpened': {!!python/unicode 'id': 10159003898, !!python/unicode 'side': !!python/unicode 'sell',
+        !!python/unicode 'stopLoss': 2015, !!python/unicode 'takeProfit': 1922, !!python/unicode 'trailingStop': 0,
+        !!python/unicode 'units': 1}
+      !!python/unicode 'tradeReduced': {}
+      !!python/unicode 'tradesClosed': []
+  page_adr: http://tradebeat.com/us500-trade-idea-08-03/
+  time: {1: '2016-03-08 13:18:07'}
+  title: us500 - trade idea 08/03
+  trade:
+    1:
+      sell: {SL: '2015', TP: '1967'}
+    2:
+      sell: {SL: '2015', TP: '1922'}
+a106329:
+  artID: a106329
+  author: Adam Puchalski
+  description: 'Short at market(1.3387)Stop loss: 1.342Take profit: 1.3266Justification:
+    Price has been moving within a bearish sequence. We see a bearish engulfing on
+    M15 which is currently being confiremd. Price rebounds from the crucial, short-term
+    resistance (previous support with local lows from 3-4th March). There is a chance
+    for a continuation of a bearish trend, we may see a new lower high within a sequence.Any
+    person acting on this information does so entirely at their own risk. Any research
+    provided does not have regard to the specific investment objectives, financial
+    situation and needs of any specific person who may receive it.'
+  instrument: usdcad
+  oanda:
+    1:
+      !!python/unicode 'instrument': !!python/unicode 'USD_CAD'
+      !!python/unicode 'price': 1.33924
+      !!python/unicode 'time': !!python/unicode '2016-03-08T16:42:55.000000Z'
+      !!python/unicode 'tradeOpened': {!!python/unicode 'id': 10159565997, !!python/unicode 'side': !!python/unicode 'sell',
+        !!python/unicode 'stopLoss': 1.342, !!python/unicode 'takeProfit': 1.3266,
+        !!python/unicode 'trailingStop': 0, !!python/unicode 'units': 1000}
+      !!python/unicode 'tradeReduced': {}
+      !!python/unicode 'tradesClosed': []
+  page_adr: http://tradebeat.com/usdcad-trade-idea-08-03/
+  time: {1: '2016-03-08 16:35:33'}
+  title: usdcad - trade idea 08/03
+  trade:
+    1:
+      sell: {SL: '1.342', TP: '1.3266'}
+a106388:
+  artID: a106388
+  author: Adam Puchalski
+  description: 'Short at market:(8.5621)Stop loss: 8.7777Take profit: 8.11, 8.05Justification:
+    On USDNOK we are probably observing a forming right hand of the SHS pattern. On
+    smaller frames, price respects the resistance around 8.56-57 and we see a short-term
+    divergence with oil. On a weekly interval one can spot a distinct bearish engulfing,
+    current move is probably nothing more but a corrective retracement. If the neck
+    line is broken below we may encounter a dynamic leg lower.Any person acting on
+    this information does so entirely at their own risk. Any research provided does
+    not have regard to the specific investment objectives, financial situation and
+    needs of any specific person who may receive it.'
+  instrument: usdnok
+  oanda:
+    1:
+      !!python/unicode 'instrument': !!python/unicode 'USD_NOK'
+      !!python/unicode 'price': 8.57435
+      !!python/unicode 'time': !!python/unicode '2016-03-09T14:31:25.000000Z'
+      !!python/unicode 'tradeOpened': {!!python/unicode 'id': 10162153198, !!python/unicode 'side': !!python/unicode 'sell',
+        !!python/unicode 'stopLoss': 8.7777, !!python/unicode 'takeProfit': 8.11,
+        !!python/unicode 'trailingStop': 0, !!python/unicode 'units': 1000}
+      !!python/unicode 'tradeReduced': {}
+      !!python/unicode 'tradesClosed': []
+    2:
+      !!python/unicode 'instrument': !!python/unicode 'USD_NOK'
+      !!python/unicode 'price': 8.57423
+      !!python/unicode 'time': !!python/unicode '2016-03-09T14:31:31.000000Z'
+      !!python/unicode 'tradeOpened': {!!python/unicode 'id': 10162153419, !!python/unicode 'side': !!python/unicode 'sell',
+        !!python/unicode 'stopLoss': 8.7777, !!python/unicode 'takeProfit': 8.05,
+        !!python/unicode 'trailingStop': 0, !!python/unicode 'units': 1000}
+      !!python/unicode 'tradeReduced': {}
+      !!python/unicode 'tradesClosed': []
+  page_adr: http://tradebeat.com/usdnok-trade-idea-09-03/
+  time: {1: '2016-03-09 13:14:05'}
+  title: usdnok - trade idea 09/03
+  trade:
+    1:
+      sell: {SL: '8.7777', TP: '8.11'}
+    2:
+      sell: {SL: '8.7777', TP: '8.05'}

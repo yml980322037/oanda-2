@@ -142,10 +142,10 @@ class get_idea_trade():
 	#print artID
 	#print self._old_time
 	#print len(self._old_time)
-	self._old_time = self._old_time.values()[-1]
+	#self._old_time = self._old_time.values()
 	self._new_time = content.find("time").get("datetime")
-	if self._old_time == self._new_time:
-	    #print('No updates')
+	if self._new_time in self._old_time.values():
+	    print('No updates')
 	    return
 	else:
 	    log.print_green('Update of article has been detected!')
