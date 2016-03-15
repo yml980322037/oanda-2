@@ -179,7 +179,7 @@ class get_idea_trade():
 	#log.print_warning(art.find('div').find('p').text.encode('ascii', 'ignore'))
 	self._art_data.do_all_data()
 	self.do_trade(self._art_data.takestop)
-	if self._art_data.trade: self.place_order(self._art_data.all_data, len(self._art_data.trade))
+	if self._art_data.trade and (self._art_data.instrument != 'not found') : self.place_order(self._art_data.all_data, len(self._art_data.trade))
 	#log.print_warning('trade: ', self._art_data.trade)
 	#log.print_warning('len: ', len(self._art_data.trade))
 	self._art_data.do_all_data()
@@ -215,6 +215,8 @@ class get_idea_trade():
 	    if i.lower() in title:
 		log.print_green('Found: ', i.lower())
 		return i.lower()
+	    else:
+		return 'not found'
 
 
     def find_tp_sl(self, info):
@@ -236,7 +238,11 @@ class get_idea_trade():
 	log.print_green("Let's check what has been updated")
 	self._old_time = self.ask_database('time', artID)
 	self._tmp = self._old_time
-	self._tmp.update({len(self._old_time)+1 : new_time})
+	print 'przed: ', self._tmp
+	self._tmp2 = '{}'.format(len(self._old_time)+1)
+	print 'tmp2: ', self._tmp2
+	self._tmp.update({self._tmp2 : new_time})
+	print 'po: ', self._tmp
 	self.update_database('time', self._tmp, artID)
 	return
 
@@ -293,19 +299,25 @@ class get_idea_trade():
 	Funtion to place an order with ST and TP parameters
 	'''
 	log.print_green('Placing an order...')
-        self._instr = self.instruments_dict.get(data.get('instrument').upper())[0].get('instrument')
-	self._unit = self.instruments_dict.get(data.get('instrument').upper())[3].get('tradeUnit')
-	for x in range(1,(i+1)):
-	    self._action = data.get('trade')[x].keys()[0]
-    	    self._tp = data.get('trade')[x][self._action]['TP'] 
-    	    self._sl = data.get('trade')[x][self._action]['SL']
-	    log.print_warning(self._instr, self._unit, self._action, self._tp, self._sl)
-	    self.ordr = order.MyOanda(self._instr, self._unit, self._action, self._sl, self._tp)
-	    try:
-	    	self._art_data.add_oanda(self.ordr.create_order())
-	    except OandaError:
-	    	log.print_error('Placing a order failed')
-	return
+	print data
+	try:
+	    self._instr = self.instruments_dict.get(data.get('instrument').upper())[0].get('instrument')
+	    self._unit = self.instruments_dict.get(data.get('instrument').upper())[3].get('tradeUnit')
+	    for x in range(1,(i+1)):
+	        self._action = data.get('trade')[x].keys()[0]
+    	    	self._tp = data.get('trade')[x][self._action]['TP'] 
+    	    	self._sl = data.get('trade')[x][self._action]['SL']
+	    	log.print_warning(self._instr, self._unit, self._action, self._tp, self._sl)
+	    	self.ordr = order.MyOanda(self._instr, self._unit, self._action, self._sl, self._tp)
+	    	try:
+	    	    self._art_data.add_oanda(self.ordr.create_order())
+	    	except OandaError:
+	    	    log.print_error('Placing a order failed')
+	    return
+	except AttributeError:
+	    log.print_error('AttributeError, data NoneType')
+	    return
+	    
 # Find take profit and stop loss values from description section:
     def outer(self, u, value = str()):
 	log.print_warning('!!wchodze z u: ', u)
