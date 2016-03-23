@@ -315,7 +315,7 @@ class get_idea_trade():
 	    	except OandaError:
 	    	    log.print_error('Placing a order failed')
 	    return
-	except AttributeError:
+	except AttributeError, TypeError:
 	    log.print_error('AttributeError, data NoneType')
 	    return
 	    
