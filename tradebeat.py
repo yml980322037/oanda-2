@@ -172,12 +172,13 @@ class get_idea_trade():
 	self._art_data.instrument = self.check_instrument(self._art_data.title)
 	for p in art.find('div').find_all('p'): #.text.encode('ascii', 'ignore')
 	    self._art_data.description += p.text.encode('ascii', 'ignore')
-	log.print_warning('###### description ##### ', self._art_data.description)
+	log.print_warning('###### description ##### ', self._art_data.description, self._art_data.ID)
         self.find_tp_sl(self._art_data.description) # find take profit and sl values
 	self._art_data.author = art.find('section', {'class' : 'autor'}).find('div', {'class' : 'about'}).find('h1').text.encode('ascii', 'ignore')
 	#self._art_data.add_trade(self.art_data['action'], self._art_data.takestop)
 	#log.print_warning(art.find('div').find('p').text.encode('ascii', 'ignore'))
 	self._art_data.do_all_data()
+	print 'take stop', self._art_data.takestop
 	self.do_trade(self._art_data.takestop)
 	if self._art_data.trade and (self._art_data.instrument != 'not found') : self.place_order(self._art_data.all_data, len(self._art_data.trade))
 	#log.print_warning('trade: ', self._art_data.trade)
@@ -194,16 +195,15 @@ class get_idea_trade():
 	log.print_green('Do trade with value: ', value)
 	try:
     	    for i in range(0,max(len(value.get('SL')), len(value.get('TP')))):
-	        log.print_green(i)
     	        try:
 		    self._temp = {}
-            	    self._temp.update({'SL' : value.get('SL', '')[0], 'TP': value.get('TP', '')[i]})
+            	    self._temp.update({'SL' : value.get('SL', '0')[0], 'TP': value.get('TP', '0')[i]})
             	    log.print_green('temp1: ', self._temp)
 		    self._art_data.add_trade(self.art_data['action'], self._temp)
     	    	except IndexError:
 		    self._temp = {}
 		    log.print_green('temp2: ', self._temp)
-        	    self._temp.update({'SL' : value.get('SL', '')[i], 'TP': value.get('TP', '')[0]})
+        	    self._temp.update({'SL' : value.get('SL', '0')[i], 'TP': value.get('TP', '0')[0]})
 		    self._art_data.add_trade(self.art_data['action'], self._temp)
 	except TypeError:
 	    self._art_data.trade = ''
@@ -265,7 +265,7 @@ class get_idea_trade():
 		self._result[i] = self._result[i].replace(',', '.')
 	    return self._result
 	except IndexError:
-	    return []
+	    return ['0']
 
 
     def save_to_yaml_all(self, data):
@@ -299,14 +299,15 @@ class get_idea_trade():
 	'''
 	log.print_green('Placing an order...')
 	print data
-	print type(data)
-	print i
 	try:
 	    self._instr = self.instruments_dict.get(data.get('instrument').upper())[0].get('instrument')
 	    self._unit = self.instruments_dict.get(data.get('instrument').upper())[3].get('tradeUnit')
 	    for x in range(1,(i+1)):
 	        self._action = data.get('trade')[x].keys()[0]
-    	    	self._tp = data.get('trade')[x][self._action]['TP'] 
+		if not data.get('trade')[x][self._action]['TP']:
+		    self._tp = 0
+		else:
+    	    	    self._tp = data.get('trade')[x][self._action]['TP'] 
     	    	self._sl = data.get('trade')[x][self._action]['SL']
 	    	log.print_warning(self._instr, self._unit, self._action, self._tp, self._sl)
 	    	self.ordr = order.MyOanda(self._instr, self._unit, self._action, self._sl, self._tp)
