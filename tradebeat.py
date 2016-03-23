@@ -197,13 +197,13 @@ class get_idea_trade():
 	        log.print_green(i)
     	        try:
 		    self._temp = {}
-            	    self._temp.update({'SL' : value.get('SL')[0], 'TP': value.get('TP')[i]})
+            	    self._temp.update({'SL' : value.get('SL', '')[0], 'TP': value.get('TP', '')[i]})
             	    log.print_green('temp1: ', self._temp)
 		    self._art_data.add_trade(self.art_data['action'], self._temp)
     	    	except IndexError:
 		    self._temp = {}
 		    log.print_green('temp2: ', self._temp)
-        	    self._temp.update({'SL' : value.get('SL')[i], 'TP': value.get('TP')[0]})
+        	    self._temp.update({'SL' : value.get('SL', '')[i], 'TP': value.get('TP', '')[0]})
 		    self._art_data.add_trade(self.art_data['action'], self._temp)
 	except TypeError:
 	    self._art_data.trade = ''
@@ -265,7 +265,7 @@ class get_idea_trade():
 		self._result[i] = self._result[i].replace(',', '.')
 	    return self._result
 	except IndexError:
-	    return 0
+	    return []
 
 
     def save_to_yaml_all(self, data):

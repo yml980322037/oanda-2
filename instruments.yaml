@@ -318,7 +318,7 @@ SGDJPY:
  - maxTradeUnits: 10000000
  - pip: 0.01
  - tradeUnit: 1000
-Soybeans:
+SOYBEANS:
  - instrument: SOYBN_USD
  - maxTradeUnits: 60000
  - pip: 0.01
@@ -333,7 +333,7 @@ US500:
  - maxTradeUnits: 800
  - pip: 1.0
  - tradeUnit: 1
-Sugar:
+SUGAR:
  - instrument: SUGAR_USD
  - maxTradeUnits: 4000000
  - pip: 0.0001
@@ -353,22 +353,22 @@ UK10YGilt:
  - maxTradeUnits: 6000
  - pip: 0.01
  - tradeUnit: 1000
-USRuss2000:
+USRUSS2000:
  - instrument: US2000_USD
  - maxTradeUnits: 1000
  - pip: 0.01
  - tradeUnit: 1000
-USWallSt30:
+USWALLST30:
  - instrument: US30_USD
  - maxTradeUnits: 100
  - pip: 1.0
  - tradeUnit: 1
-US2YT-Note:
+US2YT-NOTE:
  - instrument: USB02Y_USD
  - maxTradeUnits: 6000
  - pip: 0.01
  - tradeUnit: 1000
-US5YT-Note:
+US5YT-NOTE:
  - instrument: USB05Y_USD
  - maxTradeUnits: 6000
  - pip: 0.01
@@ -473,7 +473,7 @@ USDZAR:
  - maxTradeUnits: 10000000
  - pip: 0.0001
  - tradeUnit: 1000
-Wheat:
+WHEAT:
  - instrument: WHEAT_USD
  - maxTradeUnits: 150000
  - pip: 0.01
@@ -483,122 +483,122 @@ WestTexasOil:
  - maxTradeUnits: 10000
  - pip: 0.01
  - tradeUnit: 1000
-SilverAUD:
+SILVERAUD:
  - instrument: XAG_AUD
  - maxTradeUnits: 100000
  - pip: 0.0001
  - tradeUnit: 1000
-SilverCAD:
+SILVERCAD:
  - instrument: XAG_CAD
  - maxTradeUnits: 100000
  - pip: 0.0001
  - tradeUnit: 1000
-SilverCHF:
+SILVERCHF:
  - instrument: XAG_CHF
  - maxTradeUnits: 100000
  - pip: 0.0001
  - tradeUnit: 1000
-SilverEUR:
+SILVEREUR:
  - instrument: XAG_EUR
  - maxTradeUnits: 100000
  - pip: 0.0001
  - tradeUnit: 1000
-SilverGBP:
+SILVERGBP:
  - instrument: XAG_GBP
  - maxTradeUnits: 100000
  - pip: 0.0001
  - tradeUnit: 1000
-SilverHKD:
+SILVERHKD:
  - instrument: XAG_HKD
  - maxTradeUnits: 100000
  - pip: 0.0001
  - tradeUnit: 1000
-SilverJPY:
+SILVERJPY:
  - instrument: XAG_JPY
  - maxTradeUnits: 100000
  - pip: 1.0
  - tradeUnit: 1
-SilverNZD:
+SILVERNZD:
  - instrument: XAG_NZD
  - maxTradeUnits: 100000
  - pip: 0.0001
  - tradeUnit: 1000
-SilverSGD:
+SILVERSGD:
  - instrument: XAG_SGD
  - maxTradeUnits: 100000
  - pip: 0.0001
  - tradeUnit: 1000
-Silver:
+SILVER:
  - instrument: XAG_USD
  - maxTradeUnits: 100000
  - pip: 0.0001
  - tradeUnit: 1000
-GoldAUD:
+GOLDAUD:
  - instrument: XAU_AUD
  - maxTradeUnits: 5000
  - pip: 0.01
  - tradeUnit: 1000
-GoldCAD:
+GOLDCAD:
  - instrument: XAU_CAD
  - maxTradeUnits: 5000
  - pip: 0.01
  - tradeUnit: 1000
-GoldCHF:
+GOLDCHF:
  - instrument: XAU_CHF
  - maxTradeUnits: 5000
  - pip: 0.01
  - tradeUnit: 1000
-GoldEUR:
+GOLDEUR:
  - instrument: XAU_EUR
  - maxTradeUnits: 5000
  - pip: 0.01
  - tradeUnit: 1000
-GoldGBP:
+GOLDGBP:
  - instrument: XAU_GBP
  - maxTradeUnits: 5000
  - pip: 0.01
  - tradeUnit: 1000
-GoldHKD:
+GOLDHKD:
  - instrument: XAU_HKD
  - maxTradeUnits: 5000
  - pip: 0.01
  - tradeUnit: 1000
-GoldJPY:
+GOLDJPY:
  - instrument: XAU_JPY
  - maxTradeUnits: 5000
  - pip: 10
  - tradeUnit: 1
-GoldNZD:
+GOLDNZD:
  - instrument: XAU_NZD
  - maxTradeUnits: 5000
  - pip: 0.01
  - tradeUnit: 1000
-GoldSGD:
+GOLDSGD:
  - instrument: XAU_SGD
  - maxTradeUnits: 5000
  - pip: 0.01
  - tradeUnit: 1000
-Gold:
+GOLD:
  - instrument: XAU_USD
  - maxTradeUnits: 5000
  - pip: 0.01
  - tradeUnit: 1000
-GoldSilver:
+GOLDSILVER:
  - instrument: XAU_XAG
  - maxTradeUnits: 5000
  - pip: 0.01
  - tradeUnit: 1000
-Copper:
+COPPER:
  - instrument: XCU_USD
  - maxTradeUnits: 250000
  - pip: 0.0001
  - tradeUnit: 1000
-Palladium:
+PALLADIUM:
  - instrument: XPD_USD
  - maxTradeUnits: 500
  - pip: 0.01
  - tradeUnit: 1000
-Platinum:
+PLATINIUM:
  - instrument: XPT_USD
  - maxTradeUnits: 500
  - pip: 0.01
