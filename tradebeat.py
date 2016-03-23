@@ -212,7 +212,7 @@ class get_idea_trade():
     def check_instrument(self, title):
 	log.print_green('checking instruments...')
 	for i in self.instruments_dict.keys():
-	    if i.lower() in title:
+	    if i.lower() in title.lower():
 		log.print_green('Found: ', i.lower())
 		return i.lower()
 	    else:
