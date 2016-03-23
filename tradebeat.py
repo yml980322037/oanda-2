@@ -265,7 +265,7 @@ class get_idea_trade():
 		self._result[i] = self._result[i].replace(',', '.')
 	    return self._result
 	except IndexError:
-	    return []
+	    return 0
 
 
     def save_to_yaml_all(self, data):
@@ -299,6 +299,8 @@ class get_idea_trade():
 	'''
 	log.print_green('Placing an order...')
 	print data
+	print type(data)
+	print i
 	try:
 	    self._instr = self.instruments_dict.get(data.get('instrument').upper())[0].get('instrument')
 	    self._unit = self.instruments_dict.get(data.get('instrument').upper())[3].get('tradeUnit')
