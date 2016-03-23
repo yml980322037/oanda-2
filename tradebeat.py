@@ -215,8 +215,7 @@ class get_idea_trade():
 	    if i.lower() in title.lower():
 		log.print_green('Found: ', i.lower())
 		return i.lower()
-	    else:
-		return 'not found'
+	return 'not found'
 
 
     def find_tp_sl(self, info):
